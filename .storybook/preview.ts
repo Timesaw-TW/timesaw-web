@@ -13,7 +13,7 @@ const preview: Preview = {
   },
   globalTypes: {
     darkMode: {
-      defaultValue: true,
+      defaultValue: false,
     },
     className: {
       defaultValue: "dark",
