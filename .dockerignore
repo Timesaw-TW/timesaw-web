@@ -27,3 +27,5 @@ out/
 __tests__/
 *.test.js
 *.spec.js
+
+/storybook-static

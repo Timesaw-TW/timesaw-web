@@ -7,14 +7,24 @@
     "build": "NODE_TLS_REJECT_UNAUTHORIZED=0 next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest"
+    "test": "jest",
+    "storybook": "TAILWIND_MODE=aot storybook dev -p 6006"
   },
   "dependencies": {
+    "clsx": "^2.1.0",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^7.6.16",
+    "@storybook/addon-interactions": "^7.6.16",
+    "@storybook/addon-links": "^7.6.16",
+    "@storybook/addon-onboarding": "^1.0.11",
+    "@storybook/blocks": "^7.6.16",
+    "@storybook/nextjs": "^7.6.16",
+    "@storybook/react": "^7.6.16",
+    "@storybook/test": "^7.6.16",
     "@testing-library/jest-dom": "^6.4.1",
     "@testing-library/react": "^14.2.1",
     "@types/jest": "^29.5.12",
@@ -24,9 +34,12 @@
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
+    "eslint-plugin-storybook": "^0.8.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8",
+    "storybook": "^7.6.16",
+    "storybook-tailwind-dark-mode": "^1.0.22",
     "tailwindcss": "^3.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5"
