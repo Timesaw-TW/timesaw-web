@@ -5,4 +5,5 @@ export type TextProps = {
   children: ReactNode;
   className?: ClassValue;
   bold?: boolean;
+  element?: keyof JSX.IntrinsicElements;
 };

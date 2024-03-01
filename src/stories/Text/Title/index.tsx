@@ -4,9 +4,11 @@ import { TextProps } from "../type";
 
 interface Props extends TextProps {}
 
-const Title: FC<Props> = ({ children, className, bold }) => {
+const Title: FC<Props> = ({ children, className, bold, element = "h1" }) => {
+  const Element = element as keyof JSX.IntrinsicElements;
+
   return (
-    <span
+    <Element
       className={clsx(
         `font-main text-xl`,
         bold ? "font-semibold" : "font-normal",
@@ -14,7 +16,7 @@ const Title: FC<Props> = ({ children, className, bold }) => {
       )}
     >
       {children}
-    </span>
+    </Element>
   );
 };
 
