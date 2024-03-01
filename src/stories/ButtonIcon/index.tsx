@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { FC, ReactNode, ButtonHTMLAttributes, isValidElement } from "react";
+import { FC, ReactNode, ButtonHTMLAttributes } from "react";
 import Text from "../Text/Text";
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
