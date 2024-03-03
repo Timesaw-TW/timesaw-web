@@ -1,9 +1,10 @@
 import clsx from "clsx";
 import { FC, ReactNode, ButtonHTMLAttributes } from "react";
+import Text from "../Text/Text";
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
-  label?: string;
+  label?: string | ReactNode;
 };
 
 const ButtonIcon: FC<Props> = ({ children, className, label, ...props }) => {
@@ -19,7 +20,7 @@ const ButtonIcon: FC<Props> = ({ children, className, label, ...props }) => {
       {...props}
     >
       {children}
-      {label && <span>{label}</span>}
+      {label && (typeof label === "string" ? <Text>{label}</Text> : label)}
     </button>
   );
 };

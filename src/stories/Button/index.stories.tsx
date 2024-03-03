@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Button } from ".";
+import Text from "../Text/Text";
 
 const meta = {
   title: "Base/Button",
@@ -17,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary_100: Story = {
   args: {
     theme: "primary",
-    children: "Button",
+    children: <Text>Button</Text>,
     level: 100,
   },
 };
@@ -25,7 +26,7 @@ export const Primary_100: Story = {
 export const Primary_80: Story = {
   args: {
     theme: "primary",
-    children: "Button",
+    children: <Text>Button</Text>,
     level: 80,
   },
 };
@@ -33,7 +34,7 @@ export const Primary_80: Story = {
 export const Primary_60: Story = {
   args: {
     theme: "primary",
-    children: "Button",
+    children: <Text>Button</Text>,
     level: 60,
   },
 };
@@ -41,7 +42,7 @@ export const Primary_60: Story = {
 export const Primary_40: Story = {
   args: {
     theme: "primary",
-    children: "Button",
+    children: <Text>Button</Text>,
     level: 40,
   },
 };
@@ -49,7 +50,7 @@ export const Primary_40: Story = {
 export const Primary_20: Story = {
   args: {
     theme: "primary",
-    children: "Button",
+    children: <Text>Button</Text>,
     level: 20,
   },
 };
@@ -57,7 +58,7 @@ export const Primary_20: Story = {
 export const Secondary_100: Story = {
   args: {
     theme: "secondary",
-    children: "Button",
+    children: <Text>Button</Text>,
     level: 100,
   },
 };
@@ -65,7 +66,7 @@ export const Secondary_100: Story = {
 export const Secondary_80: Story = {
   args: {
     theme: "secondary",
-    children: "Button",
+    children: <Text>Button</Text>,
     level: 80,
   },
 };
@@ -73,7 +74,7 @@ export const Secondary_80: Story = {
 export const Secondary_60: Story = {
   args: {
     theme: "secondary",
-    children: "Button",
+    children: <Text>Button</Text>,
     level: 60,
   },
 };
@@ -81,7 +82,7 @@ export const Secondary_60: Story = {
 export const Secondary_40: Story = {
   args: {
     theme: "secondary",
-    children: "Button",
+    children: <Text>Button</Text>,
     level: 40,
   },
 };
@@ -89,7 +90,7 @@ export const Secondary_40: Story = {
 export const Secondary_20: Story = {
   args: {
     theme: "secondary",
-    children: "Button",
+    children: <Text>Button</Text>,
     level: 20,
   },
 };

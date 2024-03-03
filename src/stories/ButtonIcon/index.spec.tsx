@@ -33,4 +33,22 @@ describe("#Icon", () => {
 
     expect(mockOnClick).toHaveBeenCalled();
   });
+
+  it("should render with label text", () => {
+    const { getByText } = render(<Icon label="Label">Click me</Icon>);
+    const labelTextElement = getByText("Label");
+
+    expect(labelTextElement).toBeInTheDocument();
+    expect(labelTextElement.tagName).toBe("SPAN");
+    expect(labelTextElement).toHaveClass("text-base");
+  });
+
+  it("renders with custom label element", () => {
+    const CustomLabel = () => <span>Custom Label</span>;
+    const { getByText } = render(<Icon label={<CustomLabel />}>Click me</Icon>);
+    const labelTextElement = getByText("Custom Label");
+
+    expect(labelTextElement).toBeInTheDocument();
+    expect(labelTextElement.tagName).toBe("SPAN");
+  });
 });

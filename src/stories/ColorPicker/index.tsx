@@ -44,16 +44,19 @@ interface Props {
   selected: string[];
   onClick?: (colorList: string[]) => void;
   allowMultiple?: boolean;
+  backgroundColorClass?: ClassValue;
 }
 
 const ColorItem = ({
   color,
   isSelected,
   onClick,
+  backgroundColorClass,
 }: {
   color: Color;
   isSelected: boolean;
   onClick?: () => void;
+  backgroundColorClass?: ClassValue;
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
   const isHovering = useHoverDirty(ref);
@@ -62,8 +65,9 @@ const ColorItem = ({
     <button
       ref={ref}
       className={clsx(
-        "relative w-[32px] h-[32px] rounded-[50%]",
-        "transition-all"
+        "flex justify-center items-center",
+        "w-[32px] h-[32px] rounded-[50%]",
+        "transition-all duration-300"
       )}
       style={{
         backgroundColor: isSelected || isHovering ? color.code : "transparent",
@@ -72,18 +76,17 @@ const ColorItem = ({
     >
       <div
         className={clsx(
-          "absolute left-[2px] top-[2px] w-[28px] h-[28px] rounded-[50%]",
-          (isSelected || isHovering) && "bg-white dark:bg-black"
+          "flex justify-center items-center",
+          "w-[28px] h-[28px] rounded-[50%]",
+          "transition-all duration-300",
+          (isSelected || isHovering) &&
+            (backgroundColorClass || "bg-white dark:bg-black")
         )}
-        style={{
-          ...(!(isSelected || isHovering) && {
-            backgroundColor: "transparent",
-          }),
-        }}
       >
         <div
           className={clsx(
-            "absolute left-[2.5px] top-[2.5px] w-[23px] h-[23px] rounded-[50%]"
+            "w-[23px] h-[23px] rounded-[50%]",
+            "transition-all duration-300"
           )}
           style={{ backgroundColor: color.code }}
         ></div>
@@ -99,6 +102,7 @@ const ColorPicker: FC<Props> = ({
   allowMultiple = false,
   colors = DEFAULT_COLORS,
   className,
+  backgroundColorClass,
 }) => {
   const [selectedList, setSelectedList] = useState<string[]>(selected);
 
@@ -109,7 +113,8 @@ const ColorPicker: FC<Props> = ({
         "border border-solid border-neutral-divider rounded-lg shadow-md",
         "grid gap-y-2",
         "justify-items-center",
-        className
+        className,
+        backgroundColorClass
       )}
       style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
     >
@@ -123,6 +128,7 @@ const ColorPicker: FC<Props> = ({
             <ColorItem
               color={color}
               isSelected={isSelected}
+              backgroundColorClass={backgroundColorClass}
               onClick={() => {
                 let newList = [...selectedList];
                 if (isSelected) {

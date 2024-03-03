@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Mulish } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import SystemProvider from "./components/provider/SystemProvider";
 
-const mulish = Mulish({
-  subsets: ["latin"],
+const notoSans = localFont({
+  src: "../../public/fonts/Noto_Sans/regular.ttf",
   display: "swap",
-  variable: "--font-mulish",
+  variable: "--font-notoSans",
 });
 
 export const metadata: Metadata = {
@@ -20,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${mulish.className}  font-sans`}>
+    <html lang="en" className={`${notoSans.variable}`}>
+      <body className="font-main">
         <SystemProvider>{children}</SystemProvider>
       </body>
     </html>
