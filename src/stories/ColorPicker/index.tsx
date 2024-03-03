@@ -65,8 +65,8 @@ const ColorItem = ({
     <button
       ref={ref}
       className={clsx(
-        "flex justify-center items-center",
-        "w-[32px] h-[32px] rounded-[50%]",
+        "flex items-center justify-center",
+        "h-[32px] w-[32px] rounded-[50%]",
         "transition-all duration-300"
       )}
       style={{
@@ -76,8 +76,8 @@ const ColorItem = ({
     >
       <div
         className={clsx(
-          "flex justify-center items-center",
-          "w-[28px] h-[28px] rounded-[50%]",
+          "flex items-center justify-center",
+          "h-[28px] w-[28px] rounded-[50%]",
           "transition-all duration-300",
           (isSelected || isHovering) &&
             (backgroundColorClass || "bg-white dark:bg-black")
@@ -85,7 +85,7 @@ const ColorItem = ({
       >
         <div
           className={clsx(
-            "w-[23px] h-[23px] rounded-[50%]",
+            "h-[23px] w-[23px] rounded-[50%]",
             "transition-all duration-300"
           )}
           style={{ backgroundColor: color.code }}
@@ -110,7 +110,7 @@ const ColorPicker: FC<Props> = ({
     <ul
       className={clsx(
         "w-[320px] p-5",
-        "border border-solid border-neutral-divider rounded-lg shadow-md",
+        "rounded-lg border border-solid border-neutral-divider shadow-md",
         "grid gap-y-2",
         "justify-items-center",
         className,
@@ -123,7 +123,7 @@ const ColorPicker: FC<Props> = ({
         return (
           <li
             key={color.code}
-            className="flex justify-center items-center h-[32px]"
+            className="flex h-[32px] items-center justify-center"
           >
             <ColorItem
               color={color}

@@ -24,7 +24,7 @@ const Checkbox: FC<CheckboxProps> = ({
   return (
     <label
       htmlFor={id}
-      className={clsx("flex gap-3 cursor-pointer w-16", className)}
+      className={clsx("flex w-16 cursor-pointer gap-3", className)}
     >
       <input
         type="checkbox"
@@ -32,12 +32,12 @@ const Checkbox: FC<CheckboxProps> = ({
         checked={checked}
         className={clsx(
           "peer",
-          "appearance-none relative cursor-pointer",
-          "w-4 h-4 mt-1 shrink-0",
-          "border-2 border-neutral-secondary rounded bg-transparent",
-          "checked:bg-neutral-secondary checked:border-0",
+          "relative cursor-pointer appearance-none",
+          "mt-1 h-4 w-4 shrink-0",
+          "rounded border-2 border-neutral-secondary bg-transparent",
+          "checked:border-0 checked:bg-neutral-secondary",
           withFocus &&
-            "focus:outline-none focus:ring-offset-1 focus:ring-1 focus:ring-neutral-secondary"
+            "focus:outline-none focus:ring-1 focus:ring-neutral-secondary focus:ring-offset-1"
           // "disabled:border-steel-400 disabled:bg-steel-400"
         )}
         onChange={() => {
@@ -50,7 +50,7 @@ const Checkbox: FC<CheckboxProps> = ({
         <svg
           className={clsx(
             "absolute stroke-white outline-none",
-            "w-4 h-4 mt-1",
+            "mt-1 h-4 w-4",
             "hidden peer-checked:block",
             "pointer-events-none"
           )}

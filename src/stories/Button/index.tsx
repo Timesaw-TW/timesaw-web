@@ -35,8 +35,8 @@ export const Button: FC<ButtonProps> = ({
     <button
       type="button"
       className={clsx(
-        "w-24 h-8 rounded-md",
-        "flex justify-center items-center",
+        "h-8 w-24 rounded-md",
+        "flex items-center justify-center",
         `text-neutral-primary bg-${theme}-${level}`,
         "dark:text-neutral-white",
         className

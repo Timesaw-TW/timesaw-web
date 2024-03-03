@@ -7,7 +7,7 @@ export const IconTrashOutline = ({ className, ...props }: SVGProps<SVGSVGElement
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={`w-6 h-6 ${className}`}
+      className={`h-6 w-6 ${className}`}
       {...props}
     >
       <path

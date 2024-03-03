@@ -12,7 +12,7 @@ const ButtonIcon: FC<Props> = ({ children, className, label, ...props }) => {
     <button
       className={clsx(
         " px-6 py-3",
-        "flex flex-col justify-center items-center gap-1",
+        "flex flex-col items-center justify-center gap-1",
         " rounded-md shadow",
         "bg-primary-40",
         className
