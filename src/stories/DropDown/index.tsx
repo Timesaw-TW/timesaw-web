@@ -3,12 +3,13 @@ import { clsx } from "clsx";
 
 export interface SelectOption {
   label: string;
-  value: string | number | undefined;
+  value?: string | number;
+  //TODO:改城犯行
 }
 
 interface DropDownProps {
   options: SelectOption[];
-  value: SelectOption | undefined;
+  value?: SelectOption;
   label: string;
   onChange: (value: SelectOption) => void;
 }
@@ -34,15 +35,14 @@ export const DropDown: FC<DropDownProps> = ({
       className={clsx(
         "relative w-80 min-h-8 bg-gray-300",
         " flex items-center gap-2 p-2 rounded",
-        "outline-none text-gray-600 font-pingfang-tc"
+        "outline-none text-gray-600 "
       )}
       onClick={() => setIsOpen((open) => !open)}
       onBlur={() => setIsOpen(false)}
     >
-      <span className={clsx("grow text-black ")}>
-        {value?.label === undefined ? label : value?.label}
-      </span>
+      <span className={clsx("grow text-black ")}>{value?.label || label}</span>
       <div className="flex items-center ml-auto">
+        {/* TODO:一動到icons 資料夾 */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -70,8 +70,9 @@ export const DropDown: FC<DropDownProps> = ({
         <span>Select an option or create one</span>
         {options.map((option, index) => (
           <li
-            key={index + 1}
+            key={`${option.value}-${index}`}
             onClick={(e) => {
+              // TODO:selectOption
               selectOption(option);
               e.stopPropagation();
             }}

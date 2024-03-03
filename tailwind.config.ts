@@ -15,12 +15,6 @@ const config: Config = {
       fontFamily: {
         main: ["var(--font-notoSans)"],
       },
-      fontFamily: {
-        "pingfang-tc": ["PingFang TC", "Arial", "sans-serif"],
-      },
-      fontFamily: {
-        "pingfang-tc": ["PingFang TC", "Arial", "sans-serif"],
-      },
       colors: {
         primary: {
           100: "#9FD7E2",
