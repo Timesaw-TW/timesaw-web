@@ -23,7 +23,7 @@
     "@storybook/addon-essentials": "^7.6.16",
     "@storybook/addon-interactions": "^7.6.16",
     "@storybook/addon-links": "^7.6.16",
-    "@storybook/addon-onboarding": "^1.0.11ß",
+    "@storybook/addon-onboarding": "^1.0.11",
     "@storybook/blocks": "^7.6.16",
     "@storybook/nextjs": "^7.6.16",
     "@storybook/preview-api": "^7.6.17",

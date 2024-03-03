@@ -4,11 +4,10 @@ import {
   getByText,
   render,
   renderHook,
-  waitFor,
+  act,
 } from "@testing-library/react";
 import { DropDown, SelectOption } from ".";
 import { useState } from "react";
-import { mock } from "node:test";
 
 describe("#DropDown", () => {
   const optionList = [
@@ -21,11 +20,14 @@ describe("#DropDown", () => {
       value: "item2",
     },
   ];
-  it("should render with default props", () => {
+  const defaultLabel = "Select an option";
+  it("should render DropDown Component with default props", () => {
     const { container } = render(
       <DropDown
+        isOpen={false}
         options={optionList}
-        label="Enter or Select a category"
+        setIsOpen={undefined}
+        label={defaultLabel}
         value={undefined}
         onChange={() => {}}
       />
@@ -35,16 +37,18 @@ describe("#DropDown", () => {
 
   it("should change the DropDown Outcome Value", () => {
     const { result } = renderHook(() => {
-      const [value, setValue] = useState<SelectOption>();
-      const handleChange = (option: SelectOption) => setValue(option);
+      const [value, setValue] = useState<SelectOption<any>>();
+      const handleChange = (option: SelectOption<any>) => setValue(option);
 
       return { value, handleChange };
     });
 
     const { container } = render(
       <DropDown
+        isOpen={false}
+        setIsOpen={undefined}
         options={optionList}
-        label="Enter or Select a category"
+        label={defaultLabel}
         value={result.current.value}
         onChange={result.current.handleChange}
       />
@@ -53,7 +57,6 @@ describe("#DropDown", () => {
     const dropDown = container;
     fireEvent.click(dropDown);
     fireEvent.click(getByText(container, "item2"));
-
     expect(result.current.value).toEqual(optionList[1]);
   });
 
@@ -61,13 +64,15 @@ describe("#DropDown", () => {
     const mockClick = jest.fn();
     const { container } = render(
       <DropDown
+        isOpen={false}
+        setIsOpen={undefined}
         options={optionList}
         value={optionList[0]}
-        label="Select an option"
+        label={defaultLabel}
         onChange={mockClick}
       />
     );
-    optionList.forEach((option: SelectOption) => {
+    optionList.forEach((option: SelectOption<any>) => {
       const optionElements = container.querySelectorAll(
         `[data-value="${option.value}"]`
       );
@@ -80,16 +85,17 @@ describe("#DropDown", () => {
 
   it("should call onChange when a different option", () => {
     const mockOnChange = jest.fn();
-
-    const SELECTEDOPTION: SelectOption = {
+    const SELECTEDOPTION: SelectOption<any> = {
       label: "item2",
       value: "item2",
     };
     const { getByText } = render(
       <DropDown
+        isOpen={false}
+        setIsOpen={undefined}
         options={optionList}
         value={optionList[0]}
-        label="Select an option"
+        label={defaultLabel}
         onChange={mockOnChange}
       />
     );
@@ -105,37 +111,79 @@ describe("#DropDown", () => {
       <DropDown
         options={optionList}
         value={optionList[0]}
-        label="Select an option"
+        label={defaultLabel}
         onChange={mockClick}
       />
     );
 
     const dropdown = container;
     fireEvent.click(dropdown);
-
     expect(queryByText("Select an option or create one")).toBeInTheDocument();
   });
 
-  it("blurring the dropdown sets isOpen state to false", () => {
+  it("should being open by ouside state", async () => {
     const mockClick = jest.fn();
+    const { result } = renderHook(() => useState<boolean>(false));
 
-    const { container, queryByText } = render(
+    const { container } = render(
       <DropDown
         options={optionList}
         value={optionList[0]}
-        label="Select an option"
+        label={defaultLabel}
+        isOpen={result.current[0]}
+        setIsOpen={result.current[1]}
         onChange={mockClick}
       />
     );
+    act(() => {
+      result.current[1](true);
+    });
+    expect(container).toBeInTheDocument();
+    expect(result.current[0]).toBe(true);
+  });
 
-    const dropdown = container;
-    fireEvent.click(dropdown);
+  it("should render options block when isOpen is true", () => {
+    const { container } = render(
+      <DropDown
+        options={optionList}
+        value={optionList[0]}
+        label={defaultLabel}
+        onChange={() => {}}
+        isOpen={true}
+      />
+    );
+
+    const optionsBlock = container.querySelector(".block");
+    const hiddenBlock = container.querySelector(".hidden");
+
+    expect(optionsBlock).toBeInTheDocument();
+    expect(hiddenBlock).toBeNull();
+  });
+
+  it("should set isOpen's state by outside stateProps", () => {
+    const { result } = renderHook(() => useState<boolean>(false));
+    const { queryByText } = render(
+      <DropDown
+        options={optionList}
+        value={optionList[0]}
+        label={defaultLabel}
+        onChange={() => {}}
+        isOpen={result.current[0]}
+        setIsOpen={result.current[1]}
+      />
+    );
+
+    act(() => {
+      result.current[1](true);
+    });
+
+    expect(result.current[0]).toBe(true);
     expect(queryByText("Select an option or create one")).toBeInTheDocument();
 
-    fireEvent.blur(dropdown);
+    act(() => {
+      result.current[1](false);
+    });
 
-    setTimeout(() => {
-      expect(queryByText("Select an option or create one")).toBeNull();
-    }, 1000);
+    expect(result.current[0]).toBe(false);
   });
 });

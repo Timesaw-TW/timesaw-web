@@ -17,7 +17,7 @@ type Story = StoryObj<typeof DropDown>;
 
 export const DefaultUseage: Story = {
   args: {
-    onChange: (option: SelectOption) => {},
+    onChange: (option: SelectOption<any>) => {},
     options: [
       {
         label: "item1",
@@ -33,14 +33,14 @@ export const DefaultUseage: Story = {
   },
   render: function Render(args) {
     const [{ value }, updateArgs] = useArgs();
-    function onChange(option: SelectOption) {
+    function onChange(option: SelectOption<any>) {
       updateArgs({ value: option });
     }
     return (
       <DropDown
         {...args}
         value={value}
-        onChange={(option: SelectOption) => onChange(option)}
+        onChange={(option: SelectOption<any>) => onChange(option)}
       />
     );
   },
