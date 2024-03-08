@@ -88,7 +88,6 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
         <input
           ref={inputRef}
           type="text"
-          role="textbox"
           className={clsx(
             "flex-1 p-2",
             "bg-transparent placeholder-neutral-divider ",
@@ -134,7 +133,7 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
             setDropdownOpen(false);
           }}
           options={options}
-          createdValue={createdValue || (inputProps.value as string)}
+          createdValue={createdValue ?? (inputProps.value as string)}
           onCreateClick={(value: string) => {
             onCreateClick?.(value);
             setDropdownOpen(false);
