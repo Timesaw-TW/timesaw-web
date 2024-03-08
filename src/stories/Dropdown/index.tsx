@@ -50,25 +50,27 @@ const Dropdown = <T,>({
         label
       )}
       {options.map((option, index) => (
-        <li
-          key={`${index}-${option.value}`}
-          onClick={() => {
-            onChange?.(option);
-          }}
-          className={liBaseClass}
-        >
-          <Text>{option.label}</Text>
+        <li key={`${index}-${option.value}`} className={liBaseClass}>
+          <button
+            onClick={() => {
+              onChange?.(option);
+            }}
+          >
+            <Text>{option.label}</Text>
+          </button>
         </li>
       ))}
       {allowCreate &&
         !options.some((option) => option.label === createdValue) &&
         createdValue && (
-          <li
-            className={clsx(liBaseClass, "flex items-center gap-2")}
-            onClick={() => onCreateClick?.(createdValue)}
-          >
-            <Text className="text-[#747478]">Create</Text>
-            <Text className="text-[#090000]">{createdValue}</Text>
+          <li className={clsx(liBaseClass)}>
+            <button
+              onClick={() => onCreateClick?.(createdValue)}
+              className="flex items-center gap-2"
+            >
+              <Text className="text-[#747478]">Create</Text>
+              <Text className="text-[#090000]">{createdValue}</Text>
+            </button>
           </li>
         )}
     </ul>
