@@ -1,6 +1,6 @@
 import { SVGProps } from "react";
 
-const IconTrashSolid = ({ className, ...props }: SVGProps<SVGSVGElement>) => {
+export const IconTrashSolid = ({ className, ...props }: SVGProps<SVGSVGElement>) => {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -16,5 +16,3 @@ const IconTrashSolid = ({ className, ...props }: SVGProps<SVGSVGElement>) => {
     </svg>
   );
 };
-
-export default IconTrashSolid;
