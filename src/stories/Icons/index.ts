@@ -1,5 +1,6 @@
-import IconTrashOutline from "./IconTrashOutline";
-import IconTrashSolid from "./IconTrashSolid";
-import { IconChevronDown } from "./iconChevronDown";
+import { IconTrashOutline } from "./IconTrashOutline";
+import { IconTrashSolid } from "./IconTrashSolid";
+import { IconChevronDown } from "./IconChevronDown";
+import { IconXMark } from "./IconXMark";
 
-export { IconTrashOutline, IconTrashSolid, IconChevronDown };
+export { IconTrashOutline, IconTrashSolid, IconChevronDown, IconXMark };

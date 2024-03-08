@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { useArgs } from "@storybook/preview-api";
 import { ChangeEvent } from "react";
 import TextInput, { TextInputProps } from ".";
+import { SelectOption } from "../Dropdown";
 
 const meta: Meta<typeof TextInput> = {
   title: "Base/TextInput",
@@ -24,8 +25,19 @@ const render = function Render(args: TextInputProps) {
   return <TextInput {...args} value={value} onChange={onChange} />;
 };
 
+const dropdownOptions: SelectOption<string>[] = [
+  {
+    label: "Work",
+    value: "work",
+  },
+  {
+    label: "Dating",
+    value: "dating",
+  },
+];
+
 export const Sample_1: Story = {
-  name: "Pure Input",
+  name: "Input",
   args: {
     placeholder: "Placeholder",
   },
@@ -37,6 +49,43 @@ export const Sample_2: Story = {
   args: {
     placeholder: "Placeholder",
     showButton: true,
+    button: {
+      allowClear: true,
+    },
   },
   render,
+};
+
+export const Sample_3: Story = {
+  name: "Input with Dropdown",
+  args: {
+    placeholder: "Placeholder",
+    showButton: true,
+    showDropdown: true,
+    button: {
+      allowClear: true,
+    },
+    dropdown: {
+      label: "Select an option or create one",
+      options: dropdownOptions,
+      allowCreate: true,
+      onCreateClick: (value) => {
+        alert(`press click and will create ${value}`);
+      },
+    },
+  },
+  render: function Render(args: TextInputProps) {
+    const [{ value, dropdown }, updateArgs] = useArgs<TextInputProps>();
+    function onChange(e: ChangeEvent<HTMLInputElement>) {
+      updateArgs({ value: e.target.value });
+      if (e.target.value && dropdown) {
+        dropdown.options = dropdownOptions.filter((option) =>
+          option.label.toLowerCase().startsWith(e.target.value.toLowerCase())
+        );
+      } else if (dropdown) {
+        dropdown.options = dropdownOptions;
+      }
+    }
+    return <TextInput {...args} value={value} onChange={onChange} />;
+  },
 };

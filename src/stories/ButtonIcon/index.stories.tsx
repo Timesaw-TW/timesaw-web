@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import ButtonIcon from ".";
-import IconTrashOutline from "../Icons/IconTrashOutline";
-import IconTrashSolid from "../Icons/IconTrashSolid";
+import { IconTrashOutline, IconTrashSolid } from "../Icons";
 
 const meta = {
   title: "Base/Button Icon",
