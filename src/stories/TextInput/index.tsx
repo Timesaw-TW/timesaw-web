@@ -77,11 +77,11 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
   return (
     <div
       ref={ref || containerRef}
-      className={clsx("w-[300px] relative", className)}
+      className={clsx("relative w-[300px]", className)}
     >
       <div
         className={clsx(
-          "flex justify-between items-stretch",
+          "flex items-stretch justify-between",
           "border-b border-neutral-divider caret-[#446BF2]"
         )}
       >
@@ -91,7 +91,7 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
           className={clsx(
             "flex-1 p-2",
             "bg-transparent placeholder-neutral-divider ",
-            "border-none focus:ring-0 outline-none"
+            "border-none outline-none focus:ring-0"
           )}
           onFocus={(e) => {
             if (showDropdown) {

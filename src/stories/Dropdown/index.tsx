@@ -37,7 +37,7 @@ const Dropdown = <T,>({
       className={clsx(
         "absolute w-full",
         "flex flex-col",
-        "border rounded shadow-md",
+        "rounded border shadow-md",
         "bg-white",
         className
       )}
