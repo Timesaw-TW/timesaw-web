@@ -1,6 +1,6 @@
 import { SVGProps } from "react";
 
-const IconTrashOutline = ({ className, ...props }: SVGProps<SVGSVGElement>) => {
+export const IconTrashOutline = ({ className, ...props }: SVGProps<SVGSVGElement>) => {
   return (
     <svg
       fill="none"
@@ -18,5 +18,3 @@ const IconTrashOutline = ({ className, ...props }: SVGProps<SVGSVGElement>) => {
     </svg>
   );
 };
-
-export default IconTrashOutline;
