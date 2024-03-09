@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import SystemProvider from "./components/provider/SystemProvider";
+import SystemProvider from "@/components/provider/SystemProvider";
 
 const notoSans = localFont({
   src: "../../public/fonts/Noto_Sans/regular.ttf",
