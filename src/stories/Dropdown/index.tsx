@@ -32,6 +32,15 @@ const Dropdown = <T,>({
     "hover:bg-neutral-divider"
   );
 
+  const compareWithAutoComplete = (
+    input: string | undefined,
+    optionList: SelectOption<T>[]
+  ) => {
+    return !optionList.some((option) => {
+      return option.label.toLowerCase() === input?.toLocaleLowerCase();
+    });
+  };
+
   return (
     <ul
       className={clsx(
@@ -61,7 +70,7 @@ const Dropdown = <T,>({
         </li>
       ))}
       {allowCreate &&
-        !options.some((option) => option.label === createdValue) &&
+        compareWithAutoComplete(createdValue, options) &&
         createdValue && (
           <li className={clsx(liBaseClass)}>
             <button
