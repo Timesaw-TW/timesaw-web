@@ -5,14 +5,17 @@ import {
   ReactNode,
   RefObject,
   forwardRef,
-  useCallback,
-  useEffect,
   useRef,
   useState,
+  MouseEvent,
+  FocusEvent,
 } from "react";
 import { IconChevronDown, IconXMark } from "../Icons";
 import clsx from "clsx";
-import Dropdown, { DropdownProps as BaseDropdownProps } from "../Dropdown";
+import Dropdown, {
+  DropdownProps as BaseDropdownProps,
+  SelectOption,
+} from "../Dropdown";
 import useOnFocusOutside from "@/hooks/useOnFocusOutside";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -20,9 +23,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   allowClear?: boolean;
 }
 
-interface DropdownProps extends BaseDropdownProps<string> {
-  onOpenChange?: (open: boolean) => void;
-}
+interface DropdownProps extends BaseDropdownProps<string> {}
 
 export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   showButton?: boolean;
@@ -47,17 +48,53 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
     ...btnProps
   } = button || {};
   const {
+    searchValue,
     onChange: dropdownOnChange,
-    options = [],
-    onOpenChange,
-    createdValue,
+    options,
     onCreateClick,
     ...dropdownProps
   } = dropdown || {};
 
-  useEffect(() => {
-    onOpenChange?.(dropdownOpen);
-  }, [dropdownOpen, onOpenChange]);
+  const isClearIcon = !btnOnClick && allowClear && inputProps.value;
+  const isDropdownIcon = !isClearIcon && showDropdown;
+  const isRenderDropdown = showDropdown && dropdownOpen && dropdown;
+
+  const handleInputFocus = (e: FocusEvent<HTMLInputElement>) => {
+    if (showDropdown) {
+      setDropdownOpen(true);
+    }
+    onFocus?.(e);
+  };
+
+  const handleIconClick = (e: MouseEvent<HTMLButtonElement>) => {
+    inputRef.current?.focus();
+
+    if (btnOnClick) {
+      btnOnClick(e);
+      return;
+    }
+
+    if (isClearIcon) {
+      triggerInputChange("");
+    }
+  };
+
+  const triggerInputChange = (value: string) => {
+    inputProps.onChange?.({
+      target: { value },
+    } as ChangeEvent<HTMLInputElement>);
+  };
+
+  const handleDropdownChange = (value: SelectOption<string>) => {
+    triggerInputChange(value.label);
+    dropdownOnChange?.(value);
+    setDropdownOpen(false);
+  };
+
+  const handleDropdownCreate = (value: string) => {
+    onCreateClick?.(value);
+    setDropdownOpen(false);
+  };
 
   useOnFocusOutside((ref as RefObject<HTMLDivElement>) || containerRef, () => {
     if (showButton) {
@@ -65,14 +102,6 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
     }
   });
 
-  const triggerInputChange = useCallback(
-    (value: string) => {
-      inputProps.onChange?.({
-        target: { value },
-      } as ChangeEvent<HTMLInputElement>);
-    },
-    [inputProps]
-  );
   return (
     <div
       ref={ref || containerRef}
@@ -92,51 +121,30 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
             "bg-transparent placeholder-neutral-divider ",
             "border-none outline-none focus:ring-0"
           )}
-          onFocus={(e) => {
-            if (showDropdown) {
-              setDropdownOpen(true);
-            }
-            onFocus?.(e);
-          }}
+          onFocus={handleInputFocus}
           {...inputProps}
         />
         {showButton && (
           <button
-            className={clsx("", btnClassName)}
-            onClick={(e) => {
-              inputRef.current?.focus();
-              if (!btnOnClick) {
-                if (allowClear && inputProps.value && inputProps.onChange) {
-                  triggerInputChange("");
-                }
-              } else {
-                btnOnClick(e);
-              }
-            }}
+            className={btnClassName}
+            onClick={handleIconClick}
             {...btnProps}
           >
-            {element ||
-              (allowClear && inputProps.value ? (
+            {element ??
+              (isClearIcon ? (
                 <IconXMark />
               ) : (
-                showDropdown && <IconChevronDown />
+                isDropdownIcon && <IconChevronDown />
               ))}
           </button>
         )}
       </div>
-      {showDropdown && dropdownOpen && dropdown && (
+      {isRenderDropdown && (
         <Dropdown
-          onChange={(value) => {
-            triggerInputChange(value.label);
-            dropdownOnChange?.(value);
-            setDropdownOpen(false);
-          }}
-          options={options}
-          createdValue={createdValue ?? (inputProps.value as string)}
-          onCreateClick={(value: string) => {
-            onCreateClick?.(value);
-            setDropdownOpen(false);
-          }}
+          searchValue={searchValue ?? (inputProps.value as string)}
+          onChange={handleDropdownChange}
+          options={options ?? []}
+          onCreateClick={handleDropdownCreate}
           {...dropdownProps}
         />
       )}

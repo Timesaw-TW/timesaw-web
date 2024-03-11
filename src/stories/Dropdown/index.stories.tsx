@@ -34,7 +34,7 @@ const render = function Render(args: DropdownProps<unknown>) {
 };
 
 export const Sample_1: Story = {
-  name: "with TextInput",
+  name: "Dropdown",
   args: {
     options: dropdownOptions,
     label: "Select an option or create one",
@@ -43,12 +43,12 @@ export const Sample_1: Story = {
 };
 
 export const Sample_2: Story = {
-  name: "with TextInput (allow create)",
+  name: "Dropdown with create",
   args: {
     options: dropdownOptions,
     label: "Select an option or create one",
     allowCreate: true,
-    createdValue: "Holiday",
+    searchValue: "Holiday",
   },
   render,
 };

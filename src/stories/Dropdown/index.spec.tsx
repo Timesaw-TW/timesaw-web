@@ -44,7 +44,7 @@ describe("#Dropdown", () => {
       <Dropdown
         {...defaultProps}
         allowCreate
-        createdValue="New Option"
+        searchValue="New Option"
         onCreateClick={onCreateClickMock}
       />
     );

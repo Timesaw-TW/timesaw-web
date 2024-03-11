@@ -8,28 +8,29 @@ export interface SelectOption<T> {
 }
 
 export interface DropdownProps<T> {
+  searchValue?: string;
   label?: string | ReactNode;
   onChange?: (value: SelectOption<T>) => void;
   options: SelectOption<T>[];
   className?: ClassValue;
   allowCreate?: boolean;
-  createdValue?: string;
   onCreateClick?: (value: string) => void;
 }
 
 const Dropdown = <T,>({
-  label = "Select an option",
+  searchValue,
+  label,
   onChange,
   options,
   className,
   allowCreate,
-  createdValue,
   onCreateClick,
 }: DropdownProps<T>) => {
+  const itemPadding = "py-1 px-3";
   const liBaseClass = clsx(
-    "px-4 py-2",
+    itemPadding,
     "cursor-pointer text-neutral-primary",
-    "hover:bg-neutral-divider"
+    "hover:bg-primary-40 hover:rounded"
   );
 
   const compareWithAutoComplete = (
@@ -41,26 +42,31 @@ const Dropdown = <T,>({
     });
   };
 
+  const showCreate =
+    allowCreate && compareWithAutoComplete(searchValue, options) && searchValue;
+
   return (
     <ul
       className={clsx(
-        "absolute w-full",
+        "absolute w-full p-1",
         "flex flex-col",
         "rounded border shadow-md",
-        "bg-white",
+        "text-pretty bg-white",
         className
       )}
     >
-      {typeof label === "string" ? (
-        <Text className={clsx("px-4 py-2", "text-neutral-secondary")}>
-          {label}
-        </Text>
-      ) : (
-        label
-      )}
+      {label &&
+        (typeof label === "string" ? (
+          <Text className={clsx(itemPadding, "text-neutral-secondary")}>
+            {label}
+          </Text>
+        ) : (
+          label
+        ))}
       {options.map((option, index) => (
         <li key={`${index}-${option.value}`} className={liBaseClass}>
           <button
+            className="flex w-full justify-start"
             onClick={() => {
               onChange?.(option);
             }}
@@ -69,19 +75,17 @@ const Dropdown = <T,>({
           </button>
         </li>
       ))}
-      {allowCreate &&
-        compareWithAutoComplete(createdValue, options) &&
-        createdValue && (
-          <li className={clsx(liBaseClass)}>
-            <button
-              onClick={() => onCreateClick?.(createdValue)}
-              className="flex items-center gap-2"
-            >
-              <Text className="text-[#747478]">Create</Text>
-              <Text className="text-[#090000]">{createdValue}</Text>
-            </button>
-          </li>
-        )}
+      {showCreate && (
+        <li
+          className={clsx(liBaseClass)}
+          onClick={() => onCreateClick?.(searchValue)}
+        >
+          <button className="flex w-full items-center gap-2">
+            <Text className="text-[#747478]">Create</Text>
+            <Text className="text-[#090000]">{searchValue}</Text>
+          </button>
+        </li>
+      )}
     </ul>
   );
 };
