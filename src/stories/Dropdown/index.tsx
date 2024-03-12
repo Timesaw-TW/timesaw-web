@@ -45,6 +45,12 @@ const Dropdown = <T,>({
   const showCreate =
     allowCreate && compareWithAutoComplete(searchValue, options) && searchValue;
 
+  const filterOptions = searchValue
+    ? options.filter((x) =>
+        x.label.toLowerCase().startsWith(searchValue.toLowerCase())
+      )
+    : options;
+
   return (
     <ul
       className={clsx(
@@ -63,7 +69,7 @@ const Dropdown = <T,>({
         ) : (
           label
         ))}
-      {options.map((option, index) => (
+      {filterOptions.map((option, index) => (
         <li key={`${index}-${option.value}`} className={liBaseClass}>
           <button
             className="flex w-full justify-start"

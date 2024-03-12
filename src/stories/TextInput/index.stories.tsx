@@ -75,16 +75,9 @@ export const Sample_3: Story = {
     },
   },
   render: function Render(args: TextInputProps) {
-    const [{ value, dropdown }, updateArgs] = useArgs<TextInputProps>();
+    const [{ value }, updateArgs] = useArgs<TextInputProps>();
     function onChange(e: ChangeEvent<HTMLInputElement>) {
       updateArgs({ value: e.target.value });
-      if (e.target.value && dropdown) {
-        dropdown.options = dropdownOptions.filter((option) =>
-          option.label.toLowerCase().startsWith(e.target.value.toLowerCase())
-        );
-      } else if (dropdown) {
-        dropdown.options = dropdownOptions;
-      }
     }
     return <TextInput {...args} value={value} onChange={onChange} />;
   },
