@@ -73,7 +73,6 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
     },
     [inputProps]
   );
-
   return (
     <div
       ref={ref || containerRef}
