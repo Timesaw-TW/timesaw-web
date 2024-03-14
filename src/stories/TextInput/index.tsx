@@ -99,7 +99,6 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
             onFocus?.(e);
           }}
           {...inputProps}
-          value={inputProps.value ?? ""}
         />
         {showButton && (
           <button
