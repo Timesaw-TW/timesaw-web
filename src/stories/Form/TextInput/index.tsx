@@ -1,36 +1,20 @@
 import {
-  ButtonHTMLAttributes,
   ChangeEvent,
-  InputHTMLAttributes,
-  ReactNode,
   RefObject,
   forwardRef,
   useRef,
   useState,
   MouseEvent,
   FocusEvent,
+  useEffect,
 } from "react";
-import { IconChevronDown, IconXMark } from "../Icons";
+import { IconChevronDown, IconXMark } from "../../Icons";
 import clsx from "clsx";
-import Dropdown, {
-  DropdownProps as BaseDropdownProps,
-  SelectOption,
-} from "../Dropdown";
+import Dropdown from "../Dropdown";
+import { SelectOption } from "../Dropdown/type";
 import useOnFocusOutside from "@/hooks/useOnFocusOutside";
-
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  element?: ReactNode;
-  allowClear?: boolean;
-}
-
-interface DropdownProps extends BaseDropdownProps<string> {}
-
-export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  showButton?: boolean;
-  button?: ButtonProps;
-  showDropdown?: boolean;
-  dropdown?: DropdownProps;
-}
+import ErrorMessage from "../ErrorMessage";
+import { TextInputProps } from "./type";
 
 const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
   { showButton, button, showDropdown, dropdown, ...props },
@@ -39,7 +23,16 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { className, onFocus, onBlur, ...inputProps } = props;
+  const [value, setValue] = useState<string>(props.value as string);
+  const {
+    className,
+    onFocus,
+    onBlur,
+    value: inputValue,
+    onChange,
+    errorMessage,
+    ...inputProps
+  } = props;
   const {
     element,
     className: btnClassName,
@@ -55,9 +48,13 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
     ...dropdownProps
   } = dropdown || {};
 
-  const isClearIcon = !btnOnClick && allowClear && inputProps.value;
+  const isClearIcon = !btnOnClick && allowClear && value;
   const isDropdownIcon = !isClearIcon && showDropdown;
   const isRenderDropdown = showDropdown && dropdownOpen && dropdown;
+
+  useEffect(() => {
+    setValue(inputValue as string);
+  }, [inputValue]);
 
   const handleInputFocus = (e: FocusEvent<HTMLInputElement>) => {
     if (showDropdown) {
@@ -80,9 +77,14 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
   };
 
   const triggerInputChange = (value: string) => {
-    inputProps.onChange?.({
-      target: { value },
+    handleInputChange({
+      target: { value, id: props.id, name: props.name },
     } as ChangeEvent<HTMLInputElement>);
+  };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+    onChange?.(e);
   };
 
   const handleDropdownChange = (value: SelectOption<string>) => {
@@ -109,7 +111,7 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
     >
       <div
         className={clsx(
-          "flex items-stretch justify-between",
+          "relative flex items-stretch",
           "border-b border-neutral-divider caret-[#446BF2]"
         )}
       >
@@ -122,32 +124,35 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
             "border-none outline-none focus:ring-0"
           )}
           onFocus={handleInputFocus}
+          onChange={handleInputChange}
+          value={value}
           {...inputProps}
         />
         {showButton && (
           <button
-            className={btnClassName}
+            className={clsx("absolute right-1 h-full", btnClassName)}
             onClick={handleIconClick}
             {...btnProps}
           >
             {element ??
               (isClearIcon ? (
-                <IconXMark />
+                <IconXMark className="h-6 w-6" />
               ) : (
-                isDropdownIcon && <IconChevronDown />
+                isDropdownIcon && <IconChevronDown className="h-6 w-6" />
               ))}
           </button>
         )}
       </div>
       {isRenderDropdown && (
         <Dropdown
-          searchValue={searchValue ?? (inputProps.value as string)}
+          searchValue={searchValue ?? (value as string)}
           onChange={handleDropdownChange}
           options={options ?? []}
           onCreateClick={handleDropdownCreate}
           {...dropdownProps}
         />
       )}
+      <ErrorMessage {...errorMessage} />
     </div>
   );
 });

@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Dropdown, { DropdownProps, SelectOption } from ".";
+import Dropdown from ".";
+import { DropdownProps, SelectOption } from "./type";
 
 const meta: Meta<typeof Dropdown> = {
-  title: "Base/Dropdown",
+  title: "Base/Form/Dropdown",
   component: Dropdown,
   parameters: {
     layout: "centered",

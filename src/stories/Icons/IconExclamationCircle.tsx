@@ -1,6 +1,8 @@
 import { SVGProps } from "react";
 
-export const IconChevronDown = ({ ...props }: SVGProps<SVGSVGElement>) => {
+export const IconExclamationCircle = ({
+  ...props
+}: SVGProps<SVGSVGElement>) => {
   return (
     <svg
       fill="none"
@@ -12,7 +14,7 @@ export const IconChevronDown = ({ ...props }: SVGProps<SVGSVGElement>) => {
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="m19.5 8.25-7.5 7.5-7.5-7.5"
+        d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
       />
     </svg>
   );

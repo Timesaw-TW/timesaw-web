@@ -1,21 +1,6 @@
-import React, { ReactNode } from "react";
-import { ClassValue, clsx } from "clsx";
-import Text from "../Text/Text";
-
-export interface SelectOption<T> {
-  label: string;
-  value: T;
-}
-
-export interface DropdownProps<T> {
-  searchValue?: string;
-  label?: string | ReactNode;
-  onChange?: (value: SelectOption<T>) => void;
-  options: SelectOption<T>[];
-  className?: ClassValue;
-  allowCreate?: boolean;
-  onCreateClick?: (value: string) => void;
-}
+import { clsx } from "clsx";
+import Text from "../../Text/Text";
+import { DropdownProps } from "./type";
 
 const Dropdown = <T,>({
   searchValue,
@@ -54,6 +39,7 @@ const Dropdown = <T,>({
   return (
     <ul
       className={clsx(
+        "z-10",
         "absolute w-full p-1",
         "flex flex-col",
         "rounded border shadow-md",
