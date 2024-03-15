@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
 import Text from "../../Text/Text";
-import { DropdownProps } from "./type";
+import { DropdownProps, SelectOption } from "./type";
 
 const Dropdown = <T,>({
   searchValue,
@@ -68,11 +68,11 @@ const Dropdown = <T,>({
         </li>
       ))}
       {showCreate && (
-        <li
-          className={clsx(liBaseClass)}
-          onClick={() => onCreateClick?.(searchValue)}
-        >
-          <button className="flex w-full items-center gap-2">
+        <li className={clsx(liBaseClass)}>
+          <button
+            onClick={() => onCreateClick?.(searchValue)}
+            className="flex w-full items-center gap-2"
+          >
             <Text className="text-[#747478]">Create</Text>
             <Text className="text-[#090000]">{searchValue}</Text>
           </button>

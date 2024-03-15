@@ -145,7 +145,7 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
       </div>
       {isRenderDropdown && (
         <Dropdown
-          searchValue={searchValue ?? (value as string)}
+          searchValue={searchValue ?? value}
           onChange={handleDropdownChange}
           options={options ?? []}
           onCreateClick={handleDropdownCreate}
