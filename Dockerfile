@@ -22,7 +22,7 @@ ENV NODE_ENV production
 RUN npm install -g pnpm
 
 COPY --from=builder /app/package.json /app/pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile --prod
+RUN pnpm install --frozen-lockfile --ignore-scripts --prod
 
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public

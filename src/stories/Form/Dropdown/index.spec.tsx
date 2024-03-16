@@ -1,6 +1,7 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
-import Dropdown, { DropdownProps, SelectOption } from ".";
+import Dropdown from ".";
+import { DropdownProps, SelectOption } from "./type";
 
 describe("#Dropdown", () => {
   const options: SelectOption<number>[] = [
@@ -44,7 +45,7 @@ describe("#Dropdown", () => {
       <Dropdown
         {...defaultProps}
         allowCreate
-        createdValue="New Option"
+        searchValue="New Option"
         onCreateClick={onCreateClickMock}
       />
     );

@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Dropdown, { DropdownProps, SelectOption } from ".";
+import Dropdown from ".";
+import { DropdownProps, SelectOption } from "./type";
 
 const meta: Meta<typeof Dropdown> = {
-  title: "Base/Dropdown",
+  title: "Base/Form/Dropdown",
   component: Dropdown,
   parameters: {
     layout: "centered",
@@ -34,7 +35,7 @@ const render = function Render(args: DropdownProps<unknown>) {
 };
 
 export const Sample_1: Story = {
-  name: "with TextInput",
+  name: "Dropdown",
   args: {
     options: dropdownOptions,
     label: "Select an option or create one",
@@ -43,12 +44,12 @@ export const Sample_1: Story = {
 };
 
 export const Sample_2: Story = {
-  name: "with TextInput (allow create)",
+  name: "Dropdown with create",
   args: {
     options: dropdownOptions,
     label: "Select an option or create one",
     allowCreate: true,
-    createdValue: "Holiday",
+    searchValue: "Holiday",
   },
   render,
 };

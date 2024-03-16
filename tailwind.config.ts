@@ -35,6 +35,7 @@ const config: Config = {
           secondary: "#5C5858",
           divider: "#E1E0E0",
           white: "#FFFFFF",
+          error: "#D7402A",
         },
       },
     },

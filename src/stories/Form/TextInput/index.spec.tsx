@@ -4,7 +4,9 @@ import TextInput from ".";
 
 describe("#TextInput", () => {
   it("should render TextInput with button correctly", () => {
-    const { getByRole } = render(<TextInput showButton={true} />);
+    const { getByRole } = render(
+      <TextInput id="test" name="test" showButton={true} />
+    );
     const inputElement = getByRole("textbox");
     expect(inputElement).toBeInTheDocument();
     const buttonElement = getByRole("button");
@@ -12,7 +14,9 @@ describe("#TextInput", () => {
   });
 
   it("should render TextInput without button correctly", () => {
-    const { getByRole, queryByRole } = render(<TextInput />);
+    const { getByRole, queryByRole } = render(
+      <TextInput id="test" name="test" />
+    );
     const inputElement = getByRole("textbox");
     expect(inputElement).toBeInTheDocument();
     const buttonElement = queryByRole("button");
@@ -24,6 +28,8 @@ describe("#TextInput", () => {
       const [value, setValue] = useState<string>();
       return (
         <TextInput
+          id="test"
+          name="test"
           showButton={true}
           value={value}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +61,13 @@ describe("#TextInput", () => {
       },
     ];
     const { getByRole, queryByRole } = render(
-      <TextInput showButton={true} showDropdown dropdown={{ options }} />
+      <TextInput
+        id="test"
+        name="test"
+        showButton={true}
+        showDropdown
+        dropdown={{ options }}
+      />
     );
     const buttonElement = getByRole("button");
     fireEvent.click(buttonElement);
@@ -70,7 +82,12 @@ describe("#TextInput", () => {
   it("should call custom onClick handler when button is clicked", () => {
     const onClickMock = jest.fn();
     const { getByRole } = render(
-      <TextInput showButton={true} button={{ onClick: onClickMock }} />
+      <TextInput
+        id="test"
+        name="test"
+        showButton={true}
+        button={{ onClick: onClickMock }}
+      />
     );
     const buttonElement = getByRole("button");
     fireEvent.click(buttonElement);
@@ -81,6 +98,8 @@ describe("#TextInput", () => {
     const onCreateClickMock = jest.fn();
     const { getByText, getByRole } = render(
       <TextInput
+        id="test"
+        name="test"
         value={"text"}
         showButton={true}
         showDropdown={true}

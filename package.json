@@ -16,13 +16,15 @@
   "dependencies": {
     "@apollo/client": "^3.9.5",
     "clsx": "^2.1.0",
-    "lodash": "^4.17.21",
+    "formik": "^2.4.5",
     "graphql": "^16.8.1",
+    "lodash": "^4.17.21",
     "next": "14.1.0",
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
-    "react-use": "^17.5.0"
+    "react-use": "^17.5.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.6.16",
