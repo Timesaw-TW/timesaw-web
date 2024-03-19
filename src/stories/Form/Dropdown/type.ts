@@ -14,4 +14,5 @@ export interface DropdownProps<T> {
   className?: ClassValue;
   allowCreate?: boolean;
   onCreateClick?: (value: string) => void;
+  selected?: T[];
 }
