@@ -3,72 +3,73 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import TimeButton from ".";
 import { TimeButtonProps, Periods } from "./type";
 
-jest.mock("./Button", () => ({
-  __esModule: true,
-  default: jest.fn(() => null), // Mock Button component for testing isolation
-}));
-
-describe("TimeButton component", () => {
-  const mockClickEvent = jest.fn();
-  const periods: Periods[] = [
-    { time: "1 Minute", value: "1" },
-    { time: "15 Minutes", value: "15" },
-    { time: "30 Minutes", value: "30" },
-    { time: "1 Hour", value: "60" },
-    { time: "1.5 Hours", value: "90" },
+describe("TimeButton", () => {
+  const TIMEOPTIONS: Periods[] = [
+    {
+      time: "1分鐘",
+      value: "1",
+    },
+    {
+      time: "15分鐘",
+      value: "15",
+    },
+    {
+      time: "30分鐘",
+      value: "30",
+    },
+    {
+      time: "1小時",
+      value: "60",
+    },
+    {
+      time: "1.5小時",
+      value: "90",
+    },
   ];
 
-  // ... rest of the tests remain the same ...
+  const onChangeMock = jest.fn();
 
-  it("should render buttons for each time period", () => {
-    render(<TimeButton timePeriods={periods} clickEvent={mockClickEvent} />);
+  const defaultProps: TimeButtonProps = {
+    clickEvent: onChangeMock,
+    timePeriods: TIMEOPTIONS,
+  };
 
-    expect(screen.getAllByRole("button")).toHaveLength(periods.length);
+  it("renders all time periods", () => {
+    render(<TimeButton {...defaultProps} />);
+    const buttons = screen.getAllByRole("button");
+    expect(buttons.length).toBe(TIMEOPTIONS.length);
   });
 
-  it("should display the time for each button", () => {
-    render(<TimeButton timePeriods={periods} clickEvent={mockClickEvent} />);
-
-    periods.forEach((period, index) => {
-      expect(screen.getByText(period.time)).toBeInTheDocument();
-    });
+  it("calls onChange on button click", () => {
+    render(<TimeButton {...defaultProps} />);
+    const firstButton = screen.getByText(/1分鐘/i);
+    fireEvent.click(firstButton);
+    expect(onChangeMock).toHaveBeenCalledTimes(1);
+    expect(onChangeMock).toHaveBeenCalledWith("1");
   });
 
-  it("should initially select no button", () => {
-    render(<TimeButton timePeriods={periods} clickEvent={mockClickEvent} />);
+  it("updates button styles based on selection", () => {
+    render(<TimeButton {...defaultProps} />);
+    const firstButton = screen.getByText(/1分鐘/i);
+    const secondButton = screen.getByText(/15分鐘/i);
 
-    expect(screen.queryByText(/level: 100/i)).not.toBeInTheDocument(); // Check for level 100 (selected)
-  });
+    expect(firstButton).not.toHaveClass("bg-primary-100"); // Initially not selected
+    expect(secondButton).not.toHaveClass("bg-primary-100");
 
-  it("should set button level to 100 (selected) on click", () => {
-    render(<TimeButton timePeriods={periods} clickEvent={mockClickEvent} />);
-
-    const firstButton = screen.getAllByRole("button")[0];
     fireEvent.click(firstButton);
 
-    expect(screen.getByText(periods[0].time)).toHaveStyle({ level: "100" }); // Assert level using inline style
+    expect(firstButton).toHaveClass("bg-primary-100");
+    expect(secondButton).not.toHaveClass("bg-primary-100");
   });
 
-  it("should call clickEvent with the clicked time value", () => {
-    render(<TimeButton timePeriods={periods} clickEvent={mockClickEvent} />);
+  it("renders with an empty array of time periods", () => {
+    const emptyTimePeriods: Periods[] = [];
+    const emptyProps: TimeButtonProps = {
+      clickEvent: onChangeMock,
+      timePeriods: emptyTimePeriods,
+    };
 
-    const secondButton = screen.getAllByRole("button")[1];
-    fireEvent.click(secondButton);
-
-    expect(mockClickEvent).toHaveBeenCalledWith(periods[1].value); // Assert clickEvent call with value
-  });
-
-  it("should only have one button selected at a time", () => {
-    render(<TimeButton timePeriods={periods} clickEvent={mockClickEvent} />);
-
-    const firstButton = screen.getAllByRole("button")[0];
-    const secondButton = screen.getAllByRole("button")[1];
-
-    fireEvent.click(firstButton);
-    expect(screen.getByText(periods[0].time)).toHaveStyle({ level: "100" });
-
-    fireEvent.click(secondButton);
-    expect(screen.getByText(periods[0].time)).not.toHaveStyle({ level: "100" }); // First button unselected
-    expect(screen.getByText(periods[1].time)).toHaveStyle({ level: "100" });
+    render(<TimeButton {...emptyProps} />);
+    expect(screen.queryAllByRole("button")).toHaveLength(0);
   });
 });
