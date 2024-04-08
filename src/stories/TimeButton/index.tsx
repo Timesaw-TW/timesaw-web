@@ -13,7 +13,7 @@ const TimeButton: FunctionComponent<TimeButtonProps> = ({
 
   const clickHandler = (time: string, index: number) => {
     setButtonSelected((prev) => {
-      const newSelected = prev.map((_, i) => (i === index ? true : false));
+      const newSelected = prev.map((_, i) => (i <= index ? true : false));
       return newSelected;
     });
     clickEvent(time);
