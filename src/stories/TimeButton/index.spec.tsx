@@ -1,36 +1,15 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import TimeButton from ".";
-import { TimeButtonProps, Periods } from "./type";
+import { TimeButtonProps } from "./type";
 
 describe("TimeButton", () => {
-  const TIMEOPTIONS: Periods[] = [
-    {
-      time: "1分鐘",
-      value: "1",
-    },
-    {
-      time: "15分鐘",
-      value: "15",
-    },
-    {
-      time: "30分鐘",
-      value: "30",
-    },
-    {
-      time: "1小時",
-      value: "60",
-    },
-    {
-      time: "1.5小時",
-      value: "90",
-    },
-  ];
+  const TIMEOPTIONS: number[] = [1, 15, 30, 60, 90];
 
   const onChangeMock = jest.fn();
 
   const defaultProps: TimeButtonProps = {
-    clickEvent: onChangeMock,
+    onTimeSelect: onChangeMock,
     timePeriods: TIMEOPTIONS,
   };
 
@@ -48,24 +27,28 @@ describe("TimeButton", () => {
     expect(onChangeMock).toHaveBeenCalledWith("1");
   });
 
-  it("updates button styles based on selection", () => {
+  it("updates button styles based on selection", async () => {
     render(<TimeButton {...defaultProps} />);
-    const firstButton = screen.getByText(/1分鐘/i);
-    const secondButton = screen.getByText(/15分鐘/i);
+    const firstButton = screen.getByText(/1 分鐘/i);
+    const secondButton = screen.getByText(/15 分鐘/i);
 
     expect(firstButton).not.toHaveClass("bg-primary-100"); // Initially not selected
     expect(secondButton).not.toHaveClass("bg-primary-100");
 
     fireEvent.click(firstButton);
 
-    expect(firstButton).toHaveClass("bg-primary-100");
+    await new Promise((resolve) => setTimeout(resolve, 10)); // Adjust timeout if necessary
+
+    expect(firstButton).toHaveStyle({
+      backgroundColor: "var(--bs-primary-100)",
+    });
     expect(secondButton).not.toHaveClass("bg-primary-100");
   });
 
   it("renders with an empty array of time periods", () => {
-    const emptyTimePeriods: Periods[] = [];
+    const emptyTimePeriods: number[] = [];
     const emptyProps: TimeButtonProps = {
-      clickEvent: onChangeMock,
+      onTimeSelect: onChangeMock,
       timePeriods: emptyTimePeriods,
     };
 

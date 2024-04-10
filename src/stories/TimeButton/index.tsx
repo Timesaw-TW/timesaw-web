@@ -1,22 +1,52 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { TimeButtonProps } from "./type";
 import { Button } from "../Button";
+import Text from "../Text/Text";
 import clsx from "clsx";
 
 const TimeButton: FunctionComponent<TimeButtonProps> = ({
   timePeriods,
-  clickEvent,
+  onTimeSelect,
 }: TimeButtonProps) => {
-  const initialSelected = timePeriods.map(() => false);
-  const [buttonSelected, setButtonSelected] =
-    useState<boolean[]>(initialSelected);
+  const [selectedTimeIndex, setSelectedTimeIndex] = useState<number>(0);
 
-  const clickHandler = (time: string, index: number) => {
-    setButtonSelected((prev) => {
-      const newSelected = prev.map((_, i) => (i <= index ? true : false));
-      return newSelected;
-    });
-    clickEvent(time);
+  const clickHandler = (time: number, index: number) => {
+    setSelectedTimeIndex(index);
+    onTimeSelect(time);
+  };
+
+  const getButtonClass = (index: number) => {
+    const isActive = selectedTimeIndex === index;
+    const isPast = selectedTimeIndex > index;
+
+    return clsx(
+      "rounded-lg w-16 gap-[10px] h-14",
+      isActive ? "bg-primary-100" : isPast ? "bg-primary-60" : "bg-primary-40"
+    );
+  };
+  const getBackGroundClass = (index: number) => {
+    const isFirst = index === 0;
+    const isLast = index === timePeriods.length - 1;
+    if (selectedTimeIndex === index) {
+      return isFirst
+        ? "rounded-lg bg-primary-100"
+        : "rounded-r-lg bg-primary-60";
+    }
+
+    return isFirst
+      ? "rounded-l-lg bg-primary-60"
+      : isLast
+        ? "rounded-r-lg bg-primary-60"
+        : "bg-primary-60";
+  };
+
+  const convertMinutesToFormattedTime = (time: number) => {
+    const formattedTime = time / 60;
+
+    if (formattedTime < 1) {
+      return time <= 15 ? `${time} ` : `${time} 分鐘`;
+    }
+    return `${formattedTime} 小時`;
   };
 
   return (
@@ -26,15 +56,18 @@ const TimeButton: FunctionComponent<TimeButtonProps> = ({
       )}
     >
       {timePeriods.map((period, index) => (
-        <Button
-          theme="primary"
-          level={buttonSelected[index] ? 100 : 40}
-          className={clsx(`rounded-lg, h-10 w-16 gap-[10px]`)}
-          key={`${period.value}_${index}`}
-          onClick={() => clickHandler(period.value, index)}
+        <div
+          key={`${period}_${index}`}
+          className={clsx(`${getBackGroundClass(index)}`)}
         >
-          {period.time}
-        </Button>
+          <Button
+            theme="primary"
+            className={getButtonClass(index)}
+            onClick={() => clickHandler(period, index)}
+          >
+            <Text>{convertMinutesToFormattedTime(period)}</Text>
+          </Button>
+        </div>
       ))}
     </div>
   );

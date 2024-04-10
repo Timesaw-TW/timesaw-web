@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import TimeButton from ".";
-import { TimeButtonProps, Periods } from "./type";
+import { TimeButtonProps } from "./type";
 
 const meta: Meta<typeof TimeButton> = {
   title: "Base/TimeButton",
@@ -20,29 +20,8 @@ const render = function Render(args: TimeButtonProps) {
 export const Sample_1: Story = {
   render: () => (
     <TimeButton
-      timePeriods={[
-        {
-          time: "1分鐘",
-          value: "1",
-        },
-        {
-          time: "15分鐘",
-          value: "15",
-        },
-        {
-          time: "30分鐘",
-          value: "30",
-        },
-        {
-          time: "1小時",
-          value: "60",
-        },
-        {
-          time: "1.5小時",
-          value: "90",
-        },
-      ]}
-      clickEvent={(time: string) => console.log(time)}
+      timePeriods={[1, 15, 30, 60, 90]}
+      onTimeSelect={(time: number) => console.log(time)}
     />
   ),
 };
