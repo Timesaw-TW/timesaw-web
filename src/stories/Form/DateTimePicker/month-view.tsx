@@ -34,26 +34,28 @@ const DateTimePickerMonthView: FC<Props> = ({
 
         const monthText = dayjs(`2024/${month}/01`).format("MMM");
         return (
-          <li
-            key={`month-view-${month}`}
-            className={clsx(
-              "rounded px-3 py-2",
-              "flex items-center justify-center",
-              isDisable
-                ? "text-neutral-divider"
-                : "cursor-pointer hover:bg-primary-40",
-              !isDisable &&
-                value.year() === year &&
-                value.month() + 1 === month &&
-                "bg-primary-40"
-            )}
-            onClick={() => {
-              if (!isDisable) {
-                onChange?.(year, month);
-              }
-            }}
-          >
-            <Text>{monthText}</Text>
+          <li key={`month-view-${month}`}>
+            <button
+              type="button"
+              className={clsx(
+                "h-full w-full",
+                "rounded px-3 py-2",
+                "flex items-center justify-center",
+                isDisable ? "text-neutral-divider" : "hover:bg-primary-40",
+                !isDisable &&
+                  value.year() === year &&
+                  value.month() + 1 === month &&
+                  "bg-primary-40"
+              )}
+              disabled={isDisable}
+              onClick={() => {
+                if (!isDisable) {
+                  onChange?.(year, month);
+                }
+              }}
+            >
+              <Text>{monthText}</Text>
+            </button>
           </li>
         );
       })}

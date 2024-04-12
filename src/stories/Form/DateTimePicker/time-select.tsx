@@ -83,7 +83,6 @@ const TimeSelect: FC<Props> = ({ value, type, onChange, max, min }) => {
       {optionOpen && (
         <ul
           ref={listRef}
-          role="list"
           className={clsx(
             "h-[240px] w-[72px] overflow-y-scroll p-1",
             "absolute bottom-9 left-0",
@@ -93,23 +92,24 @@ const TimeSelect: FC<Props> = ({ value, type, onChange, max, min }) => {
         >
           {options.map(({ value: option, isDisable }) => {
             return (
-              <li
-                data-value={option}
-                key={option}
-                className={clsx(
-                  "rounded px-3 py-1",
-                  isDisable
-                    ? "text-neutral-divider"
-                    : "cursor-pointer hover:bg-primary-40",
-                  !isDisable && value[type]() === option && "bg-primary-40"
-                )}
-                onClick={() => {
-                  if (!isDisable) {
-                    handleOptionClick(option);
-                  }
-                }}
-              >
-                <Text>{option.toString().padStart(2, "0")}</Text>
+              <li data-value={option} key={option}>
+                <button
+                  type="button"
+                  className={clsx(
+                    "h-full w-full text-left",
+                    "rounded px-3 py-1",
+                    isDisable ? "text-neutral-divider" : "hover:bg-primary-40",
+                    !isDisable && value[type]() === option && "bg-primary-40"
+                  )}
+                  disabled={isDisable}
+                  onClick={() => {
+                    if (!isDisable) {
+                      handleOptionClick(option);
+                    }
+                  }}
+                >
+                  <Text>{option.toString().padStart(2, "0")}</Text>
+                </button>
               </li>
             );
           })}

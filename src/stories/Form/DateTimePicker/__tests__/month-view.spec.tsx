@@ -42,21 +42,15 @@ describe("#DateTimePicker > DateTimePickerMonthView", () => {
         max={dayjs("2024/08/01")}
       />
     );
-    expect(getByText("Jan").parentElement).toHaveClass("text-neutral-divider");
-    expect(getByText("Feb").parentElement).toHaveClass("text-neutral-divider");
-    expect(getByText("Mar").parentElement).not.toHaveClass(
-      "text-neutral-divider"
-    );
-    expect(getByText("Apr").parentElement).not.toHaveClass(
-      "text-neutral-divider"
-    );
-    expect(getByText("Aug").parentElement).not.toHaveClass(
-      "text-neutral-divider"
-    );
-    expect(getByText("Sep").parentElement).toHaveClass("text-neutral-divider");
-    expect(getByText("Oct").parentElement).toHaveClass("text-neutral-divider");
-    expect(getByText("Nov").parentElement).toHaveClass("text-neutral-divider");
-    expect(getByText("Dec").parentElement).toHaveClass("text-neutral-divider");
+    expect(getByText("Jan").parentElement).toBeDisabled();
+    expect(getByText("Feb").parentElement).toBeDisabled();
+    expect(getByText("Mar").parentElement).not.toBeDisabled();
+    expect(getByText("Apr").parentElement).not.toBeDisabled();
+    expect(getByText("Aug").parentElement).not.toBeDisabled();
+    expect(getByText("Sep").parentElement).toBeDisabled();
+    expect(getByText("Oct").parentElement).toBeDisabled();
+    expect(getByText("Nov").parentElement).toBeDisabled();
+    expect(getByText("Dec").parentElement).toBeDisabled();
   });
 
   it("should highlight current month", () => {

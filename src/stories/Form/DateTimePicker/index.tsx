@@ -69,7 +69,8 @@ const DateTimePicker = forwardRef<HTMLDivElement, DateTimePickerProps>(
 
     return (
       <div className={clsx("relative", className)} ref={ref || containerRef}>
-        <div
+        <button
+          type="button"
           onClick={() => {
             if (!value && onChange) {
               onChange({
@@ -83,7 +84,7 @@ const DateTimePicker = forwardRef<HTMLDivElement, DateTimePickerProps>(
             setOpened(!opened);
           }}
           className={clsx(
-            "relative cursor-pointer",
+            "relative w-full",
             "flex items-center px-4 py-3",
             "border-b-[0.5px] border-[#C6C6C8]"
           )}
@@ -94,7 +95,7 @@ const DateTimePicker = forwardRef<HTMLDivElement, DateTimePickerProps>(
             <Text>{datetime.format("MMM DD, YYYY HH:mm")}</Text>
           )}
           <IconCalendarOutline className={clsx("absolute right-3 h-6 w-6")} />
-        </div>
+        </button>
         {opened && (
           <div className="absolute">
             <DateTimePickerModal

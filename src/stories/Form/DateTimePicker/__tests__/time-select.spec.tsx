@@ -60,10 +60,8 @@ describe("#DateTimePicker > TimeSelect", () => {
     const selectButton = getByRole("button");
     fireEvent.click(selectButton);
 
-    expect(getByText("08").parentElement).toHaveClass("text-neutral-divider");
-    expect(getByText("16").parentElement).toHaveClass("text-neutral-divider");
-    expect(getByText("14").parentElement).not.toHaveClass(
-      "text-neutral-divider"
-    );
+    expect(getByText("08").parentElement).toBeDisabled();
+    expect(getByText("16").parentElement).toBeDisabled();
+    expect(getByText("14").parentElement).not.toBeDisabled();
   });
 });

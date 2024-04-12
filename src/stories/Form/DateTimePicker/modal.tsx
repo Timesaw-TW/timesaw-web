@@ -37,31 +37,40 @@ const DateTimePickerModal: FC<DateTimePickerModalProps> = ({
   }) => {
     if (mode === "date") {
       onMonthChange(type);
-      return;
     } else if (mode === "month") {
       onYearChange(type);
-      return;
     } else if (mode === "year") {
       onYearRangeChange(type);
     }
   };
 
   const onMonthChange = (type: "next" | "previous") => {
-    if (type === "next") {
-      if (searchMonth === 12) {
-        setSearchYear((year) => year + 1);
-        setSearchMonth(1);
-      } else {
-        setSearchMonth((month) => month + 1);
-      }
-    } else {
-      if (searchMonth === 1) {
-        setSearchYear((year) => year - 1);
-        setSearchMonth(12);
-      } else {
-        setSearchMonth((month) => month - 1);
-      }
+    let newMonth = searchMonth;
+    let newYear = searchYear;
+
+    switch (type) {
+      case "next":
+        if (searchMonth === 12) {
+          newYear++;
+          newMonth = 1;
+        } else {
+          newMonth++;
+        }
+        break;
+      case "previous":
+        if (searchMonth === 1) {
+          newYear--;
+          newMonth = 12;
+        } else {
+          newMonth--;
+        }
+        break;
+      default:
+        break;
     }
+
+    setSearchYear(newYear);
+    setSearchMonth(newMonth);
   };
 
   const onYearChange = (type: "next" | "previous") => {

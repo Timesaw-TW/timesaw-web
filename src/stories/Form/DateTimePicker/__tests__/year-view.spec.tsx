@@ -43,24 +43,16 @@ describe("#DateTimePicker > DateTimePickerYearView", () => {
         max={dayjs("2025-12-31")}
       />
     );
-    expect(getByText("2021").parentElement).toHaveClass("text-neutral-divider");
-    expect(getByText("2022").parentElement).not.toHaveClass(
-      "text-neutral-divider"
-    );
-    expect(getByText("2023").parentElement).not.toHaveClass(
-      "text-neutral-divider"
-    );
-    expect(getByText("2024").parentElement).not.toHaveClass(
-      "text-neutral-divider"
-    );
-    expect(getByText("2025").parentElement).not.toHaveClass(
-      "text-neutral-divider"
-    );
-    expect(getByText("2026").parentElement).toHaveClass("text-neutral-divider");
-    expect(getByText("2027").parentElement).toHaveClass("text-neutral-divider");
-    expect(getByText("2028").parentElement).toHaveClass("text-neutral-divider");
-    expect(getByText("2029").parentElement).toHaveClass("text-neutral-divider");
-    expect(getByText("2030").parentElement).toHaveClass("text-neutral-divider");
+    expect(getByText("2021").parentElement).toBeDisabled();
+    expect(getByText("2022").parentElement).not.toBeDisabled();
+    expect(getByText("2023").parentElement).not.toBeDisabled();
+    expect(getByText("2024").parentElement).not.toBeDisabled();
+    expect(getByText("2025").parentElement).not.toBeDisabled();
+    expect(getByText("2026").parentElement).toBeDisabled();
+    expect(getByText("2027").parentElement).toBeDisabled();
+    expect(getByText("2028").parentElement).toBeDisabled();
+    expect(getByText("2029").parentElement).toBeDisabled();
+    expect(getByText("2030").parentElement).toBeDisabled();
   });
 
   it("should highlight current year", () => {
