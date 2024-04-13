@@ -77,3 +77,14 @@ export const Sample_4: Story = {
   },
   render: render(dayjs("2024/4/15 10:00").toISOString()),
 };
+
+export const Sample_5: Story = {
+  name: "DateTimePicker with min & max",
+  args: {
+    id: "time",
+    name: "time",
+    min: dayjs("2024/02/03 12:58"),
+    max: dayjs("2024/12/01 13:00"),
+  },
+  render: render(dayjs("2024/4/15 10:00").toISOString()),
+};

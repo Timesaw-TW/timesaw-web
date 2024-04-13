@@ -105,6 +105,13 @@ const DateTimePickerDateView: FC<Props> = ({
       }
       setSearchYear(date.year());
       setSearchMonth(date.month() + 1);
+      return;
+    }
+
+    if (min && date.isBefore(min)) {
+      onChange?.(min);
+    } else if (max && date.isAfter(max)) {
+      onChange?.(max);
     } else {
       onChange?.(date);
     }
