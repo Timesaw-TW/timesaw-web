@@ -144,8 +144,7 @@ const DateTimePickerDateView: FC<Props> = ({
                     className={clsx(
                       "flex-1 text-center",
                       item.enable && "cursor-pointer",
-                      (!item.enable || item.isOutOfMon) &&
-                        "text-neutral-divider"
+                      (!item.enable || item.isOutOfMon) && "text-caption"
                     )}
                     onClick={() => onDateClick(item)}
                   >

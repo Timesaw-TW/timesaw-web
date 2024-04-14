@@ -36,10 +36,10 @@ const DateTimePickerYearView: FC<Props> = ({
                 "h-full w-full",
                 "rounded px-3 py-2",
                 "flex items-center justify-center",
-                isDisable && "text-neutral-divider",
+                isDisable && "text-caption",
                 !isDisable && value.year() === year && "bg-soda-40",
                 !isDisable && index <= 9 && "hover:bg-soda-40",
-                index > 9 && "text-neutral-divider"
+                index > 9 && "text-caption"
               )}
               disabled={isDisable}
               onClick={() => {

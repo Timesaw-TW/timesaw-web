@@ -112,7 +112,7 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
       <div
         className={clsx(
           "relative flex items-stretch",
-          "border-b border-neutral-divider caret-[#446BF2]"
+          "border-b border-caption caret-[#446BF2]"
         )}
       >
         <input
@@ -120,7 +120,7 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
           type="text"
           className={clsx(
             "flex-1 p-2",
-            "bg-transparent placeholder-neutral-divider ",
+            "bg-transparent placeholder-caption",
             "border-none outline-none focus:ring-0"
           )}
           onFocus={handleInputFocus}

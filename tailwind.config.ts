@@ -33,9 +33,9 @@ const config: Config = {
         neutral: {
           primary: "#090000",
           secondary: "#5C5858",
-          divider: "#E1E0E0",
           white: "#FFFFFF",
         },
+        caption: "#E1E0E0",
         success: "#77BD5B",
         warning: "#F7AF0A",
         error: "#D7402A",
