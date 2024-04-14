@@ -90,7 +90,7 @@ const DateTimePickerMenu: FC<Props> = ({
         )}
         onClick={() => onChange({ type: "previous", mode })}
       >
-        <IconChevronLeft className="h-4 w-4 stroke-2 text-neutral-primary" />
+        <IconChevronLeft className="h-4 w-4 stroke-2 text-primary" />
       </button>
       <button type="button" onClick={handleChangeMode}>
         <Headline bold>
@@ -108,7 +108,7 @@ const DateTimePickerMenu: FC<Props> = ({
         )}
         onClick={() => onChange({ type: "next", mode })}
       >
-        <IconChevronRight className="h-4 w-4 stroke-2 text-neutral-primary" />
+        <IconChevronRight className="h-4 w-4 stroke-2 text-primary" />
       </button>
     </div>
   );

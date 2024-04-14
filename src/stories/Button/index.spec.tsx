@@ -7,7 +7,7 @@ describe("#Button", () => {
     const { getByRole } = render(<Button>Click me</Button>);
     const button = getByRole("button");
     expect(button).toBeInTheDocument();
-    expect(button).toHaveClass("text-neutral-primary");
+    expect(button).toHaveClass("text-primary");
     expect(button).toHaveClass("bg-soda-100");
   });
 

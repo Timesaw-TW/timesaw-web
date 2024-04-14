@@ -125,7 +125,7 @@ const DateTimePickerDateView: FC<Props> = ({
             {["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"].map((day) => (
               <th key={day} className="flex-1 text-center">
                 <div className="flex h-8 w-8  items-center justify-center">
-                  <Footnote className="text-neutral-secondary">{day}</Footnote>
+                  <Footnote className="text-secondary">{day}</Footnote>
                 </div>
               </th>
             ))}

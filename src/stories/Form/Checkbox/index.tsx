@@ -20,10 +20,10 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Container(
           "peer",
           "relative cursor-pointer appearance-none",
           "mt-1 h-4 w-4 shrink-0",
-          "rounded border-2 border-neutral-secondary bg-transparent",
-          "checked:border-0 checked:bg-neutral-secondary",
+          "rounded border-2 border-secondary bg-transparent",
+          "checked:border-0 checked:bg-secondary",
           withFocus &&
-            "focus:outline-none focus:ring-1 focus:ring-neutral-secondary focus:ring-offset-1"
+            "focus:outline-none focus:ring-1 focus:ring-secondary focus:ring-offset-1"
           // "disabled:border-steel-400 disabled:bg-steel-400"
         )}
         {...props}

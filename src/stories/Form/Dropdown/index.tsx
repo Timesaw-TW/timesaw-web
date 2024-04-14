@@ -18,7 +18,7 @@ const Dropdown = <T,>({
   const itemPadding = "py-1 px-3";
   const selectedClass = "bg-soda-40 rounded";
   const liBaseClass = clsx(
-    "cursor-pointer text-neutral-primary",
+    "cursor-pointer text-primary",
     "hover:bg-soda-40 hover:rounded"
   );
 
@@ -69,9 +69,7 @@ const Dropdown = <T,>({
     >
       {label &&
         (typeof label === "string" ? (
-          <Text className={clsx(itemPadding, "text-neutral-secondary")}>
-            {label}
-          </Text>
+          <Text className={clsx(itemPadding, "text-secondary")}>{label}</Text>
         ) : (
           label
         ))}

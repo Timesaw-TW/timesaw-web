@@ -15,7 +15,7 @@ export const Button: FC<ButtonProps> = ({ children, className, ...props }) => {
       className={clsx(
         "h-8 w-24 rounded-md",
         "flex items-center justify-center",
-        "text-neutral-primary dark:text-neutral-white",
+        "text-primary dark:text-white",
         "bg-soda-100",
         className
       )}
