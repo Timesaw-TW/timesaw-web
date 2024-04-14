@@ -157,10 +157,10 @@ const DateTimePickerDateView: FC<Props> = ({
                           value.year() === searchYear &&
                           value.month() + 1 === searchMonth &&
                           value.isSame(item.date, "day") &&
-                          "rounded-[50%] bg-primary-80",
+                          "rounded-[50%] bg-soda-80",
                         item.enable &&
                           !item.isOutOfMon &&
-                          "hover:rounded-[50%] hover:bg-primary-80"
+                          "hover:rounded-[50%] hover:bg-soda-80"
                       )}
                     >
                       <Text>{item.date.date()}</Text>

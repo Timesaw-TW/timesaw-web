@@ -98,8 +98,8 @@ const TimeSelect: FC<Props> = ({ value, type, onChange, max, min }) => {
                   className={clsx(
                     "h-full w-full text-left",
                     "rounded px-3 py-1",
-                    isDisable ? "text-neutral-divider" : "hover:bg-primary-40",
-                    !isDisable && value[type]() === option && "bg-primary-40"
+                    isDisable ? "text-neutral-divider" : "hover:bg-soda-40",
+                    !isDisable && value[type]() === option && "bg-soda-40"
                   )}
                   disabled={isDisable}
                   onClick={() => {

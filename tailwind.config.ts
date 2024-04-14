@@ -16,7 +16,7 @@ const config: Config = {
         main: ["var(--font-notoSans)"],
       },
       colors: {
-        primary: {
+        soda: {
           100: "#9FD7E2",
           80: "#B2DFE8",
           60: "#C5E7EE",
@@ -35,8 +35,10 @@ const config: Config = {
           secondary: "#5C5858",
           divider: "#E1E0E0",
           white: "#FFFFFF",
-          error: "#D7402A",
         },
+        success: "#77BD5B",
+        warning: "#F7AF0A",
+        error: "#D7402A",
       },
     },
   },

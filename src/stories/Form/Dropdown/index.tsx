@@ -16,10 +16,10 @@ const Dropdown = <T,>({
   selected,
 }: DropdownProps<T>) => {
   const itemPadding = "py-1 px-3";
-  const selectedClass = "bg-primary-40 rounded";
+  const selectedClass = "bg-soda-40 rounded";
   const liBaseClass = clsx(
     "cursor-pointer text-neutral-primary",
-    "hover:bg-primary-40 hover:rounded"
+    "hover:bg-soda-40 hover:rounded"
   );
 
   const compareWithAutoComplete = (

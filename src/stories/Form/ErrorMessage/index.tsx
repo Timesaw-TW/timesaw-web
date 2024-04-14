@@ -14,7 +14,7 @@ const ErrorMessage: FC<Props> = ({ message, element, className }) => {
   return (
     <div
       className={clsx(
-        "h-6 py-1 text-neutral-error",
+        "h-6 py-1 text-error",
         "flex items-center gap-1",
         className
       )}

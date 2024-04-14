@@ -37,8 +37,8 @@ const DateTimePickerYearView: FC<Props> = ({
                 "rounded px-3 py-2",
                 "flex items-center justify-center",
                 isDisable && "text-neutral-divider",
-                !isDisable && value.year() === year && "bg-primary-40",
-                !isDisable && index <= 9 && "hover:bg-primary-40",
+                !isDisable && value.year() === year && "bg-soda-40",
+                !isDisable && index <= 9 && "hover:bg-soda-40",
                 index > 9 && "text-neutral-divider"
               )}
               disabled={isDisable}

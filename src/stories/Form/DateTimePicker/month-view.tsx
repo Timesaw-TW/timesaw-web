@@ -41,11 +41,11 @@ const DateTimePickerMonthView: FC<Props> = ({
                 "h-full w-full",
                 "rounded px-3 py-2",
                 "flex items-center justify-center",
-                isDisable ? "text-neutral-divider" : "hover:bg-primary-40",
+                isDisable ? "text-neutral-divider" : "hover:bg-soda-40",
                 !isDisable &&
                   value.year() === year &&
                   value.month() + 1 === month &&
-                  "bg-primary-40"
+                  "bg-soda-40"
               )}
               disabled={isDisable}
               onClick={() => {
