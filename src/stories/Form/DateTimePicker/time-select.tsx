@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useEffect, useMemo, useRef, useState } from "react";
-import Text from "@/stories/Text/Text";
+import Text from "@/stories/Typography/Text";
 import { IconChevronDown } from "@/stories/Icons";
 import clsx from "clsx";
 import { Dayjs } from "dayjs";

@@ -1,7 +1,7 @@
 "use client";
 
 import { clsx } from "clsx";
-import Text from "../../Text/Text";
+import Text from "../../Typography/Text";
 import { DropdownProps, SelectOption } from "./type";
 import { useEffect, useRef } from "react";
 

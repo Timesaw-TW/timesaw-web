@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { IconExclamationCircle } from "@/stories/Icons";
 import clsx from "clsx";
-import Caption from "@/stories/Text/Caption";
+import Caption from "@/stories/Typography/Caption";
 import { ErrorMessageProps } from "./type";
 
 interface Props extends ErrorMessageProps {}

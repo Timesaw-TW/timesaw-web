@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import clsx from "clsx";
-import Text from "../../Text/Text";
+import Text from "../../Typography/Text";
 import { CheckboxProps } from "./type";
 
 const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Container(

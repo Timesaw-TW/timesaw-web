@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import dayjs, { Dayjs } from "dayjs";
 import { FC } from "react";
-import Text from "@/stories/Text/Text";
+import Text from "@/stories/Typography/Text";
 
 interface Props {
   value: Dayjs;

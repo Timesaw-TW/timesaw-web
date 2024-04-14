@@ -4,8 +4,8 @@ import { FC, useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
 import dayjs, { Dayjs } from "dayjs";
 import objectSupport from "dayjs/plugin/objectSupport";
-import Footnote from "@/stories/Text/Footnote";
-import Text from "@/stories/Text/Text";
+import Footnote from "@/stories/Typography/Footnote";
+import Text from "@/stories/Typography/Text";
 import TimeSelect from "./time-select";
 
 dayjs.extend(objectSupport);

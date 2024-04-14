@@ -5,7 +5,7 @@ import clsx from "clsx";
 import dayjs, { Dayjs } from "dayjs";
 import { DateTimePickerMode } from "./type";
 import { IconChevronLeft, IconChevronRight } from "@/stories/Icons";
-import Headline from "@/stories/Text/Headline";
+import Headline from "@/stories/Typography/Headline";
 
 interface Props {
   mode: DateTimePickerMode;

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { FC, ReactNode, ButtonHTMLAttributes } from "react";
-import Text from "../Text/Text";
+import Text from "../Typography/Text";
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;

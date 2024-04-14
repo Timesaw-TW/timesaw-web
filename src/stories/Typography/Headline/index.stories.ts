@@ -1,27 +1,27 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Text from ".";
+import Headline from ".";
 
 const meta = {
-  title: "Base/Text/Text",
-  component: Text,
+  title: "Base/Typography/Headline",
+  component: Headline,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof Text>;
+} satisfies Meta<typeof Headline>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Sample: Story = {
   args: {
-    children: "Text",
+    children: "Headline",
   },
 };
 
 export const Bold: Story = {
   args: {
-    children: "Text",
+    children: "Headline",
     bold: true,
   },
 };

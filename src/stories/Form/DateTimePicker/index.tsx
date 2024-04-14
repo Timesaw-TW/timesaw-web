@@ -12,7 +12,7 @@ import clsx from "clsx";
 import dayjs, { Dayjs } from "dayjs";
 import { IconCalendarOutline } from "@/stories/Icons/IconCalendarOutline";
 import { DateTimePickerProps } from "./type";
-import Text from "@/stories/Text/Text";
+import Text from "@/stories/Typography/Text";
 import useOnFocusOutside from "@/hooks/useOnFocusOutside";
 import DateTimePickerModal from "./modal";
 

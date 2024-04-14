@@ -1,27 +1,27 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Caption from ".";
+import Footnote from ".";
 
 const meta = {
-  title: "Base/Text/Caption",
-  component: Caption,
+  title: "Base/Typography/Footnote",
+  component: Footnote,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof Caption>;
+} satisfies Meta<typeof Footnote>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Sample: Story = {
   args: {
-    children: "Caption",
+    children: "Footnote",
   },
 };
 
 export const Bold: Story = {
   args: {
-    children: "Caption",
+    children: "Footnote",
     bold: true,
   },
 };
