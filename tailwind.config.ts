@@ -23,7 +23,7 @@ const config: Config = {
           40: "#D9EFF3",
           20: "#ECF7F9",
         },
-        secondary: {
+        daisy: {
           100: "#F9D060",
           80: "#FAD980",
           60: "#FBE3A0",
