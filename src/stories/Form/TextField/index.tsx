@@ -14,9 +14,9 @@ import Dropdown from "../Dropdown";
 import { SelectOption } from "../Dropdown/type";
 import useOnFocusOutside from "@/hooks/useOnFocusOutside";
 import ErrorMessage from "../ErrorMessage";
-import { TextInputProps } from "./type";
+import { TextFieldProps } from "./type";
 
-const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
+const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Container(
   { showButton, button, showDropdown, dropdown, ...props },
   ref
 ) {
@@ -119,7 +119,7 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
           ref={inputRef}
           type="text"
           className={clsx(
-            "flex-1 p-2",
+            "flex-1 px-4 py-3",
             "bg-transparent placeholder-caption",
             "border-none outline-none focus:ring-0"
           )}
@@ -130,7 +130,7 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
         />
         {showButton && (
           <button
-            className={clsx("absolute right-1 h-full", btnClassName)}
+            className={clsx("absolute right-3 h-full", btnClassName)}
             onClick={handleIconClick}
             {...btnProps}
           >
@@ -157,4 +157,4 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Container(
   );
 });
 
-export default TextInput;
+export default TextField;

@@ -1,9 +1,10 @@
 "use client";
 
 import { clsx } from "clsx";
-import Text from "../../Typography/Text";
 import { DropdownProps, SelectOption } from "./type";
 import { useEffect, useRef } from "react";
+import Footnote from "@/stories/Typography/Footnote";
+import SubHeadline from "@/stories/Typography/SubHeadline";
 
 const Dropdown = <T,>({
   searchValue,
@@ -69,7 +70,9 @@ const Dropdown = <T,>({
     >
       {label &&
         (typeof label === "string" ? (
-          <Text className={clsx(itemPadding, "text-secondary")}>{label}</Text>
+          <Footnote className={clsx(itemPadding, "text-secondary")}>
+            {label}
+          </Footnote>
         ) : (
           label
         ))}
@@ -89,7 +92,7 @@ const Dropdown = <T,>({
               onChange?.(option);
             }}
           >
-            <Text>{option.label}</Text>
+            <SubHeadline>{option.label}</SubHeadline>
           </button>
         </li>
       ))}
@@ -99,8 +102,8 @@ const Dropdown = <T,>({
             onClick={() => onCreateClick?.(searchValue)}
             className={clsx("flex w-full items-center gap-2", itemPadding)}
           >
-            <Text className="text-[#747478]">Create</Text>
-            <Text className="text-[#090000]">{searchValue}</Text>
+            <SubHeadline className="text-[#747478]">Create</SubHeadline>
+            <SubHeadline className="text-[#090000]">{searchValue}</SubHeadline>
           </button>
         </li>
       )}
