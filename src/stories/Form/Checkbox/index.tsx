@@ -1,35 +1,21 @@
-import clsx, { ClassValue } from "clsx";
-import { FC, ReactNode } from "react";
-import Text from "../Text/Text";
+import { forwardRef } from "react";
+import clsx from "clsx";
+import Text from "../../Text/Text";
+import { CheckboxProps } from "./type";
 
-export interface CheckboxProps {
-  id: string;
-  children: string | ReactNode;
-  checked: boolean;
-  className?: ClassValue;
-  onChange?: (check: boolean) => void;
-  withIcon?: boolean;
-  withFocus?: boolean;
-}
-
-const Checkbox: FC<CheckboxProps> = ({
-  id,
-  checked,
-  onChange,
-  withIcon = false,
-  withFocus = false,
-  children,
-  className,
-}) => {
+const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Container(
+  { id, withIcon = false, withFocus = false, children, className, ...props },
+  ref
+) {
   return (
     <label
       htmlFor={id}
+      ref={ref}
       className={clsx("flex w-16 cursor-pointer gap-3", className)}
     >
       <input
-        type="checkbox"
         id={id}
-        checked={checked}
+        type="checkbox"
         className={clsx(
           "peer",
           "relative cursor-pointer appearance-none",
@@ -40,11 +26,7 @@ const Checkbox: FC<CheckboxProps> = ({
             "focus:outline-none focus:ring-1 focus:ring-neutral-secondary focus:ring-offset-1"
           // "disabled:border-steel-400 disabled:bg-steel-400"
         )}
-        onChange={() => {
-          if (onChange) {
-            onChange(!checked);
-          }
-        }}
+        {...props}
       />
       {withIcon && (
         <svg
@@ -67,6 +49,6 @@ const Checkbox: FC<CheckboxProps> = ({
       {typeof children === "string" ? <Text>{children}</Text> : children}
     </label>
   );
-};
+});
 
 export default Checkbox;

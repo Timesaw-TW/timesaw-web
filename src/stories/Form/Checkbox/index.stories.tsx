@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useArgs } from "@storybook/preview-api";
-import Checkbox, { CheckboxProps } from ".";
+import Checkbox from ".";
+import { CheckboxProps } from "./type";
+import { useFormik } from "formik";
 
 const meta = {
-  title: "Base/Checkbox",
+  title: "Base/Form/Checkbox",
   component: Checkbox,
   parameters: {
     layout: "centered",
@@ -15,22 +16,19 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const render = function Render(args: CheckboxProps) {
-  const [{ checked }, updateArgs] = useArgs<CheckboxProps>();
-  function onChange(check: boolean) {
-    updateArgs({ checked: check });
-  }
-  return (
-    <Checkbox
-      {...args}
-      checked={checked}
-      onChange={(check: boolean) => onChange(check)}
-    />
-  );
+  const { handleChange, values } = useFormik({
+    initialValues: {
+      test: true,
+    },
+    onSubmit() {},
+  });
+  return <Checkbox {...args} checked={values.test} onChange={handleChange} />;
 };
 
 export const Full_Unchecked: Story = {
   args: {
-    id: "full-unchecked",
+    id: "test",
+    name: "test",
     children: "Subtask",
     checked: false,
   },
@@ -39,7 +37,8 @@ export const Full_Unchecked: Story = {
 
 export const Full_Checked: Story = {
   args: {
-    id: "full-checked",
+    id: "test",
+    name: "test",
     children: "Subtask",
     checked: true,
   },
@@ -48,7 +47,8 @@ export const Full_Checked: Story = {
 
 export const Icon_Unchecked: Story = {
   args: {
-    id: "icon-unchecked",
+    id: "test",
+    name: "test",
     children: "Subtask",
     checked: false,
     withIcon: true,
@@ -58,7 +58,8 @@ export const Icon_Unchecked: Story = {
 
 export const Icon_Checked: Story = {
   args: {
-    id: "icon-checked",
+    id: "test",
+    name: "test",
     children: "Subtask",
     checked: true,
     withIcon: true,
@@ -68,7 +69,8 @@ export const Icon_Checked: Story = {
 
 export const Focus_Unchecked: Story = {
   args: {
-    id: "focus-unchecked",
+    id: "test",
+    name: "test",
     children: "Subtask",
     checked: false,
     withIcon: true,
@@ -79,7 +81,8 @@ export const Focus_Unchecked: Story = {
 
 export const Focus_Checked: Story = {
   args: {
-    id: "focus-checked",
+    id: "test",
+    name: "test",
     children: "Subtask",
     checked: true,
     withIcon: true,
