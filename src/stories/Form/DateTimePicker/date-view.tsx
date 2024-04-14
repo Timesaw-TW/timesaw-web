@@ -5,6 +5,7 @@ import clsx from "clsx";
 import dayjs, { Dayjs } from "dayjs";
 import objectSupport from "dayjs/plugin/objectSupport";
 import Footnote from "@/stories/Typography/Footnote";
+import SubHeadline from "@/stories/Typography/SubHeadline";
 import Text from "@/stories/Typography/Text";
 import TimeSelect from "./time-select";
 
@@ -162,7 +163,7 @@ const DateTimePickerDateView: FC<Props> = ({
                           "hover:rounded-[50%] hover:bg-soda-80"
                       )}
                     >
-                      <Text>{item.date.date()}</Text>
+                      <SubHeadline>{item.date.date()}</SubHeadline>
                     </div>
                   </td>
                 ))}
@@ -172,7 +173,7 @@ const DateTimePickerDateView: FC<Props> = ({
         </tbody>
       </table>
       <div className={clsx("flex h-8 items-end justify-between")}>
-        <Text bold>Time</Text>
+        <SubHeadline bold>Time</SubHeadline>
         <div className="flex items-center gap-2">
           <TimeSelect
             type="hour"

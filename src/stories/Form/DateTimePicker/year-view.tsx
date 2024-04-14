@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { Dayjs } from "dayjs";
 import { FC } from "react";
-import Text from "@/stories/Typography/Text";
+import SubHeadline from "@/stories/Typography/SubHeadline";
 
 interface Props {
   value: Dayjs;
@@ -48,7 +48,7 @@ const DateTimePickerYearView: FC<Props> = ({
                 }
               }}
             >
-              <Text>{year}</Text>
+              <SubHeadline>{year}</SubHeadline>
             </button>
           </li>
         );
