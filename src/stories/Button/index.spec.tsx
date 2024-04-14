@@ -4,23 +4,11 @@ import { Button } from ".";
 
 describe("#Button", () => {
   it("should render with default props", () => {
-    const { getByText } = render(<Button>Click me</Button>);
-    const button = getByText("Click me");
+    const { getByRole } = render(<Button>Click me</Button>);
+    const button = getByRole("button");
     expect(button).toBeInTheDocument();
-    expect(button).toHaveClass("text-neutral-primary");
-    expect(button).toHaveClass("bg-primary-100");
-  });
-
-  it("should render with custom theme and level", () => {
-    const { getByText } = render(
-      <Button theme="secondary" level={60}>
-        Submit
-      </Button>
-    );
-    const button = getByText("Submit");
-    expect(button).toBeInTheDocument();
-    expect(button).toHaveClass("text-neutral-primary");
-    expect(button).toHaveClass("bg-secondary-60");
+    expect(button).toHaveClass("text-primary");
+    expect(button).toHaveClass("bg-soda-100");
   });
 
   it("should call onClick prop when clicked", () => {
@@ -34,10 +22,10 @@ describe("#Button", () => {
   });
 
   it("should apply custom className", () => {
-    const { getByText } = render(
+    const { getByRole } = render(
       <Button className="custom-class">Custom Button</Button>
     );
-    const button = getByText("Custom Button");
+    const button = getByRole("button");
     expect(button).toHaveClass("custom-class");
   });
 });

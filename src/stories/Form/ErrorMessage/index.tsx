@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { IconExclamationCircle } from "@/stories/Icons";
 import clsx from "clsx";
-import Caption from "@/stories/Text/Caption";
+import Caption from "@/stories/Typography/Caption";
 import { ErrorMessageProps } from "./type";
 
 interface Props extends ErrorMessageProps {}
@@ -14,7 +14,7 @@ const ErrorMessage: FC<Props> = ({ message, element, className }) => {
   return (
     <div
       className={clsx(
-        "h-6 py-1 text-neutral-error",
+        "h-6 py-1 text-error",
         "flex items-center gap-1",
         className
       )}

@@ -1,9 +1,10 @@
 "use client";
 
 import { clsx } from "clsx";
-import Text from "../../Text/Text";
 import { DropdownProps, SelectOption } from "./type";
 import { useEffect, useRef } from "react";
+import Footnote from "@/stories/Typography/Footnote";
+import SubHeadline from "@/stories/Typography/SubHeadline";
 
 const Dropdown = <T,>({
   searchValue,
@@ -16,10 +17,10 @@ const Dropdown = <T,>({
   selected,
 }: DropdownProps<T>) => {
   const itemPadding = "py-1 px-3";
-  const selectedClass = "bg-primary-40 rounded";
+  const selectedClass = "bg-soda-40 rounded";
   const liBaseClass = clsx(
-    "cursor-pointer text-neutral-primary",
-    "hover:bg-primary-40 hover:rounded"
+    "cursor-pointer text-primary",
+    "hover:bg-soda-40 hover:rounded"
   );
 
   const compareWithAutoComplete = (
@@ -69,9 +70,9 @@ const Dropdown = <T,>({
     >
       {label &&
         (typeof label === "string" ? (
-          <Text className={clsx(itemPadding, "text-neutral-secondary")}>
+          <Footnote className={clsx(itemPadding, "text-secondary")}>
             {label}
-          </Text>
+          </Footnote>
         ) : (
           label
         ))}
@@ -91,7 +92,7 @@ const Dropdown = <T,>({
               onChange?.(option);
             }}
           >
-            <Text>{option.label}</Text>
+            <SubHeadline>{option.label}</SubHeadline>
           </button>
         </li>
       ))}
@@ -101,8 +102,8 @@ const Dropdown = <T,>({
             onClick={() => onCreateClick?.(searchValue)}
             className={clsx("flex w-full items-center gap-2", itemPadding)}
           >
-            <Text className="text-[#747478]">Create</Text>
-            <Text className="text-[#090000]">{searchValue}</Text>
+            <SubHeadline className="text-[#747478]">Create</SubHeadline>
+            <SubHeadline className="text-[#090000]">{searchValue}</SubHeadline>
           </button>
         </li>
       )}

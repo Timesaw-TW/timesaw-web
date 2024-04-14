@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useEffect, useMemo, useRef, useState } from "react";
-import Text from "@/stories/Text/Text";
+import Text from "@/stories/Typography/Text";
 import { IconChevronDown } from "@/stories/Icons";
 import clsx from "clsx";
 import { Dayjs } from "dayjs";
@@ -62,10 +62,7 @@ const TimeSelect: FC<Props> = ({ value, type, onChange, max, min }) => {
   return (
     <div
       ref={ref}
-      className={clsx(
-        "relative",
-        "rounded border border-neutral-divider px-2 py-1"
-      )}
+      className={clsx("relative", "rounded border border-caption px-2 py-1")}
     >
       <button
         type="button"
@@ -86,7 +83,7 @@ const TimeSelect: FC<Props> = ({ value, type, onChange, max, min }) => {
           className={clsx(
             "h-[240px] w-[72px] overflow-y-scroll p-1",
             "absolute bottom-9 left-0",
-            "rounded border border-e-neutral-divider bg-white",
+            "rounded border border-caption bg-white",
             "flex flex-col gap-[10px]"
           )}
         >
@@ -98,8 +95,8 @@ const TimeSelect: FC<Props> = ({ value, type, onChange, max, min }) => {
                   className={clsx(
                     "h-full w-full text-left",
                     "rounded px-3 py-1",
-                    isDisable ? "text-neutral-divider" : "hover:bg-primary-40",
-                    !isDisable && value[type]() === option && "bg-primary-40"
+                    isDisable ? "text-caption" : "hover:bg-soda-40",
+                    !isDisable && value[type]() === option && "bg-soda-40"
                   )}
                   disabled={isDisable}
                   onClick={() => {

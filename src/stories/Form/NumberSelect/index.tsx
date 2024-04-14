@@ -72,7 +72,7 @@ const NumberSelect = forwardRef<HTMLDivElement, NumberSelectProps>(
           className={clsx(
             "px-2 py-1",
             "w-full  bg-transparent",
-            "rounded border border-neutral-divider"
+            "rounded border border-caption"
           )}
           onFocus={(e) => {
             handleDropdownOpen(true);

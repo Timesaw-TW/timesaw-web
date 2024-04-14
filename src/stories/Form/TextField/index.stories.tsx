@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useArgs } from "@storybook/preview-api";
 import { ChangeEvent } from "react";
-import TextInput from ".";
+import TextField from ".";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import clsx from "clsx";
 import { SelectOption } from "../Dropdown/type";
-import { TextInputProps } from "./type";
+import { TextFieldProps } from "./type";
 
-const meta: Meta<typeof TextInput> = {
-  title: "Base/Form/TextInput",
-  component: TextInput,
+const meta: Meta<typeof TextField> = {
+  title: "Base/Form/TextField",
+  component: TextField,
   parameters: {
     layout: "centered",
   },
@@ -19,14 +19,14 @@ const meta: Meta<typeof TextInput> = {
 };
 export default meta;
 
-type Story = StoryObj<typeof TextInput>;
+type Story = StoryObj<typeof TextField>;
 
-const render = function Render(args: TextInputProps) {
-  const [{ value }, updateArgs] = useArgs<TextInputProps>();
+const render = function Render(args: TextFieldProps) {
+  const [{ value }, updateArgs] = useArgs<TextFieldProps>();
   function onChange(e: ChangeEvent<HTMLInputElement>) {
     updateArgs({ value: e.target.value });
   }
-  return <TextInput {...args} value={value} onChange={onChange} />;
+  return <TextField {...args} value={value} onChange={onChange} />;
 };
 
 const dropdownOptions: SelectOption<string>[] = [
@@ -46,6 +46,7 @@ export const Sample_1: Story = {
     id: "test",
     name: "test",
     placeholder: "Placeholder",
+    className: "w-[335px]",
   },
   render,
 };
@@ -60,6 +61,7 @@ export const Sample_2: Story = {
     button: {
       allowClear: true,
     },
+    className: "w-[335px]",
   },
   render,
 };
@@ -83,13 +85,14 @@ export const Sample_3: Story = {
         alert(`press click and will create ${value}`);
       },
     },
+    className: "w-[335px]",
   },
-  render: function Render(args: TextInputProps) {
-    const [{ value }, updateArgs] = useArgs<TextInputProps>();
+  render: function Render(args: TextFieldProps) {
+    const [{ value }, updateArgs] = useArgs<TextFieldProps>();
     function onChange(e: ChangeEvent<HTMLInputElement>) {
       updateArgs({ value: e.target.value });
     }
-    return <TextInput {...args} value={value} onChange={onChange} />;
+    return <TextField {...args} value={value} onChange={onChange} />;
   },
 };
 
@@ -112,8 +115,9 @@ export const Sample_4: Story = {
         alert(`press click and will create ${value}`);
       },
     },
+    className: "w-[335px]",
   },
-  render: function Render(args: TextInputProps) {
+  render: function Render(args: TextFieldProps) {
     const {
       errors,
       values,
@@ -142,7 +146,7 @@ export const Sample_4: Story = {
 
     return (
       <form onSubmit={handleSubmit}>
-        <TextInput
+        <TextField
           {...args}
           value={values.category}
           onChange={handleChange}

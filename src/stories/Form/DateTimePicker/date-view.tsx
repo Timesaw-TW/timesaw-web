@@ -4,8 +4,9 @@ import { FC, useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
 import dayjs, { Dayjs } from "dayjs";
 import objectSupport from "dayjs/plugin/objectSupport";
-import Footnote from "@/stories/Text/Footnote";
-import Text from "@/stories/Text/Text";
+import Footnote from "@/stories/Typography/Footnote";
+import SubHeadline from "@/stories/Typography/SubHeadline";
+import Text from "@/stories/Typography/Text";
 import TimeSelect from "./time-select";
 
 dayjs.extend(objectSupport);
@@ -125,7 +126,7 @@ const DateTimePickerDateView: FC<Props> = ({
             {["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"].map((day) => (
               <th key={day} className="flex-1 text-center">
                 <div className="flex h-8 w-8  items-center justify-center">
-                  <Footnote className="text-neutral-secondary">{day}</Footnote>
+                  <Footnote className="text-secondary">{day}</Footnote>
                 </div>
               </th>
             ))}
@@ -144,8 +145,7 @@ const DateTimePickerDateView: FC<Props> = ({
                     className={clsx(
                       "flex-1 text-center",
                       item.enable && "cursor-pointer",
-                      (!item.enable || item.isOutOfMon) &&
-                        "text-neutral-divider"
+                      (!item.enable || item.isOutOfMon) && "text-caption"
                     )}
                     onClick={() => onDateClick(item)}
                   >
@@ -157,13 +157,13 @@ const DateTimePickerDateView: FC<Props> = ({
                           value.year() === searchYear &&
                           value.month() + 1 === searchMonth &&
                           value.isSame(item.date, "day") &&
-                          "rounded-[50%] bg-primary-80",
+                          "rounded-[50%] bg-soda-80",
                         item.enable &&
                           !item.isOutOfMon &&
-                          "hover:rounded-[50%] hover:bg-primary-80"
+                          "hover:rounded-[50%] hover:bg-soda-80"
                       )}
                     >
-                      <Text>{item.date.date()}</Text>
+                      <SubHeadline>{item.date.date()}</SubHeadline>
                     </div>
                   </td>
                 ))}
@@ -173,7 +173,7 @@ const DateTimePickerDateView: FC<Props> = ({
         </tbody>
       </table>
       <div className={clsx("flex h-8 items-end justify-between")}>
-        <Text bold>Time</Text>
+        <SubHeadline bold>Time</SubHeadline>
         <div className="flex items-center gap-2">
           <TimeSelect
             type="hour"

@@ -110,7 +110,7 @@ const ColorPicker: FC<Props> = ({
     <ul
       className={clsx(
         "w-[320px] p-5",
-        "rounded-lg border border-solid border-neutral-divider shadow-md",
+        "rounded-lg border border-solid border-caption shadow-md",
         "grid gap-y-2",
         "justify-items-center",
         className,

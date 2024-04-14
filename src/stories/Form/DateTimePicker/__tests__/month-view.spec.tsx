@@ -62,6 +62,6 @@ describe("#DateTimePicker > DateTimePickerMonthView", () => {
       />
     );
     const currentMonth = getByText("Apr");
-    expect(currentMonth.parentElement).toHaveClass("bg-primary-40");
+    expect(currentMonth.parentElement).toHaveClass("bg-soda-40");
   });
 });

@@ -1,49 +1,27 @@
-import React, { ButtonHTMLAttributes, FC, ReactNode } from "react";
+import { ButtonHTMLAttributes, FC, ReactNode } from "react";
 import { clsx } from "clsx";
+import Text from "../Typography/Text";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  /**
-   * Theme
-   */
-  theme?: "primary" | "secondary";
-  /**
-   * Theme level
-   * */
-  level?: 100 | 80 | 60 | 40 | 20;
-  /**
-   * Optional click handler
-   */
   onClick?: () => void;
-  /**
-   * Content
-   * */
-  children: ReactNode;
-  /**
-   * Customize style
-   */
+  children: string | ReactNode;
   className?: string;
 }
 
-export const Button: FC<ButtonProps> = ({
-  theme = "primary",
-  level = 100,
-  children,
-  className,
-  ...props
-}) => {
+export const Button: FC<ButtonProps> = ({ children, className, ...props }) => {
   return (
     <button
       type="button"
       className={clsx(
         "h-8 w-24 rounded-md",
         "flex items-center justify-center",
-        `text-neutral-primary bg-${theme}-${level}`,
-        "dark:text-neutral-white",
+        "text-primary dark:text-white",
+        "bg-soda-100",
         className
       )}
       {...props}
     >
-      {children}
+      {typeof children === "string" ? <Text>{children}</Text> : children}
     </button>
   );
 };

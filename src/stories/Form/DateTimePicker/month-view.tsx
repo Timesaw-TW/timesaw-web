@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import dayjs, { Dayjs } from "dayjs";
 import { FC } from "react";
-import Text from "@/stories/Text/Text";
+import SubHeadline from "@/stories/Typography/SubHeadline";
 
 interface Props {
   value: Dayjs;
@@ -41,11 +41,11 @@ const DateTimePickerMonthView: FC<Props> = ({
                 "h-full w-full",
                 "rounded px-3 py-2",
                 "flex items-center justify-center",
-                isDisable ? "text-neutral-divider" : "hover:bg-primary-40",
+                isDisable ? "text-caption" : "hover:bg-soda-40",
                 !isDisable &&
                   value.year() === year &&
                   value.month() + 1 === month &&
-                  "bg-primary-40"
+                  "bg-soda-40"
               )}
               disabled={isDisable}
               onClick={() => {
@@ -54,7 +54,7 @@ const DateTimePickerMonthView: FC<Props> = ({
                 }
               }}
             >
-              <Text>{monthText}</Text>
+              <SubHeadline>{monthText}</SubHeadline>
             </button>
           </li>
         );

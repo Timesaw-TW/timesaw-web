@@ -1,11 +1,11 @@
 import React, { ChangeEvent, useState } from "react";
 import { render, fireEvent, act } from "@testing-library/react";
-import TextInput from ".";
+import TextField from ".";
 
-describe("#TextInput", () => {
-  it("should render TextInput with button correctly", () => {
+describe("#TextField", () => {
+  it("should render TextField with button correctly", () => {
     const { getByRole } = render(
-      <TextInput id="test" name="test" showButton={true} />
+      <TextField id="test" name="test" showButton={true} />
     );
     const inputElement = getByRole("textbox");
     expect(inputElement).toBeInTheDocument();
@@ -13,9 +13,9 @@ describe("#TextInput", () => {
     expect(buttonElement).toBeInTheDocument();
   });
 
-  it("should render TextInput without button correctly", () => {
+  it("should render TextField without button correctly", () => {
     const { getByRole, queryByRole } = render(
-      <TextInput id="test" name="test" />
+      <TextField id="test" name="test" />
     );
     const inputElement = getByRole("textbox");
     expect(inputElement).toBeInTheDocument();
@@ -27,7 +27,7 @@ describe("#TextInput", () => {
     const WrapperComponent = () => {
       const [value, setValue] = useState<string>();
       return (
-        <TextInput
+        <TextField
           id="test"
           name="test"
           showButton={true}
@@ -61,7 +61,7 @@ describe("#TextInput", () => {
       },
     ];
     const { getByRole, queryByRole } = render(
-      <TextInput
+      <TextField
         id="test"
         name="test"
         showButton={true}
@@ -82,7 +82,7 @@ describe("#TextInput", () => {
   it("should call custom onClick handler when button is clicked", () => {
     const onClickMock = jest.fn();
     const { getByRole } = render(
-      <TextInput
+      <TextField
         id="test"
         name="test"
         showButton={true}
@@ -97,7 +97,7 @@ describe("#TextInput", () => {
   it("should call onCreateClick handler when creating a new option", () => {
     const onCreateClickMock = jest.fn();
     const { getByText, getByRole } = render(
-      <TextInput
+      <TextField
         id="test"
         name="test"
         value={"text"}

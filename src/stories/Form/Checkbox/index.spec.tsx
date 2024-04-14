@@ -37,7 +37,7 @@ describe("#Checkbox", () => {
     fireEvent.focus(container);
 
     expect(container.getElementsByTagName("input")[0]).toHaveClass(
-      "focus:ring-neutral-secondary"
+      "focus:ring-secondary"
     );
   });
 

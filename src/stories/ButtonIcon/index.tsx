@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { FC, ReactNode, ButtonHTMLAttributes } from "react";
-import Text from "../Text/Text";
+import Text from "../Typography/Text";
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
@@ -14,7 +14,7 @@ const ButtonIcon: FC<Props> = ({ children, className, label, ...props }) => {
         " px-6 py-3",
         "flex flex-col items-center justify-center gap-1",
         " rounded-md shadow",
-        "bg-primary-40",
+        "bg-soda-40",
         className
       )}
       {...props}

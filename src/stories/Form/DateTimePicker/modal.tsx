@@ -89,7 +89,7 @@ const DateTimePickerModal: FC<DateTimePickerModalProps> = ({
     <div
       className={clsx(
         "p-4",
-        "rounded-lg bg-white text-neutral-primary shadow",
+        "rounded-lg bg-white text-primary shadow",
         className
       )}
     >
