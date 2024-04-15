@@ -21,28 +21,37 @@ describe("TimeButton", () => {
 
   it("calls onChange on button click", () => {
     render(<TimeButton {...defaultProps} />);
-    const firstButton = screen.getByText(/1分鐘/i);
+    const firstButton = screen.getByTestId("button-1");
     fireEvent.click(firstButton);
     expect(onChangeMock).toHaveBeenCalledTimes(1);
-    expect(onChangeMock).toHaveBeenCalledWith("1");
+    expect(onChangeMock).toHaveBeenCalledWith(1);
   });
 
-  it("updates button styles based on selection", async () => {
-    render(<TimeButton {...defaultProps} />);
-    const firstButton = screen.getByText(/1 分鐘/i);
-    const secondButton = screen.getByText(/15 分鐘/i);
+  it("updates button styles based on selection", () => {
+    const timePeriods = [15, 30, 60]; // Example time periods
+    const onTimeSelect = jest.fn();
+    const { getByTestId } = render(
+      <TimeButton timePeriods={timePeriods} onTimeSelect={onTimeSelect} />
+    );
 
-    expect(firstButton).not.toHaveClass("bg-primary-100"); // Initially not selected
-    expect(secondButton).not.toHaveClass("bg-primary-100");
+    // Act
+    const firstButton = getByTestId("button-15");
+    const secondButton = getByTestId("button-30");
+    const thirdButton = getByTestId("button-60");
 
     fireEvent.click(firstButton);
 
-    await new Promise((resolve) => setTimeout(resolve, 10)); // Adjust timeout if necessary
+    // Assert
+    expect(firstButton).toHaveClass("bg-primary-100"); // Selected button should have active class
+    expect(secondButton).toHaveClass("bg-primary-40"); // Unselected buttons should have default class
+    expect(thirdButton).toHaveClass("bg-primary-40"); // Unselected buttons should have default class
 
-    expect(firstButton).toHaveStyle({
-      backgroundColor: "var(--bs-primary-100)",
-    });
-    expect(secondButton).not.toHaveClass("bg-primary-100");
+    fireEvent.click(secondButton);
+
+    // Assert
+    expect(firstButton).toHaveClass("bg-primary-60");
+    expect(secondButton).toHaveClass("bg-primary-100");
+    expect(thirdButton).toHaveClass("bg-primary-40");
   });
 
   it("renders with an empty array of time periods", () => {

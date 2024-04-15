@@ -62,6 +62,7 @@ const TimeButton: FunctionComponent<TimeButtonProps> = ({
         >
           <Button
             theme="primary"
+            data-testid={`button-${period}`}
             className={getButtonClass(index)}
             onClick={() => clickHandler(period, index)}
           >
