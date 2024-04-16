@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import TimeButton from ".";
-import { TimeButtonProps } from "./type";
 
 const meta: Meta<typeof TimeButton> = {
   title: "Base/TimeButton",
@@ -14,9 +13,6 @@ const meta: Meta<typeof TimeButton> = {
 export default meta;
 type Story = StoryObj<typeof TimeButton>;
 
-const render = function Render(args: TimeButtonProps) {
-  return <TimeButton {...args} />;
-};
 export const Sample_1: Story = {
   render: () => (
     <TimeButton

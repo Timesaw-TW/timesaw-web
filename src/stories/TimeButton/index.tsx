@@ -1,7 +1,7 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useState } from "react"; // 引入 React
 import { TimeButtonProps } from "./type";
 import { Button } from "../Button";
-import Text from "../Text/Text";
+import Text from "../Typography/Text";
 import clsx from "clsx";
 
 const TimeButton: FunctionComponent<TimeButtonProps> = ({
@@ -20,24 +20,22 @@ const TimeButton: FunctionComponent<TimeButtonProps> = ({
     const isPast = selectedTimeIndex > index;
 
     return clsx(
-      "rounded-lg w-16 gap-[10px] h-14",
-      isActive ? "bg-primary-100" : isPast ? "bg-primary-60" : "bg-primary-40"
+      "rounded-lg w-16 gap-[10px] h-[54px]",
+      isActive ? "bg-soda-100" : isPast ? "bg-soda-60" : "bg-soda-40"
     );
   };
   const getBackGroundClass = (index: number) => {
     const isFirst = index === 0;
     const isLast = index === timePeriods.length - 1;
     if (selectedTimeIndex === index) {
-      return isFirst
-        ? "rounded-lg bg-primary-100"
-        : "rounded-r-lg bg-primary-60";
+      return isFirst ? "rounded-lg bg-soda-100" : "rounded-r-lg bg-soda-60";
     }
 
     return isFirst
-      ? "rounded-l-lg bg-primary-60"
+      ? "rounded-l-lg bg-soda-60"
       : isLast
-        ? "rounded-r-lg bg-primary-60"
-        : "bg-primary-60";
+        ? "rounded-r-lg bg-soda-60"
+        : "bg-soda-60";
   };
 
   const convertMinutesToFormattedTime = (time: number) => {
@@ -52,7 +50,7 @@ const TimeButton: FunctionComponent<TimeButtonProps> = ({
   return (
     <div
       className={clsx(
-        `flex items-center justify-center gap-0 rounded-lg bg-primary-40 px-0 py-0`
+        "flex items-center justify-center gap-0 rounded-lg bg-soda-40"
       )}
     >
       {timePeriods.map((period, index) => (
@@ -61,7 +59,6 @@ const TimeButton: FunctionComponent<TimeButtonProps> = ({
           className={clsx(`${getBackGroundClass(index)}`)}
         >
           <Button
-            theme="primary"
             data-testid={`button-${period}`}
             className={getButtonClass(index)}
             onClick={() => clickHandler(period, index)}

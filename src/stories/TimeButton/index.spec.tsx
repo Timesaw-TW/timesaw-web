@@ -42,16 +42,16 @@ describe("TimeButton", () => {
     fireEvent.click(firstButton);
 
     // Assert
-    expect(firstButton).toHaveClass("bg-primary-100"); // Selected button should have active class
-    expect(secondButton).toHaveClass("bg-primary-40"); // Unselected buttons should have default class
-    expect(thirdButton).toHaveClass("bg-primary-40"); // Unselected buttons should have default class
+    expect(firstButton).toHaveClass("bg-soda-100"); // Selected button should have active class
+    expect(secondButton).toHaveClass("bg-soda-40"); // Unselected buttons should have default class
+    expect(thirdButton).toHaveClass("bg-soda-40"); // Unselected buttons should have default class
 
     fireEvent.click(secondButton);
 
     // Assert
-    expect(firstButton).toHaveClass("bg-primary-60");
-    expect(secondButton).toHaveClass("bg-primary-100");
-    expect(thirdButton).toHaveClass("bg-primary-40");
+    expect(firstButton).toHaveClass("bg-soda-60");
+    expect(secondButton).toHaveClass("bg-soda-100");
+    expect(thirdButton).toHaveClass("bg-soda-40");
   });
 
   it("renders with an empty array of time periods", () => {
