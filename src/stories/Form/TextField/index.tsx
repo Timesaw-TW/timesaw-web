@@ -119,7 +119,8 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Container(
           ref={inputRef}
           type="text"
           className={clsx(
-            "flex-1 px-4 py-3",
+            "flex-1 pb-2 pl-2 pt-3",
+            showButton ? "pr-9" : "pr-2",
             "bg-transparent placeholder-caption",
             "border-none outline-none focus:ring-0"
           )}
