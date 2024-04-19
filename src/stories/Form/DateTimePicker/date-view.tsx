@@ -160,7 +160,7 @@ const DateTimePickerDateView: FC<Props> = ({
                           "rounded-[50%] bg-soda-80",
                         item.enable &&
                           !item.isOutOfMon &&
-                          "hover:rounded-[50%] hover:bg-soda-80"
+                          "hover:rounded-[50%] hover:bg-soda-40"
                       )}
                     >
                       <SubHeadline>{item.date.date()}</SubHeadline>
