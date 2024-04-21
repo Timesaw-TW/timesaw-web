@@ -85,7 +85,7 @@ const ColorItem = ({
       >
         <div
           className={clsx(
-            "h-[23px] w-[23px] rounded-[50%]",
+            "h-[24px] w-[24px] rounded-[50%]",
             "transition-all duration-300"
           )}
           style={{ backgroundColor: color.code }}
@@ -109,9 +109,8 @@ const ColorPicker: FC<Props> = ({
   return (
     <ul
       className={clsx(
-        "w-[320px] p-5",
-        "rounded-lg border border-solid border-caption shadow-md",
-        "grid gap-y-2",
+        "grid w-[280px] p-3",
+        "rounded-md border border-solid border-caption",
         "justify-items-center",
         className,
         backgroundColorClass
@@ -123,7 +122,7 @@ const ColorPicker: FC<Props> = ({
         return (
           <li
             key={color.code}
-            className="flex h-[32px] items-center justify-center"
+            className="flex h-10 w-10 items-center justify-center"
           >
             <ColorItem
               color={color}

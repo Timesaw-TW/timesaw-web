@@ -3,7 +3,7 @@ import ButtonIcon from ".";
 import { IconTrashOutline, IconTrashSolid } from "../Icons";
 
 const meta = {
-  title: "Base/Button Icon",
+  title: "Base/Button/Button Icon",
   component: ButtonIcon,
   parameters: {
     layout: "centered",

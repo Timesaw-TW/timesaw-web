@@ -8,7 +8,7 @@ describe("#Button", () => {
     const button = getByRole("button");
     expect(button).toBeInTheDocument();
     expect(button).toHaveClass("text-primary");
-    expect(button).toHaveClass("bg-soda-100");
+    expect(button).toHaveClass("bg-soda-80");
   });
 
   it("should call onClick prop when clicked", () => {
