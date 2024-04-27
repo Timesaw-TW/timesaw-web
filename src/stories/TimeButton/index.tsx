@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react"; // 引入 React
+import React, { FunctionComponent, ReactNode, useState } from "react"; // 引入 React
 import { TimeButtonProps } from "./type";
 import { Button } from "../Button";
 import Text from "../Typography/Text";
@@ -38,13 +38,19 @@ const TimeButton: FunctionComponent<TimeButtonProps> = ({
         : "bg-soda-60";
   };
 
-  const convertMinutesToFormattedTime = (time: number) => {
-    const formattedTime = time / 60;
-
-    if (formattedTime < 1) {
-      return time <= 15 ? `${time} ` : `${time} 分鐘`;
+  const formatTimeLabel = (label: string | ReactNode) => {
+    if (typeof label !== "string") {
+      return label;
     }
-    return `${formattedTime} 小時`;
+
+    const regex = /\d+/g;
+    const match = label.match(regex);
+    if (match === null) {
+      return label;
+    }
+
+    const unit = label?.toString().includes("分鐘") ? "分鐘" : "小時";
+    return `${match[0]} ${unit}`;
   };
 
   return (
@@ -59,11 +65,11 @@ const TimeButton: FunctionComponent<TimeButtonProps> = ({
           className={clsx(`${getBackGroundClass(index)}`)}
         >
           <Button
-            data-testid={`button-${period}`}
+            data-testid={`button-${period.value}`}
             className={getButtonClass(index)}
-            onClick={() => clickHandler(period, index)}
+            onClick={() => clickHandler(period.value, index)}
           >
-            <Text>{convertMinutesToFormattedTime(period)}</Text>
+            <Text>{formatTimeLabel(period.label)}</Text>
           </Button>
         </div>
       ))}

@@ -1,10 +1,16 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import TimeButton from ".";
-import { TimeButtonProps } from "./type";
+import { TimeButtonProps, Periods } from "./type";
 
 describe("TimeButton", () => {
-  const TIMEOPTIONS: number[] = [1, 15, 30, 60, 90];
+  const TIMEOPTIONS: Periods[] = [
+    { label: "1 Minute", value: 1 },
+    { label: "15 Minutes", value: 15 },
+    { label: "30 Minutes", value: 30 },
+    { label: "1 Hour", value: 60 },
+    { label: "1.5 Hours", value: 90 },
+  ];
 
   const onChangeMock = jest.fn();
 
@@ -28,20 +34,17 @@ describe("TimeButton", () => {
   });
 
   it("updates button styles based on selection", () => {
-    const timePeriods = [15, 30, 60]; // Example time periods
     const onTimeSelect = jest.fn();
     const { getByTestId } = render(
-      <TimeButton timePeriods={timePeriods} onTimeSelect={onTimeSelect} />
+      <TimeButton timePeriods={TIMEOPTIONS} onTimeSelect={onTimeSelect} />
     );
 
-    // Act
     const firstButton = getByTestId("button-15");
     const secondButton = getByTestId("button-30");
     const thirdButton = getByTestId("button-60");
 
     fireEvent.click(firstButton);
 
-    // Assert
     expect(firstButton).toHaveClass("bg-soda-100"); // Selected button should have active class
     expect(secondButton).toHaveClass("bg-soda-40"); // Unselected buttons should have default class
     expect(thirdButton).toHaveClass("bg-soda-40"); // Unselected buttons should have default class
@@ -55,7 +58,7 @@ describe("TimeButton", () => {
   });
 
   it("renders with an empty array of time periods", () => {
-    const emptyTimePeriods: number[] = [];
+    const emptyTimePeriods: Periods[] = [];
     const emptyProps: TimeButtonProps = {
       onTimeSelect: onChangeMock,
       timePeriods: emptyTimePeriods,
