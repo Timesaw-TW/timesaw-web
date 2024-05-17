@@ -11,6 +11,7 @@ const TimeButton: FunctionComponent<TimeButtonProps> = ({
   const [selectedTimeIndex, setSelectedTimeIndex] = useState<number>(0);
 
   const clickHandler = (time: number, index: number) => {
+    console.log("test");
     setSelectedTimeIndex(index);
     onTimeSelect(time);
   };
