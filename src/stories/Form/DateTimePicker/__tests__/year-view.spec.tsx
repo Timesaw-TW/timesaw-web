@@ -64,6 +64,6 @@ describe("#DateTimePicker > DateTimePickerYearView", () => {
       />
     );
     const currentYear = getByText("2024");
-    expect(currentYear.parentElement).toHaveClass("bg-soda-40");
+    expect(currentYear.parentElement).toHaveClass("bg-soda-80");
   });
 });

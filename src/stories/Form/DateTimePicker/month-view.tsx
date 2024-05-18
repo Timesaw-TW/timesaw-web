@@ -45,7 +45,7 @@ const DateTimePickerMonthView: FC<Props> = ({
                 !isDisable &&
                   value.year() === year &&
                   value.month() + 1 === month &&
-                  "bg-soda-40"
+                  "bg-soda-80"
               )}
               disabled={isDisable}
               onClick={() => {
