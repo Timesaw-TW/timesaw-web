@@ -31,19 +31,18 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Container(
       {withIcon && (
         <svg
           className={clsx(
-            "absolute stroke-white outline-none",
-            "mt-1 h-4 w-4",
+            "absolute mt-1 h-4 w-4 text-white",
             "hidden peer-checked:block",
             "pointer-events-none"
           )}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          viewBox="0 0 16 16"
+          fill="currentColor"
         >
-          <polyline points="20 6 9 17 4 12"></polyline>
+          <path
+            fillRule="evenodd"
+            d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"
+            clipRule="evenodd"
+          />
         </svg>
       )}
       {typeof children === "string" ? <Text>{children}</Text> : children}
