@@ -7,6 +7,7 @@ export const IconXMark = ({ ...props }: SVGProps<SVGSVGElement>) => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
+      role="img"
       {...props}
     >
       <path
