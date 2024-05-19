@@ -4,15 +4,15 @@ import { SVGProps } from "react";
 
 describe("#FAB", () => {
   it("should render with default props", () => {
-    const { getByRole, queryByText } = render(<FAB />);
+    const { getByRole, queryByText, container } = render(<FAB />);
     const button = getByRole("button");
     expect(button).toBeInTheDocument();
     expect(button).toHaveClass(
       "h-full w-full rounded-[50%] bg-soda-100 shadow-fab border-[0.5px] border-[#0900000A] flex items-center justify-center"
     );
 
-    const icon = getByRole("img");
-    expect(icon).toBeInTheDocument();
+    const icon = container.getElementsByTagName("svg");
+    expect(icon).toHaveLength(1);
 
     const label = queryByText("Continue");
     expect(label).not.toBeInTheDocument();

@@ -35,7 +35,7 @@ const FAB: FC<FABProps> = ({
 
   return (
     <button
-      type={type || "button"}
+      type={type ?? "button"}
       className={clsx(
         "h-full w-full rounded-[50%] bg-soda-100",
         "border-[0.5px] border-[#0900000A] shadow-fab",
