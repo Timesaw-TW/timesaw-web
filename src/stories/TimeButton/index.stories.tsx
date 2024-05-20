@@ -16,21 +16,22 @@ type Story = StoryObj<typeof TimeButton>;
 export const DefaultState: Story = {
   render: () => (
     <TimeButton
-      timePeriods={[
+      className="h-[40px] w-[320px]"
+      options={[
         {
-          label: "1分鐘",
+          label: "1",
           value: 1,
         },
         {
-          label: "15分鐘",
+          label: "15",
           value: 15,
         },
         {
-          label: "30分鐘",
+          label: "30 分鐘",
           value: 30,
         },
         {
-          label: "1小時",
+          label: "1 小時",
           value: 60,
         },
         {
@@ -38,7 +39,6 @@ export const DefaultState: Story = {
           value: 90,
         },
       ]}
-      onTimeSelect={(time: number) => console.log(time)}
     />
   ),
 };
@@ -46,21 +46,21 @@ export const DefaultState: Story = {
 export const DifferentTimePeriodQuantities: Story = {
   render: () => (
     <TimeButton
-      timePeriods={[
+      className="h-[40px] w-[320px]"
+      options={[
         {
-          label: "1分鐘",
+          label: "1 分鐘",
           value: 1,
         },
         {
-          label: "15分鐘",
+          label: "15 分鐘",
           value: 15,
         },
         {
-          label: "30分鐘",
+          label: "30 分鐘",
           value: 30,
         },
       ]}
-      onTimeSelect={(time: number) => console.log(time)}
     />
   ),
 };
@@ -68,7 +68,8 @@ export const DifferentTimePeriodQuantities: Story = {
 export const CustomStyles: Story = {
   render: () => (
     <TimeButton
-      timePeriods={[
+      className="h-[40px] w-[320px]"
+      options={[
         {
           label: <span style={{ color: "red" }}>1 分鐘</span>,
           value: 1,
@@ -90,37 +91,6 @@ export const CustomStyles: Story = {
           value: 90,
         },
       ]}
-      onTimeSelect={(time: number) => console.log(time)}
-    />
-  ),
-};
-
-export const DifferentLabels: Story = {
-  render: () => (
-    <TimeButton
-      timePeriods={[
-        {
-          label: (
-            <span style={{ color: "red" }}>
-              <strong>1 分鐘</strong>
-            </span>
-          ),
-          value: 1,
-        },
-        {
-          label: (
-            <span style={{ color: "blue" }}>
-              <em>15 Minutes</em>
-            </span>
-          ),
-          value: 15,
-        },
-        {
-          label: "30分鐘",
-          value: 30,
-        },
-      ]}
-      onTimeSelect={(time: number) => console.log(time)}
     />
   ),
 };

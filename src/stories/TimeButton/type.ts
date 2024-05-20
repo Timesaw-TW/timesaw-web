@@ -1,11 +1,13 @@
 import { ReactNode } from "react";
 
-export interface TimeButtonProps {
-  timePeriods: Periods[];
-  onTimeSelect: (time: number) => void;
+export interface TimeButtonProps<T> {
+  className?: string;
+  value?: T;
+  onChange?: (time: T) => void;
+  options: Periods<T>[];
 }
 
-export interface Periods {
+export interface Periods<T> {
   label: string | ReactNode;
-  value: number;
+  value: T;
 }

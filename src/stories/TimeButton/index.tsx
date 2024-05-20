@@ -1,78 +1,61 @@
-import React, { FunctionComponent, ReactNode, useState } from "react"; // 引入 React
-import { TimeButtonProps } from "./type";
-import { Button } from "../Button";
-import Text from "../Typography/Text";
+"use client";
+
+import React, { useState } from "react";
 import clsx from "clsx";
+import { TimeButtonProps } from "./type";
+import Caption from "../Typography/Caption";
 
-const TimeButton: FunctionComponent<TimeButtonProps> = ({
-  timePeriods,
-  onTimeSelect,
-}: TimeButtonProps) => {
-  const [selectedTimeIndex, setSelectedTimeIndex] = useState<number>(0);
+const TimeButton = <T,>({
+  className,
+  value,
+  onChange,
+  options,
+}: TimeButtonProps<T>) => {
+  const [selectedTimeIndex, setSelectedTimeIndex] = useState<number>(
+    value !== undefined ? options.map((x) => x.value).indexOf(value) : 0
+  );
 
-  const clickHandler = (time: number, index: number) => {
-    console.log("test");
+  const onTimeClick = (time: T, index: number) => {
     setSelectedTimeIndex(index);
-    onTimeSelect(time);
-  };
-
-  const getButtonClass = (index: number) => {
-    const isActive = selectedTimeIndex === index;
-    const isPast = selectedTimeIndex > index;
-
-    return clsx(
-      "rounded-lg w-16 gap-[10px] h-[54px]",
-      isActive ? "bg-soda-100" : isPast ? "bg-soda-60" : "bg-soda-40"
-    );
-  };
-  const getBackGroundClass = (index: number) => {
-    const isFirst = index === 0;
-    const isLast = index === timePeriods.length - 1;
-    if (selectedTimeIndex === index) {
-      return isFirst ? "rounded-lg bg-soda-100" : "rounded-r-lg bg-soda-60";
-    }
-
-    return isFirst
-      ? "rounded-l-lg bg-soda-60"
-      : isLast
-        ? "rounded-r-lg bg-soda-60"
-        : "bg-soda-60";
-  };
-
-  const formatTimeLabel = (label: string | ReactNode) => {
-    if (typeof label !== "string") {
-      return label;
-    }
-
-    const regex = /\d+/g;
-    const match = label.match(regex);
-    if (match === null) {
-      return label;
-    }
-
-    const unit = label?.toString().includes("分鐘") ? "分鐘" : "小時";
-    return `${match[0]} ${unit}`;
+    onChange?.(time);
   };
 
   return (
     <div
       className={clsx(
-        "flex items-center justify-center gap-0 rounded-lg bg-soda-40"
+        "overflow-hidden",
+        "flex items-center justify-center",
+        "rounded-md bg-soda-20",
+        className
       )}
     >
-      {timePeriods.map((period, index) => (
-        <div
-          key={`${period}_${index}`}
-          className={clsx(`${getBackGroundClass(index)}`)}
+      {options.map((period, index) => (
+        <button
+          key={`${period.value}-${index}`}
+          data-testid={`time-btn-${period.value}`}
+          className="relative h-full w-full flex-1"
+          onClick={() => onTimeClick(period.value, index)}
         >
-          <Button
-            data-testid={`button-${period.value}`}
-            className={getButtonClass(index)}
-            onClick={() => clickHandler(period.value, index)}
+          {index === selectedTimeIndex && index > 0 && (
+            <div className="absolute z-[1] h-full w-[50%] bg-soda-40" />
+          )}
+          <div
+            className={clsx(
+              "relative z-[2] h-full w-full",
+              "flex items-center justify-center",
+              index === selectedTimeIndex && "rounded-lg bg-soda-80",
+              index < selectedTimeIndex && "bg-soda-40"
+            )}
           >
-            <Text>{formatTimeLabel(period.label)}</Text>
-          </Button>
-        </div>
+            {typeof period.label === "string" ? (
+              <Caption element="span" bold={index === selectedTimeIndex}>
+                {period.label}
+              </Caption>
+            ) : (
+              period.label
+            )}
+          </div>
+        </button>
       ))}
     </div>
   );
