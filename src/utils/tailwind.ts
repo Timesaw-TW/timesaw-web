@@ -1,5 +1,7 @@
-export const bindClass = (type: string, classNames: string[]): string => {
-  return classNames.length
-    ? classNames.map((className) => `${type}:${className}`).join(" ")
-    : "";
+import clsx from "clsx";
+import { ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export const merge = (...inputs: ClassValue[]) => {
+  return twMerge(clsx(inputs));
 };
