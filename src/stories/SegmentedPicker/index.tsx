@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import clsx from "clsx";
-import { SegmentedPickerProps } from "./type";
+import Text from "../Typography/Text";
+import { SegmentedPickerProps, Segment } from "./type";
 
-export const SegmentedPicker: React.FC<SegmentedPickerProps> = ({
+export const SegmentedPicker = <T,>({
   className,
   segments,
+  value,
   onSelect,
-}) => {
-  const [selectedSegment, setSelectedSegment] = useState(segments[0]);
-  const onSegmentClick = (segment: string) => {
-    setSelectedSegment(segment);
-    onSelect(segment);
+}: SegmentedPickerProps<T>) => {
+  const [selectedSegment, setSelectedSegment] = useState<T>(
+    segments.find((segment) => segment.value === value)?.value ||
+      segments[0].value
+  );
+
+  const onSegmentClick = (segment: Segment<T>) => {
+    setSelectedSegment(segment.value);
+    onSelect?.(segment.value);
   };
 
   return (
@@ -22,46 +28,39 @@ export const SegmentedPicker: React.FC<SegmentedPickerProps> = ({
         className
       )}
     >
-      {segments.map((segment) => (
-        <div
-          className={clsx(
-            "flex flex-1 items-center justify-center",
-            "relative gap-1",
-            segment !== selectedSegment &&
-              ` 
-            after: 
-            border-zinc-600
-            after:absolute 
-            after:bottom-2 
-            after:left-[-8px] 
-            after:top-2 
-            after:w-[1px] after:border-x-[0.5px]
-            after:content-['']`
-          )}
-          key={segment}
-        >
-          <button
+      {segments.map((segment, index) => {
+        const isSelected = segment.value === selectedSegment;
+        return (
+          <div
             className={clsx(
-              segment === selectedSegment
-                ? "bg-white shadow-xl "
-                : "bg-transparent",
               "flex flex-1 items-center justify-center",
-              "rounded-lg transition-colors duration-200",
-              "z-10"
+              "relative gap-1",
+              !isSelected && "after: border-zinc-600",
+              "after:absolute",
+              "after:bottom-2",
+              "after:left-[-8px]",
+              "after:top-2",
+              "after:w-[1px] after:border-x-[0.5px]",
+              "after:content-['']"
             )}
-            onClick={() => onSegmentClick(segment)}
+            key={`${segment.value}-${index}`}
           >
-            <span
+            <button
               className={clsx(
-                "h-9 w-20 p-1",
-                segment === selectedSegment ? "font-bold" : "font-normal"
+                isSelected ? "bg-white shadow-xl " : "bg-transparent",
+                "flex flex-1 items-center justify-center",
+                "rounded-lg transition-colors duration-200",
+                "z-10"
               )}
+              onClick={() => onSegmentClick(segment)}
             >
-              {segment}
-            </span>
-          </button>
-        </div>
-      ))}
+              <Text className={clsx("h-9 w-20 p-1")} bold={isSelected}>
+                {segment.label}
+              </Text>
+            </button>
+          </div>
+        );
+      })}
     </div>
   );
 };

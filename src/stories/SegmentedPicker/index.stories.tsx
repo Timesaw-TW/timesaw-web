@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { SegmentedPickerProps } from "./type";
+import { Segment } from "./type";
 import { SegmentedPicker } from ".";
 
 const meta: Meta<typeof SegmentedPicker> = {
@@ -15,11 +15,17 @@ const meta: Meta<typeof SegmentedPicker> = {
 export default meta;
 type Story = StoryObj<typeof SegmentedPicker>;
 
+const SEGMENT_ARRAY: Segment<string>[] = [
+  { value: "Task", label: "Task" },
+  { value: "Puzzle", label: "Puzzle" },
+  { value: "MessyBox", label: "MessyBox" },
+];
+
 export const DefaultState: Story = {
   render: () => (
     <SegmentedPicker
       className="h-[40px] w-[320px]"
-      segments={["Task", "Puzzle", "MessyBox"]}
+      segments={SEGMENT_ARRAY}
       onSelect={(value) => {
         console.log(value);
       }}
@@ -27,11 +33,16 @@ export const DefaultState: Story = {
   ),
 };
 
+const LOGIN_SEGMENT_ARRAY: Segment<string>[] = [
+  { value: "註冊", label: "註冊" },
+  { value: "登入", label: "登入" },
+];
+
 export const LoginSegmentPicker: Story = {
   render: () => (
     <SegmentedPicker
       className="h-[40px] w-[320px]"
-      segments={["註冊", "登入"]}
+      segments={LOGIN_SEGMENT_ARRAY}
       onSelect={(value) => {
         console.log(value);
       }}
