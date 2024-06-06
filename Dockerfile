@@ -9,6 +9,9 @@ RUN pnpm install --frozen-lockfile
 
 COPY . .
 
+ENV NEXT_PUBLIC_BASE_URI=http://127.0.0.1:3000
+ENV NEXT_PUBLIC_BACKEND_URI=https://timesaw-backend.zeabur.app
+
 RUN pnpm build
 
 FROM node:18-alpine AS runner
@@ -16,8 +19,6 @@ FROM node:18-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
-
-# ENV NEXT_PUBLIC_API_URL=https://api.example.com
 
 RUN npm install -g pnpm
 

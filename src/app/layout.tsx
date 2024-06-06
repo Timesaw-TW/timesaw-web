@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+
 import SystemProvider from "@/components/provider/SystemProvider";
+import AxiosProvider from "@/components/provider/AxiosProvider";
+import ApolloProvider from "@/components/provider/ApolloProvider";
 
 const notoSans = localFont({
   src: "../../public/fonts/Noto_Sans/regular.ttf",
@@ -22,7 +25,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${notoSans.variable}`} suppressHydrationWarning>
       <body className="font-main">
-        <SystemProvider>{children}</SystemProvider>
+        <ApolloProvider>
+          <SystemProvider>
+            <AxiosProvider>{children}</AxiosProvider>
+          </SystemProvider>
+        </ApolloProvider>
       </body>
     </html>
   );

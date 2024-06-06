@@ -2,7 +2,7 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import Icon from ".";
 
-describe("#Icon", () => {
+describe("#ButtonIcon", () => {
   const mockOnClick = jest.fn();
 
   const renderComponent = (props = {}) => {

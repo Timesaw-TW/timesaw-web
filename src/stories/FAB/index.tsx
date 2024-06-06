@@ -7,9 +7,9 @@ import {
   ReactNode,
   SVGProps,
 } from "react";
-import clsx from "clsx";
 import { IconPlusSolid } from "../Icons";
 import SubHeadline from "../Typography/SubHeadline";
+import { merge } from "@/libs/tailwind";
 
 export interface FABProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
@@ -36,7 +36,7 @@ const FAB: FC<FABProps> = ({
   return (
     <button
       type={type ?? "button"}
-      className={clsx(
+      className={merge(
         "h-full w-full rounded-[50%] bg-soda-100",
         "border-[0.5px] border-[#0900000A] shadow-fab",
         "flex items-center justify-center",

@@ -8,7 +8,15 @@ interface Props {
 }
 
 const SystemProvider: FC<Props> = ({ children }) => {
-  return <ThemeProvider attribute="class">{children}</ThemeProvider>;
+  return (
+    <ThemeProvider
+      attribute="class"
+      themes={["light", "dark"]}
+      enableSystem={false}
+    >
+      {children}
+    </ThemeProvider>
+  );
 };
 
 export default SystemProvider;
