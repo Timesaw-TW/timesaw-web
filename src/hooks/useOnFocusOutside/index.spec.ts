@@ -1,7 +1,6 @@
 import { act, renderHook } from "@testing-library/react";
 import { useRef } from "react";
-
-import useOnFocusOutside from "..";
+import useOnFocusOutside from ".";
 
 describe("#useOnFocusOutside", () => {
   beforeAll(() => {
@@ -58,8 +57,8 @@ describe("#useOnFocusOutside", () => {
 
     unmount();
 
-    expect(addEventListenerSpy).toHaveBeenCalledTimes(3); // for mousedown, touchstart, and scroll
-    expect(removeEventListenerSpy).toHaveBeenCalledTimes(3); // for mousedown, touchstart, and scroll
+    expect(addEventListenerSpy).toHaveBeenCalledTimes(3);
+    expect(removeEventListenerSpy).toHaveBeenCalledTimes(3);
     addEventListenerSpy.mockRestore();
     removeEventListenerSpy.mockRestore();
   });

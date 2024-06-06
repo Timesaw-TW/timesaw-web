@@ -1,12 +1,12 @@
 export interface Environment {
+  baseUri: string;
   backendUri: string;
-  graphqlUri: string;
 }
 
 export function getEnv(): Environment {
   const env: Environment = {
-    backendUri: process.env.BACKEND_URI ?? "",
-    graphqlUri: process.env.GRAPHQL_URI ?? "",
+    baseUri: process.env.NEXT_PUBLIC_BASE_URI ?? "",
+    backendUri: process.env.NEXT_PUBLIC_BACKEND_URI ?? "",
   };
 
   return env;

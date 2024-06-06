@@ -1,3 +1,4 @@
+import { getEnv } from "@/libs/environment";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
 type HttpMethod = "GET" | "POST";
@@ -23,6 +24,7 @@ export const requestWrapper = <T>(
   //     isPublic?: boolean;
   //   }
 ): RequestWrapper<T> => {
+  const url = `${getEnv().baseUri}${config.url}`;
   return {
     executor: (
       axiosInstance: AxiosInstance,
@@ -30,7 +32,7 @@ export const requestWrapper = <T>(
     ) => {
       return axiosInstance.request({ ...config, ...additionalToRequest });
     },
-    url: config.url,
+    url,
     method: config.method,
     // additional,
   };

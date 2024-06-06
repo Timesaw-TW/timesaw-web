@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import TimeButton from ".";
 import { TimeButtonProps, Periods } from "./type";
 
-describe("TimeButton", () => {
+describe("#TimeButton", () => {
   const TIME_OPTIONS: Periods<number>[] = [
     { label: "1 Minute", value: 1 },
     { label: "15 Minutes", value: 15 },

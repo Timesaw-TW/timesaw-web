@@ -6,8 +6,11 @@ settings:
 
 dependencies:
   '@apollo/client':
-    specifier: ^3.9.5
-    version: 3.9.6(@types/react@18.2.52)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^3.10.4
+    version: 3.10.4(@types/react@18.2.52)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+  '@apollo/experimental-nextjs-app-support':
+    specifier: ^0.11.0
+    version: 0.11.0(@apollo/client@3.10.4)(next@14.1.0)(react@18.2.0)
   axios:
     specifier: ^1.7.1
     version: 1.7.1
@@ -175,8 +178,19 @@ packages:
       '@jridgewell/gen-mapping': 0.3.3
       '@jridgewell/trace-mapping': 0.3.22
 
-  /@apollo/client@3.9.6(@types/react@18.2.52)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-+zpddcnZ4G2VZ0xIEnvIHFsLqeopNOnWuE2ZVbRuetLLpj/biLPNN719B/iofdd1/iHRclKfv0XaAmX6PBhYKA==}
+  /@apollo/client-react-streaming@0.11.0(@apollo/client@3.10.4)(react@18.2.0):
+    resolution: {integrity: sha512-F8pK1lVCaXKTwXQvXHO9bXtXqGIlpX3201uTqFl44oc9a0L+LGTSigthrB/KA19ihyMT6cB1GnnXiyWcUSW+3A==}
+    peerDependencies:
+      '@apollo/client': ^3.10.4
+      react: ^18
+    dependencies:
+      '@apollo/client': 3.10.4(@types/react@18.2.52)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      ts-invariant: 0.10.3
+    dev: false
+
+  /@apollo/client@3.10.4(@types/react@18.2.52)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-51gk0xOwN6Ls1EbTG5svFva1kdm2APHYTzmFhaAdvUQoJFDxfc0UwQgDxGptzH84vkPlo1qunY1FuboyF9LI3Q==}
     peerDependencies:
       graphql: ^15.0.0 || ^16.0.0
       graphql-ws: ^5.5.5
@@ -204,7 +218,7 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      rehackt: 0.0.6(@types/react@18.2.52)(react@18.2.0)
+      rehackt: 0.1.0(@types/react@18.2.52)(react@18.2.0)
       response-iterator: 0.2.6
       symbol-observable: 4.0.0
       ts-invariant: 0.10.3
@@ -212,6 +226,19 @@ packages:
       zen-observable-ts: 1.2.5
     transitivePeerDependencies:
       - '@types/react'
+    dev: false
+
+  /@apollo/experimental-nextjs-app-support@0.11.0(@apollo/client@3.10.4)(next@14.1.0)(react@18.2.0):
+    resolution: {integrity: sha512-e5SpE4JHwXq5TGDGL2qjPcG4X1ZWI7kStg2HtpjLxAM9BpwvE2X5EM5cgMNkOkFOrzt/qsrfCt8fI+lkeBD/5A==}
+    peerDependencies:
+      '@apollo/client': ^3.10.4
+      next: ^13.4.1 || ^14.0.0 || 15.0.0-rc.0
+      react: ^18
+    dependencies:
+      '@apollo/client': 3.10.4(@types/react@18.2.52)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+      '@apollo/client-react-streaming': 0.11.0(@apollo/client@3.10.4)(react@18.2.0)
+      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
     dev: false
 
   /@aw-web-design/x-default-browser@1.4.126:
@@ -11225,8 +11252,8 @@ packages:
       jsesc: 0.5.0
     dev: true
 
-  /rehackt@0.0.6(@types/react@18.2.52)(react@18.2.0):
-    resolution: {integrity: sha512-l3WEzkt4ntlEc/IB3/mF6SRgNHA6zfQR7BlGOgBTOmx7IJJXojDASav+NsgXHFjHn+6RmwqsGPFgZpabWpeOdw==}
+  /rehackt@0.1.0(@types/react@18.2.52)(react@18.2.0):
+    resolution: {integrity: sha512-7kRDOuLHB87D/JESKxQoRwv4DzbIdwkAGQ7p6QKGdVlY1IZheUnVhlk/4UZlNUVxdAXpyxikE3URsG067ybVzw==}
     peerDependencies:
       '@types/react': '*'
       react: '*'

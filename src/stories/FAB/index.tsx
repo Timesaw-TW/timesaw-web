@@ -9,7 +9,7 @@ import {
 } from "react";
 import { IconPlusSolid } from "../Icons";
 import SubHeadline from "../Typography/SubHeadline";
-import { merge } from "@/utils/tailwind";
+import { merge } from "@/libs/tailwind";
 
 export interface FABProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
