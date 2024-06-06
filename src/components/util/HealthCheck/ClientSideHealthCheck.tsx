@@ -10,29 +10,28 @@ import { useQuery } from "@apollo/client";
 
 const ClientSideHealthCheck = () => {
   const [restfulCheck, setRestfulCheck] = useState<HealthCheckState>("pending");
-  const request = useRequest();
+  const { fetch } = useRequest();
   const { data: gqlData, loading: gqlLoading } = useQuery<{
     healthCheck: string;
   }>(GQL_SERVER_CHECK);
 
   useEffect(() => {
-    request
-      .fetch(getServerHealth())
+    fetch(getServerHealth())
       .then(() => {
         setRestfulCheck("success");
       })
       .catch(() => {
         setRestfulCheck("failed");
       });
-  }, []);
+  }, [fetch]);
+
+  const gqlCheck: HealthCheckState = gqlData ? "success" : "failed";
 
   return (
     <>
       <Text className="flex items-center">
         Client Side (GraphQL) :
-        <HealthCheckIcon
-          status={gqlLoading ? "pending" : gqlData ? "success" : "failed"}
-        />
+        <HealthCheckIcon status={gqlLoading ? "pending" : gqlCheck} />
       </Text>
       <Text className="flex items-center">
         Client Side (Restful) : <HealthCheckIcon status={restfulCheck} />

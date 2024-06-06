@@ -30,7 +30,7 @@ export const requestWrapper = <T>(
       axiosInstance: AxiosInstance,
       additionalToRequest?: AxiosRequestConfig
     ) => {
-      return axiosInstance.request({ ...config, ...additionalToRequest });
+      return axiosInstance.request({ ...config, ...additionalToRequest, url });
     },
     url,
     method: config.method,

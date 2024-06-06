@@ -5,8 +5,7 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
-import type { AxiosInstance } from "axios";
-import { FC, ReactNode, useEffect, useMemo, useState } from "react";
+import { FC, ReactNode, useMemo } from "react";
 
 import { axios as axiosConfig } from "@/configs/axios";
 import AxiosContext from "@/contexts/AxiosContext";
@@ -16,8 +15,6 @@ type Props = {
 };
 
 const AxiosProvider: FC<Props> = ({ children }) => {
-  const [axInstance, setAxInstance] = useState<AxiosInstance>();
-
   const axInterceptor = useMemo(() => {
     const onRequest = (
       config: InternalAxiosRequestConfig
@@ -33,19 +30,17 @@ const AxiosProvider: FC<Props> = ({ children }) => {
     return { onRequest, onResponse, onError };
   }, []);
 
-  useEffect(() => {
-    setAxInstance(() => {
-      const instance = axios.create(axiosConfig);
-      instance.interceptors.request.use(
-        axInterceptor.onRequest,
-        axInterceptor.onError
-      );
-      instance.interceptors.response.use(
-        axInterceptor.onResponse,
-        axInterceptor.onError
-      );
-      return instance;
-    });
+  const axInstance = useMemo(() => {
+    const instance = axios.create(axiosConfig);
+    instance.interceptors.request.use(
+      axInterceptor.onRequest,
+      axInterceptor.onError
+    );
+    instance.interceptors.response.use(
+      axInterceptor.onResponse,
+      axInterceptor.onError
+    );
+    return instance;
   }, [axInterceptor]);
 
   return (
