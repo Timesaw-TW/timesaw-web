@@ -38,8 +38,11 @@ jobs:
 
       - name: Build
         run: pnpm build
+        env:
+          NEXT_PUBLIC_BASE_URI: ${{ secrets.NEXT_PUBLIC_BASE_URI }}
+          NEXT_PUBLIC_BACKEND_URI: ${{ secrets.NEXT_PUBLIC_BACKEND_URI }}
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          SONAR_TOKEN: ${{ secrets. SONARCLOUD_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
