@@ -7,7 +7,7 @@ import {
   ApolloClient,
   InMemoryCache,
 } from "@apollo/experimental-nextjs-app-support";
-import { PropsWithChildren } from "react";
+import { FC, ReactNode } from "react";
 
 function makeClient() {
   const httpLink = new HttpLink({
@@ -21,10 +21,16 @@ function makeClient() {
   });
 }
 
-export default function ApolloProvider({ children }: PropsWithChildren) {
+interface Props {
+  children: ReactNode;
+}
+
+const ApolloProvider: FC<Props> = ({ children }) => {
   return (
     <ApolloNextAppProvider makeClient={makeClient}>
       {children}
     </ApolloNextAppProvider>
   );
-}
+};
+
+export default ApolloProvider;

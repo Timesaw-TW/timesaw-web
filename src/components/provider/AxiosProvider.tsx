@@ -30,7 +30,7 @@ const AxiosProvider: FC<Props> = ({ children }) => {
     return { onRequest, onResponse, onError };
   }, []);
 
-  const axInstance = useMemo(() => {
+  const axContextValue = useMemo(() => {
     const instance = axios.create(axiosConfig);
     instance.interceptors.request.use(
       axInterceptor.onRequest,
@@ -40,15 +40,13 @@ const AxiosProvider: FC<Props> = ({ children }) => {
       axInterceptor.onResponse,
       axInterceptor.onError
     );
-    return instance;
+    return { axios: instance };
   }, [axInterceptor]);
 
   return (
-    axInstance && (
-      <AxiosContext.Provider value={{ axios: axInstance }}>
-        {children}
-      </AxiosContext.Provider>
-    )
+    <AxiosContext.Provider value={axContextValue}>
+      {children}
+    </AxiosContext.Provider>
   );
 };
 
