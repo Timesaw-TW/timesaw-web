@@ -9,6 +9,7 @@ import { IconPlusSolid } from "./IconPlusSolid";
 import { IconShieldCheckOutline } from "./IconShieldCheckOutline";
 import { IconShieldExclamationOutline } from "./IconShieldExclamationOutline";
 import { IconHomeSolid } from "./IconHomeSolid";
+import { IconCheckCircleOutline } from "./IconCheckCircleOutline";
 
 export {
   IconTrashOutline,
@@ -22,4 +23,5 @@ export {
   IconShieldCheckOutline,
   IconShieldExclamationOutline,
   IconHomeSolid,
+  IconCheckCircleOutline,
 };

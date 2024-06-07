@@ -40,7 +40,8 @@ const FAB: FC<FABProps> = ({
         "h-12 w-12",
         "rounded-[50%] bg-soda-100",
         "border-[0.5px] border-[#0900000A] shadow-fab",
-        "flex items-center justify-center",
+        "flex items-center",
+        showLabel ? "justify-start pl-3" : "justify-center",
         className
       )}
       {...props}
