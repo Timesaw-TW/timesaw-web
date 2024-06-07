@@ -1,13 +1,13 @@
 "use client";
 
 import { FC, useEffect, useMemo, useState } from "react";
-import clsx from "clsx";
 import dayjs, { Dayjs } from "dayjs";
 import objectSupport from "dayjs/plugin/objectSupport";
 import Footnote from "@/stories/Typography/Footnote";
 import SubHeadline from "@/stories/Typography/SubHeadline";
 import Text from "@/stories/Typography/Text";
 import TimeSelect from "./time-select";
+import { merge } from "@/libs/tailwind";
 
 dayjs.extend(objectSupport);
 
@@ -142,7 +142,7 @@ const DateTimePickerDateView: FC<Props> = ({
                 {week.map((item) => (
                   <td
                     key={`${item.date.year()}-${item.date.month() + 1}-${item.date.date()}`}
-                    className={clsx(
+                    className={merge(
                       "flex-1 text-center",
                       item.enable && "cursor-pointer",
                       (!item.enable || item.isOutOfMon) && "text-caption"
@@ -150,7 +150,7 @@ const DateTimePickerDateView: FC<Props> = ({
                     onClick={() => onDateClick(item)}
                   >
                     <div
-                      className={clsx(
+                      className={merge(
                         "flex h-8 w-8 items-center justify-center",
                         item.enable &&
                           value &&
@@ -172,7 +172,7 @@ const DateTimePickerDateView: FC<Props> = ({
           })}
         </tbody>
       </table>
-      <div className={clsx("flex h-8 items-end justify-between")}>
+      <div className={merge("flex h-8 items-end justify-between")}>
         <SubHeadline bold>Time</SubHeadline>
         <div className="flex items-center gap-2">
           <TimeSelect

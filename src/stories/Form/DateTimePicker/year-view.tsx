@@ -1,7 +1,7 @@
-import clsx from "clsx";
 import { Dayjs } from "dayjs";
 import { FC } from "react";
 import SubHeadline from "@/stories/Typography/SubHeadline";
+import { merge } from "@/libs/tailwind";
 
 interface Props {
   value: Dayjs;
@@ -22,7 +22,7 @@ const DateTimePickerYearView: FC<Props> = ({
   const years = Array.from({ length: 12 }, (_, index) => startYear + index);
 
   return (
-    <ul className={clsx("grid grid-cols-4 gap-[10px] ")}>
+    <ul className={merge("grid grid-cols-4 gap-[10px]")}>
       {years.map((year, index) => {
         const isOutOfMax = max && year > max.year();
         const isOutOfMin = min && year < min.year();
@@ -32,7 +32,7 @@ const DateTimePickerYearView: FC<Props> = ({
           <li key={`year-view-${year}`}>
             <button
               type="button"
-              className={clsx(
+              className={merge(
                 "h-full w-full",
                 "rounded px-3 py-2",
                 "flex items-center justify-center",

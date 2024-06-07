@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, FC, ReactNode } from "react";
-import { clsx } from "clsx";
 import Text from "../Typography/Text";
+import { merge } from "@/libs/tailwind";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
@@ -12,7 +12,7 @@ export const Button: FC<ButtonProps> = ({ children, className, ...props }) => {
   return (
     <button
       type="button"
-      className={clsx(
+      className={merge(
         "h-12 w-24 rounded-md",
         "flex items-center justify-center",
         "text-primary dark:text-white",

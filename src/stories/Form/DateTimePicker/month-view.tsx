@@ -1,7 +1,7 @@
-import clsx from "clsx";
 import dayjs, { Dayjs } from "dayjs";
 import { FC } from "react";
 import SubHeadline from "@/stories/Typography/SubHeadline";
+import { merge } from "@/libs/tailwind";
 
 interface Props {
   value: Dayjs;
@@ -19,7 +19,7 @@ const DateTimePickerMonthView: FC<Props> = ({
   min,
 }) => {
   return (
-    <ul className={clsx("grid grid-cols-4 gap-[10px] ")}>
+    <ul className={merge("grid grid-cols-4 gap-[10px]")}>
       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((month) => {
         const isOutOfMax =
           max &&
@@ -37,7 +37,7 @@ const DateTimePickerMonthView: FC<Props> = ({
           <li key={`month-view-${month}`}>
             <button
               type="button"
-              className={clsx(
+              className={merge(
                 "h-full w-full",
                 "rounded px-3 py-2",
                 "flex items-center justify-center",

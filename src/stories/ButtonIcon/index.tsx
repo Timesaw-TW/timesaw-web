@@ -1,6 +1,6 @@
-import clsx from "clsx";
 import { FC, ReactNode, ButtonHTMLAttributes } from "react";
 import Text from "../Typography/Text";
+import { merge } from "@/libs/tailwind";
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
@@ -10,10 +10,10 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
 const ButtonIcon: FC<Props> = ({ children, className, label, ...props }) => {
   return (
     <button
-      className={clsx(
-        " px-6 py-3",
+      className={merge(
+        "px-6 py-3",
         "flex flex-col items-center justify-center gap-1",
-        " rounded-md",
+        "rounded-md",
         "bg-soda-20",
         className
       )}

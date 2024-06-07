@@ -4,9 +4,9 @@ import { ChangeEvent } from "react";
 import TextField from ".";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import clsx from "clsx";
 import { SelectOption } from "../Dropdown/type";
 import { TextFieldProps } from "./type";
+import { merge } from "@/libs/tailwind";
 
 const meta: Meta<typeof TextField> = {
   title: "Base/Form/TextField",
@@ -155,7 +155,7 @@ export const Sample_4: Story = {
         <button
           type="submit"
           disabled={isDisableSubmit}
-          className={clsx(
+          className={merge(
             "rounded border bg-slate-500/50 p-1",
             isDisableSubmit && "opacity-30"
           )}

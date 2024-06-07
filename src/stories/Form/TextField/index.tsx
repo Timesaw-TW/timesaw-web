@@ -9,12 +9,12 @@ import {
   useEffect,
 } from "react";
 import { IconChevronDown, IconXMark } from "../../Icons";
-import clsx from "clsx";
 import Dropdown from "../Dropdown";
 import { SelectOption } from "../Dropdown/type";
 import useOnFocusOutside from "@/hooks/useOnFocusOutside";
 import ErrorMessage from "../ErrorMessage";
 import { TextFieldProps } from "./type";
+import { merge } from "@/libs/tailwind";
 
 const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Container(
   { showButton, button, showDropdown, dropdown, ...props },
@@ -107,10 +107,10 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Container(
   return (
     <div
       ref={ref || containerRef}
-      className={clsx("relative w-[300px]", className)}
+      className={merge("relative w-[300px]", className)}
     >
       <div
-        className={clsx(
+        className={merge(
           "relative flex items-stretch",
           "border-b border-caption caret-[#446BF2]"
         )}
@@ -118,7 +118,7 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Container(
         <input
           ref={inputRef}
           type="text"
-          className={clsx(
+          className={merge(
             "flex-1 pb-2 pl-2 pt-3",
             showButton ? "pr-9" : "pr-2",
             "bg-transparent placeholder-caption",
@@ -131,7 +131,7 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Container(
         />
         {showButton && (
           <button
-            className={clsx("absolute right-3 h-full", btnClassName)}
+            className={merge("absolute right-3 h-full", btnClassName)}
             onClick={handleIconClick}
             {...btnProps}
           >

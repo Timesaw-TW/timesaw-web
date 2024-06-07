@@ -2,11 +2,11 @@
 
 import { ChangeEvent, RefObject, forwardRef, useRef, useState } from "react";
 import { NumberSelectProps } from "./type";
-import clsx from "clsx";
 import Dropdown from "../Dropdown";
 import { SelectOption } from "../Dropdown/type";
 import useOnFocusOutside from "@/hooks/useOnFocusOutside";
 import "./index.css";
+import { merge } from "@/libs/tailwind";
 
 const NumberSelect = forwardRef<HTMLDivElement, NumberSelectProps>(
   function Container(
@@ -66,10 +66,10 @@ const NumberSelect = forwardRef<HTMLDivElement, NumberSelectProps>(
     );
 
     return (
-      <div ref={ref ?? containerRef} className={clsx("relative", className)}>
+      <div ref={ref ?? containerRef} className={merge("relative", className)}>
         <input
           type="number"
-          className={clsx(
+          className={merge(
             "px-2 py-1",
             "w-full  bg-transparent",
             "rounded border border-caption"
@@ -85,7 +85,7 @@ const NumberSelect = forwardRef<HTMLDivElement, NumberSelectProps>(
         />
         {dropdownOpen && (
           <Dropdown
-            className={clsx("max-h-52 overflow-y-auto", dropdown?.className)}
+            className={merge("max-h-52 overflow-y-auto", dropdown?.className)}
             options={options}
             onChange={handleDropdownClick}
             selected={props.value ? [props.value as number] : []}

@@ -11,7 +11,7 @@ import { IconPlusSolid } from "../Icons";
 import SubHeadline from "../Typography/SubHeadline";
 import { merge } from "@/libs/tailwind";
 
-export interface FABProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface FABProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   showIcon?: boolean;
   icon?: ({ ...props }: SVGProps<SVGSVGElement>) => ReactElement;
@@ -37,7 +37,8 @@ const FAB: FC<FABProps> = ({
     <button
       type={type ?? "button"}
       className={merge(
-        "h-full w-full rounded-[50%] bg-soda-100",
+        "h-12 w-12",
+        "rounded-[50%] bg-soda-100",
         "border-[0.5px] border-[#0900000A] shadow-fab",
         "flex items-center justify-center",
         className
