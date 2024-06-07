@@ -18,11 +18,11 @@ export const DefaultState: Story = {
     <TimeButton
       options={[
         {
-          label: "1",
+          label: "1 分鐘",
           value: 1,
         },
         {
-          label: "15",
+          label: "15 分鐘",
           value: 15,
         },
         {
