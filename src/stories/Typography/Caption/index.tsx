@@ -8,7 +8,7 @@ const Caption: FC<Props> = ({
   children,
   className,
   bold,
-  element = "caption",
+  element = "span",
 }) => {
   const Element = element as keyof JSX.IntrinsicElements;
 

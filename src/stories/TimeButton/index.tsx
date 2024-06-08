@@ -50,7 +50,7 @@ const TimeButton = <T,>({
             )}
           >
             {typeof period.label === "string" ? (
-              <Caption element="span" bold={index === selectedTimeIndex}>
+              <Caption bold={index === selectedTimeIndex}>
                 {period.label}
               </Caption>
             ) : (

@@ -10,6 +10,8 @@ import { IconShieldCheckOutline } from "./IconShieldCheckOutline";
 import { IconShieldExclamationOutline } from "./IconShieldExclamationOutline";
 import { IconHomeSolid } from "./IconHomeSolid";
 import { IconCheckCircleOutline } from "./IconCheckCircleOutline";
+import { IconEyeOutline } from "./IconEyeOutline";
+import { IconEyeSlashOutline } from "./IconEyeSlashOutline";
 
 export {
   IconTrashOutline,
@@ -24,4 +26,7 @@ export {
   IconShieldExclamationOutline,
   IconHomeSolid,
   IconCheckCircleOutline,
+  IconEyeOutline,
+  IconEyeSlashOutline,
 };
+export * from "./Svgs";

@@ -23,8 +23,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${notoSans.variable}`} suppressHydrationWarning>
-      <body className="font-main">
+    <html
+      lang="en"
+      className={`${notoSans.variable} h-full`}
+      suppressHydrationWarning
+    >
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
+      <body className="h-full font-main">
         <ApolloProvider>
           <SystemProvider>
             <AxiosProvider>{children}</AxiosProvider>

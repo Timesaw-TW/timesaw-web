@@ -7,7 +7,7 @@ describe("#Caption", () => {
     const captionElement = getByText("Hello");
 
     expect(captionElement).toBeInTheDocument();
-    expect(captionElement.tagName).toBe("CAPTION");
+    expect(captionElement.tagName).toBe("SPAN");
     expect(captionElement).toHaveClass("font-main", "text-xs", "font-normal");
   });
 
@@ -26,9 +26,9 @@ describe("#Caption", () => {
   });
 
   it("should render with custom element", () => {
-    const { getByText } = render(<Caption element="span">Hello</Caption>);
+    const { getByText } = render(<Caption element="p">Hello</Caption>);
     const captionElement = getByText("Hello");
 
-    expect(captionElement.tagName).toBe("SPAN");
+    expect(captionElement.tagName).toBe("P");
   });
 });

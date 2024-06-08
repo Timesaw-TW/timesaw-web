@@ -8,7 +8,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
 }
 
-export const Button: FC<ButtonProps> = ({ children, className, ...props }) => {
+const Button: FC<ButtonProps> = ({ children, className, ...props }) => {
   return (
     <button
       type="button"
@@ -25,3 +25,5 @@ export const Button: FC<ButtonProps> = ({ children, className, ...props }) => {
     </button>
   );
 };
+
+export default Button;

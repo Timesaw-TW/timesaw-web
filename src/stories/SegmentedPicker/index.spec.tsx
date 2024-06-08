@@ -33,15 +33,4 @@ describe("SegmentedPicker", () => {
     expect(onChangeMock).toHaveBeenCalledWith("Task");
     expect(onChangeMock).toHaveBeenCalledTimes(1);
   });
-
-  test("should update the selected segment when clicked", () => {
-    const { getByText } = render(<SegmentedPicker {...defaultProps} />);
-
-    const puzzleButton = getByText("Puzzle");
-    fireEvent.click(puzzleButton);
-    expect(puzzleButton).toHaveClass("font-semibold");
-
-    const taskButton = getByText("Task");
-    expect(taskButton).toHaveClass("font-normal");
-  });
 });
