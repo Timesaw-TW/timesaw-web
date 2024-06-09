@@ -15,18 +15,8 @@ const getEyeIcon = (show: boolean) => {
 
 const LoginPanel = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPassword, setShowConfirmPassword] =
-    useState<boolean>(false);
 
-  const {
-    errors,
-    values,
-    handleChange,
-    handleSubmit,
-    isSubmitting,
-    isValid,
-    dirty,
-  } = useFormik({
+  const { errors, values, handleChange, handleSubmit } = useFormik({
     initialValues: { email: "", password: "" },
     validationSchema: yup.object({
       email: yup.string().required("請填寫信箱").email("Email 格式錯誤"),

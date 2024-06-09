@@ -53,6 +53,7 @@ const LoginBox: FC<Props> = ({ className }) => {
               {tab === "register" ? "已有帳號?" : "還沒有帳號?"}
             </Caption>
             <Button
+              role="switch"
               className="h-8 w-12 bg-transparent px-3 py-2"
               onClick={() => setTab(tab === "register" ? "login" : "register")}
             >

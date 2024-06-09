@@ -10,7 +10,7 @@ interface Props {
   height?: string | number;
 }
 
-const Splash: FC<Props> = ({ width = 80, height = 80 }) => {
+const Splash: FC<Props> = ({ width = "5rem", height = "5rem" }) => {
   const lottieOption = {
     loop: true,
     autoplay: true,
