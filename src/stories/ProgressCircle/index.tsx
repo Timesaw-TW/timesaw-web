@@ -1,16 +1,18 @@
-import clsx from "clsx";
+import { merge } from "@/libs/tailwind";
 import { FC } from "react";
 
 interface Props {
   percentage: number;
   size?: number;
   strokeWidth?: number;
+  className?: string;
 }
 
 const ProgressCircle: FC<Props> = ({
   percentage,
   size = 16,
   strokeWidth = 1.5,
+  className,
 }) => {
   const radius = (size - strokeWidth) / 2;
 
@@ -21,9 +23,10 @@ const ProgressCircle: FC<Props> = ({
     return (
       <div
         style={{ width: `${size}px`, height: `${size}px` }}
-        className={clsx(
+        className={merge(
           "rounded-[50%] bg-secondary fill-white",
-          "flex items-center justify-center"
+          "flex items-center justify-center",
+          className
         )}
       >
         <svg viewBox="0 0 16 16" className="h-[70%] w-[70%]">
@@ -38,7 +41,12 @@ const ProgressCircle: FC<Props> = ({
   }
 
   return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+    <svg
+      width={size}
+      height={size}
+      viewBox={`0 0 ${size} ${size}`}
+      className={className}
+    >
       <circle
         className="fill-none stroke-caption"
         cx={size / 2}
@@ -47,7 +55,7 @@ const ProgressCircle: FC<Props> = ({
         strokeWidth={`${strokeWidth}px`}
       />
       <circle
-        className={clsx(
+        className={merge(
           "fill-none stroke-secondary"
           // "transition-all delay-200 ease-in"
         )}

@@ -2,7 +2,8 @@
 
 import { FC, useRef, useState } from "react";
 import { useHoverDirty } from "react-use";
-import clsx, { ClassValue } from "clsx";
+import { ClassValue } from "clsx";
+import { merge } from "@/libs/tailwind";
 
 export type Color = {
   code: string;
@@ -64,7 +65,7 @@ const ColorItem = ({
   return (
     <button
       ref={ref}
-      className={clsx(
+      className={merge(
         "flex items-center justify-center",
         "h-[32px] w-[32px] rounded-[50%]",
         "transition-all duration-300"
@@ -75,7 +76,7 @@ const ColorItem = ({
       onClick={onClick}
     >
       <div
-        className={clsx(
+        className={merge(
           "flex items-center justify-center",
           "h-[28px] w-[28px] rounded-[50%]",
           "transition-all duration-300",
@@ -84,7 +85,7 @@ const ColorItem = ({
         )}
       >
         <div
-          className={clsx(
+          className={merge(
             "h-[24px] w-[24px] rounded-[50%]",
             "transition-all duration-300"
           )}
@@ -108,7 +109,7 @@ const ColorPicker: FC<Props> = ({
 
   return (
     <ul
-      className={clsx(
+      className={merge(
         "grid w-[280px] p-3",
         "rounded-md border border-solid border-caption",
         "justify-items-center",

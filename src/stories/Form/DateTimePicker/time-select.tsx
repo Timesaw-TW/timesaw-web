@@ -3,9 +3,9 @@
 import { FC, useEffect, useMemo, useRef, useState } from "react";
 import Text from "@/stories/Typography/Text";
 import { IconChevronDown } from "@/stories/Icons";
-import clsx from "clsx";
 import { Dayjs } from "dayjs";
 import useOnFocusOutside from "@/hooks/useOnFocusOutside";
+import { merge } from "@/libs/tailwind";
 
 interface Props {
   value: Dayjs;
@@ -62,12 +62,12 @@ const TimeSelect: FC<Props> = ({ value, type, onChange, max, min }) => {
   return (
     <div
       ref={ref}
-      className={clsx("relative", "rounded border border-caption px-2 py-1")}
+      className={merge("relative", "rounded border border-caption px-2 py-1")}
     >
       <button
         type="button"
         onClick={() => setOptionOpen(!optionOpen)}
-        className={clsx(
+        className={merge(
           "cursor-pointer",
           "flex items-center justify-center gap-1"
         )}
@@ -80,7 +80,7 @@ const TimeSelect: FC<Props> = ({ value, type, onChange, max, min }) => {
       {optionOpen && (
         <ul
           ref={listRef}
-          className={clsx(
+          className={merge(
             "h-[240px] w-[72px] overflow-y-scroll p-1",
             "absolute bottom-9 left-0",
             "rounded border border-caption bg-white",
@@ -92,7 +92,7 @@ const TimeSelect: FC<Props> = ({ value, type, onChange, max, min }) => {
               <li data-value={option} key={option}>
                 <button
                   type="button"
-                  className={clsx(
+                  className={merge(
                     "h-full w-full text-left",
                     "rounded px-3 py-1",
                     isDisable ? "text-caption" : "hover:bg-soda-40",

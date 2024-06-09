@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import FAB, { FABProps } from ".";
-import { IconChevronDown } from "../Icons";
+import FAB from ".";
+import { IconCheckCircleOutline, IconChevronDown } from "../Icons";
 
 const meta = {
   title: "Base/Button/FAB",
@@ -19,11 +19,6 @@ export const Example_1: Story = {
   args: {
     onClick: () => alert("click"),
   },
-  render: (args: FABProps) => (
-    <div className="h-12 w-12">
-      <FAB {...args} />
-    </div>
-  ),
 };
 
 export const Example_2: Story = {
@@ -32,39 +27,35 @@ export const Example_2: Story = {
     icon: IconChevronDown,
     onClick: () => alert("click"),
   },
-  render: (args: FABProps) => (
-    <div className="h-12 w-12">
-      <FAB {...args} />
-    </div>
-  ),
 };
 
 export const Example_3: Story = {
-  name: "Default Label",
+  name: "Task Label",
   args: {
     showLabel: true,
-    className: "!rounded-[100px] bg-soda-20",
+    label: "任務",
+    className: "w-[128px] rounded-[100px] bg-soda-20",
     onClick: () => alert("click"),
+    icon: IconCheckCircleOutline,
   },
-  render: (args: FABProps) => (
-    <div className="h-[48px] w-[128px]">
-      <FAB {...args} />
-    </div>
-  ),
 };
 
 export const Example_4: Story = {
+  name: "Default Label",
+  args: {
+    showLabel: true,
+    className: "w-[128px] rounded-[100px] bg-soda-20",
+    onClick: () => alert("click"),
+  },
+};
+
+export const Example_5: Story = {
   name: "Custom Label",
   args: {
-    className: "!rounded-[100px] bg-soda-20",
+    className: "w-[128px] rounded-[100px] bg-soda-20",
     icon: IconChevronDown,
     showLabel: true,
     label: "Open",
     onClick: () => alert("click"),
   },
-  render: (args: FABProps) => (
-    <div className="h-[48px] w-[128px]">
-      <FAB {...args} />
-    </div>
-  ),
 };

@@ -8,13 +8,13 @@ import {
   useEffect,
   ChangeEvent,
 } from "react";
-import clsx from "clsx";
 import dayjs, { Dayjs } from "dayjs";
 import { IconCalendarOutline } from "@/stories/Icons/IconCalendarOutline";
 import { DateTimePickerProps } from "./type";
 import Text from "@/stories/Typography/Text";
 import useOnFocusOutside from "@/hooks/useOnFocusOutside";
 import DateTimePickerModal from "./modal";
+import { merge } from "@/libs/tailwind";
 
 const resetSecond = (time: Dayjs) => {
   return time.set("second", 0).set("millisecond", 0);
@@ -68,7 +68,7 @@ const DateTimePicker = forwardRef<HTMLDivElement, DateTimePickerProps>(
     };
 
     return (
-      <div className={clsx("relative", className)} ref={ref || containerRef}>
+      <div className={merge("relative", className)} ref={ref || containerRef}>
         <button
           type="button"
           onClick={() => {
@@ -83,7 +83,7 @@ const DateTimePicker = forwardRef<HTMLDivElement, DateTimePickerProps>(
             }
             setOpened(!opened);
           }}
-          className={clsx(
+          className={merge(
             "relative w-full",
             "flex items-center px-4 py-3",
             "border-b-[0.5px] border-[#C6C6C8]"
@@ -94,7 +94,7 @@ const DateTimePicker = forwardRef<HTMLDivElement, DateTimePickerProps>(
           ) : (
             <Text>{datetime.format("MMM DD, YYYY HH:mm")}</Text>
           )}
-          <IconCalendarOutline className={clsx("absolute right-3 h-6 w-6")} />
+          <IconCalendarOutline className={merge("absolute right-3 h-6 w-6")} />
         </button>
         {opened && (
           <div className="absolute">

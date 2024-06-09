@@ -1,7 +1,9 @@
-import { useState } from "react";
-import clsx from "clsx";
-import Text from "../Typography/Text";
+"use client";
+
+import { useEffect, useState } from "react";
 import { SegmentedPickerProps, Segment } from "./type";
+import { merge } from "@/libs/tailwind";
+import Caption from "../Typography/Caption";
 
 export const SegmentedPicker = <T,>({
   className,
@@ -10,9 +12,15 @@ export const SegmentedPicker = <T,>({
   onSelect,
 }: SegmentedPickerProps<T>) => {
   const [selectedSegment, setSelectedSegment] = useState<T>(
-    segments.find((segment) => segment.value === value)?.value ||
+    segments.find((segment) => segment.value === value)?.value ??
       segments[0].value
   );
+
+  useEffect(() => {
+    if (value) {
+      setSelectedSegment(value);
+    }
+  }, [value]);
 
   const onSegmentClick = (segment: Segment<T>) => {
     setSelectedSegment(segment.value);
@@ -21,44 +29,42 @@ export const SegmentedPicker = <T,>({
 
   return (
     <div
-      className={clsx(
+      className={merge(
+        "h-8 w-[20.5rem]",
         "flex items-center justify-between",
-        "rounded-lg bg-soda-40 px-[2px]",
+        "rounded-lg bg-soda-20 p-[0.125rem]",
         "overflow-hidden",
         className
       )}
     >
       {segments.map((segment, index) => {
         const isSelected = segment.value === selectedSegment;
+        const isLast = index === segments.length - 1;
+
         return (
-          <div
-            className={clsx(
-              "flex flex-1 items-center justify-center",
-              "relative gap-1",
-              !isSelected && "after: border-zinc-600",
-              "after:absolute",
-              "after:bottom-2",
-              "after:left-[-8px]",
-              "after:top-2",
-              "after:w-[1px] after:border-x-[0.5px]",
-              "after:content-['']"
-            )}
+          <button
             key={`${segment.value}-${index}`}
+            onClick={() => onSegmentClick(segment)}
+            className={merge(
+              "relative",
+              "h-full rounded-lg transition-colors duration-200",
+              "flex flex-1 items-center justify-center",
+              isSelected && "border-primary/4 border-[0.5px]",
+              isSelected
+                ? "bg-white shadow-segmentedPickerSelected"
+                : "bg-transparent"
+            )}
           >
-            <button
-              className={clsx(
-                isSelected ? "bg-white shadow-xl " : "bg-transparent",
-                "flex flex-1 items-center justify-center",
-                "rounded-lg transition-colors duration-200",
-                "z-10"
-              )}
-              onClick={() => onSegmentClick(segment)}
-            >
-              <Text className={clsx("h-9 w-20 p-1")} bold={isSelected}>
-                {segment.label}
-              </Text>
-            </button>
-          </div>
+            <Caption bold>{segment.label}</Caption>
+            {!isLast && (
+              <div
+                className={merge(
+                  "h-[60%] w-[0.5px] bg-caption",
+                  "absolute right-0 top-[50%] -translate-y-[50%] "
+                )}
+              />
+            )}
+          </button>
         );
       })}
     </div>

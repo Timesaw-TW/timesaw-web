@@ -1,10 +1,10 @@
 "use client";
 
-import { clsx } from "clsx";
 import { DropdownProps, SelectOption } from "./type";
 import { useEffect, useRef } from "react";
 import Footnote from "@/stories/Typography/Footnote";
 import SubHeadline from "@/stories/Typography/SubHeadline";
+import { merge } from "@/libs/tailwind";
 
 const Dropdown = <T,>({
   searchValue,
@@ -18,7 +18,7 @@ const Dropdown = <T,>({
 }: DropdownProps<T>) => {
   const itemPadding = "py-1 px-3";
   const selectedClass = "bg-soda-40 rounded";
-  const liBaseClass = clsx(
+  const liBaseClass = merge(
     "cursor-pointer text-primary",
     "hover:bg-soda-40 hover:rounded"
   );
@@ -59,9 +59,8 @@ const Dropdown = <T,>({
 
   return (
     <ul
-      className={clsx(
-        "z-10",
-        "absolute w-full p-1",
+      className={merge(
+        "absolute z-10 w-[300px] p-1",
         "flex flex-col",
         "rounded border shadow-md",
         "text-pretty bg-white",
@@ -70,7 +69,7 @@ const Dropdown = <T,>({
     >
       {label &&
         (typeof label === "string" ? (
-          <Footnote className={clsx(itemPadding, "text-secondary")}>
+          <Footnote className={merge(itemPadding, "text-secondary")}>
             {label}
           </Footnote>
         ) : (
@@ -80,14 +79,14 @@ const Dropdown = <T,>({
         <li
           ref={(el) => (itemRefs.current[index] = el)}
           key={`${index}-${option.value}`}
-          className={clsx(
+          className={merge(
             liBaseClass,
             selected?.some((x) => x === option.value) && selectedClass
           )}
         >
           <button
             type="button"
-            className={clsx("flex w-full justify-start", itemPadding)}
+            className={merge("flex w-full justify-start", itemPadding)}
             onClick={() => {
               onChange?.(option);
             }}
@@ -97,10 +96,10 @@ const Dropdown = <T,>({
         </li>
       ))}
       {showCreate && (
-        <li className={clsx(liBaseClass)}>
+        <li className={merge(liBaseClass)}>
           <button
             onClick={() => onCreateClick?.(searchValue)}
-            className={clsx("flex w-full items-center gap-2", itemPadding)}
+            className={merge("flex w-full items-center gap-2", itemPadding)}
           >
             <SubHeadline className="text-[#747478]">Create</SubHeadline>
             <SubHeadline className="text-[#090000]">{searchValue}</SubHeadline>

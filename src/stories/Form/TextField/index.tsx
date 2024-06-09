@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ChangeEvent,
   RefObject,
@@ -9,12 +11,12 @@ import {
   useEffect,
 } from "react";
 import { IconChevronDown, IconXMark } from "../../Icons";
-import clsx from "clsx";
 import Dropdown from "../Dropdown";
 import { SelectOption } from "../Dropdown/type";
 import useOnFocusOutside from "@/hooks/useOnFocusOutside";
 import ErrorMessage from "../ErrorMessage";
 import { TextFieldProps } from "./type";
+import { merge } from "@/libs/tailwind";
 
 const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Container(
   { showButton, button, showDropdown, dropdown, ...props },
@@ -31,6 +33,7 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Container(
     value: inputValue,
     onChange,
     errorMessage,
+    type = "text",
     ...inputProps
   } = props;
   const {
@@ -38,6 +41,7 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Container(
     className: btnClassName,
     onClick: btnOnClick,
     allowClear,
+    type: btnType = "button",
     ...btnProps
   } = button || {};
   const {
@@ -107,18 +111,18 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Container(
   return (
     <div
       ref={ref || containerRef}
-      className={clsx("relative w-[300px]", className)}
+      className={merge("relative h-[70px] w-[300px]", className)}
     >
       <div
-        className={clsx(
+        className={merge(
           "relative flex items-stretch",
           "border-b border-caption caret-[#446BF2]"
         )}
       >
         <input
           ref={inputRef}
-          type="text"
-          className={clsx(
+          type={type}
+          className={merge(
             "flex-1 pb-2 pl-2 pt-3",
             showButton ? "pr-9" : "pr-2",
             "bg-transparent placeholder-caption",
@@ -131,7 +135,8 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Container(
         />
         {showButton && (
           <button
-            className={clsx("absolute right-3 h-full", btnClassName)}
+            type={btnType}
+            className={merge("absolute right-3 h-full", btnClassName)}
             onClick={handleIconClick}
             {...btnProps}
           >

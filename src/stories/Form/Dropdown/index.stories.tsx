@@ -28,7 +28,7 @@ const dropdownOptions: SelectOption<string>[] = [
 
 const render = function Render(args: DropdownProps<unknown>) {
   return (
-    <div className="relative w-[300px]">
+    <div className="relative">
       <Dropdown {...args} />
     </div>
   );

@@ -1,11 +1,11 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
-import clsx from "clsx";
 import dayjs, { Dayjs } from "dayjs";
 import { DateTimePickerMode } from "./type";
 import { IconChevronLeft, IconChevronRight } from "@/stories/Icons";
 import Headline from "@/stories/Typography/Headline";
+import { merge } from "@/libs/tailwind";
 
 interface Props {
   mode: DateTimePickerMode;
@@ -81,10 +81,10 @@ const DateTimePickerMenu: FC<Props> = ({
   };
 
   return (
-    <div className={clsx("h-10 pb-2", "flex items-center justify-between")}>
+    <div className={merge("h-10 pb-2", "flex items-center justify-between")}>
       <button
         type="button"
-        className={clsx(
+        className={merge(
           "flex h-10 w-10 items-center justify-center p-2",
           !showPreBtn && "invisible"
         )}
@@ -102,7 +102,7 @@ const DateTimePickerMenu: FC<Props> = ({
       </button>
       <button
         type="button"
-        className={clsx(
+        className={merge(
           "flex h-10 w-10 items-center justify-center p-2",
           !showNextBtn && "invisible"
         )}

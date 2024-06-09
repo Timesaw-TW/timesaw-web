@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
-import clsx from "clsx";
 import Text from "../../Typography/Text";
 import { CheckboxProps } from "./type";
+import { merge } from "@/libs/tailwind";
 
 const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Container(
   { id, withIcon = false, withFocus = false, children, className, ...props },
@@ -11,12 +11,12 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Container(
     <label
       htmlFor={id}
       ref={ref}
-      className={clsx("flex w-16 cursor-pointer gap-3", className)}
+      className={merge("flex w-16 cursor-pointer gap-3", className)}
     >
       <input
         id={id}
         type="checkbox"
-        className={clsx(
+        className={merge(
           "peer",
           "relative cursor-pointer appearance-none",
           "mt-1 h-4 w-4 shrink-0",
@@ -30,7 +30,7 @@ const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Container(
       />
       {withIcon && (
         <svg
-          className={clsx(
+          className={merge(
             "absolute mt-1 h-4 w-4 text-white",
             "hidden peer-checked:block",
             "pointer-events-none"

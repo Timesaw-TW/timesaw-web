@@ -1,6 +1,6 @@
-import clsx from "clsx";
 import { FC } from "react";
 import { TextProps } from "../type";
+import { merge } from "@/libs/tailwind";
 
 interface Props extends TextProps {}
 
@@ -9,7 +9,7 @@ const Title: FC<Props> = ({ children, className, bold, element = "h1" }) => {
 
   return (
     <Element
-      className={clsx(
+      className={merge(
         `font-main text-xl`,
         bold ? "font-semibold" : "font-normal",
         className

@@ -1,13 +1,14 @@
 "use client";
 
 import { FC, useState } from "react";
-import clsx, { ClassValue } from "clsx";
+import { ClassValue } from "clsx";
 import { Dayjs } from "dayjs";
 import DateTimePickerMenu from "./menu";
 import DateTimePickerDateView from "./date-view";
 import DateTimePickerMonthView from "./month-view";
 import { DateTimePickerMode } from "./type";
 import DateTimePickerYearView from "./year-view";
+import { merge } from "@/libs/tailwind";
 
 interface DateTimePickerModalProps {
   value: Dayjs;
@@ -87,7 +88,7 @@ const DateTimePickerModal: FC<DateTimePickerModalProps> = ({
 
   return (
     <div
-      className={clsx(
+      className={merge(
         "p-4",
         "rounded-lg bg-white text-primary shadow",
         className

@@ -1,5 +1,4 @@
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import TimeButton from ".";
 import { TimeButtonProps, Periods } from "./type";
 
@@ -20,14 +19,14 @@ describe("#TimeButton", () => {
   };
 
   it("should render all time periods", () => {
-    render(<TimeButton {...defaultProps} />);
-    const buttons = screen.getAllByRole("button");
+    const { getAllByRole } = render(<TimeButton {...defaultProps} />);
+    const buttons = getAllByRole("button");
     expect(buttons.length).toBe(TIME_OPTIONS.length);
   });
 
   it("should call onChange when button click", () => {
-    render(<TimeButton {...defaultProps} />);
-    const firstButton = screen.getByTestId("time-btn-1");
+    const { getByTestId } = render(<TimeButton {...defaultProps} />);
+    const firstButton = getByTestId("time-btn-1");
     fireEvent.click(firstButton);
     expect(onChangeMock).toHaveBeenCalledTimes(1);
     expect(onChangeMock).toHaveBeenCalledWith(1);

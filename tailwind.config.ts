@@ -40,6 +40,8 @@ const config: Config = {
       },
       boxShadow: {
         fab: "0px 3px 1px 0px #0000000A, 0px 3px 8px 0px #0000001F",
+        segmentedPickerSelected:
+          "0px 3px 1px 0px #0000000A, 0px 3px 8px 0px #0000001F",
       },
     },
   },

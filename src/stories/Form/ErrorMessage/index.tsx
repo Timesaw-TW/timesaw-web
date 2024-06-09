@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { IconExclamationCircle } from "@/stories/Icons";
-import clsx from "clsx";
 import Caption from "@/stories/Typography/Caption";
 import { ErrorMessageProps } from "./type";
+import { merge } from "@/libs/tailwind";
 
 interface Props extends ErrorMessageProps {}
 
@@ -13,7 +13,7 @@ const ErrorMessage: FC<Props> = ({ message, element, className }) => {
 
   return (
     <div
-      className={clsx(
+      className={merge(
         "h-6 py-1 text-error",
         "flex items-center gap-1",
         className

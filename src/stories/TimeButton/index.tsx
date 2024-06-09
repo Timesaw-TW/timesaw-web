@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
-import clsx from "clsx";
+import { useState } from "react";
 import { TimeButtonProps } from "./type";
 import Caption from "../Typography/Caption";
+import { merge } from "@/libs/tailwind";
 
 const TimeButton = <T,>({
   className,
@@ -22,7 +22,8 @@ const TimeButton = <T,>({
 
   return (
     <div
-      className={clsx(
+      className={merge(
+        "h-[40px] w-[320px]",
         "overflow-hidden",
         "flex items-center justify-center",
         "rounded-md bg-soda-20",
@@ -31,6 +32,7 @@ const TimeButton = <T,>({
     >
       {options.map((period, index) => (
         <button
+          type="button"
           key={`${period.value}-${index}`}
           data-testid={`time-btn-${period.value}`}
           className="relative h-full w-full flex-1"
@@ -40,7 +42,7 @@ const TimeButton = <T,>({
             <div className="absolute z-[1] h-full w-[50%] bg-soda-40" />
           )}
           <div
-            className={clsx(
+            className={merge(
               "relative z-[2] h-full w-full",
               "flex items-center justify-center",
               index === selectedTimeIndex && "rounded-lg bg-soda-80",
@@ -48,7 +50,7 @@ const TimeButton = <T,>({
             )}
           >
             {typeof period.label === "string" ? (
-              <Caption element="span" bold={index === selectedTimeIndex}>
+              <Caption bold={index === selectedTimeIndex}>
                 {period.label}
               </Caption>
             ) : (
