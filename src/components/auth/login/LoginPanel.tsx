@@ -28,7 +28,6 @@ const LoginPanel = () => {
   return (
     <form onSubmit={handleSubmit}>
       <TextField
-        className="w-full"
         id="email"
         name="email"
         placeholder="信箱"
@@ -41,7 +40,6 @@ const LoginPanel = () => {
         }}
       />
       <TextField
-        className="w-full"
         id="password"
         name="password"
         placeholder="密碼"

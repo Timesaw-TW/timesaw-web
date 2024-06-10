@@ -34,7 +34,6 @@ const RegisterPanel = () => {
   return (
     <form onSubmit={handleSubmit}>
       <TextField
-        className="w-full"
         id="email"
         name="email"
         placeholder="信箱"
@@ -47,7 +46,6 @@ const RegisterPanel = () => {
         }}
       />
       <TextField
-        className="w-full"
         id="password"
         name="password"
         placeholder="密碼"
@@ -62,7 +60,6 @@ const RegisterPanel = () => {
         errorMessage={{ message: errors.password }}
       />
       <TextField
-        className="w-full"
         id="confirmPassword"
         name="confirmPassword"
         placeholder="確認密碼"
