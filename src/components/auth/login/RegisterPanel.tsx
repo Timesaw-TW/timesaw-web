@@ -77,7 +77,7 @@ const RegisterPanel = () => {
         errorMessage={{ message: errors.confirmPassword }}
       />
       <div className="py-2">
-        <Button className="h-11 w-full" type="submit">
+        <Button type="submit">
           <Text bold>註冊</Text>
         </Button>
       </div>

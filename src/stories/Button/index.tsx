@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, FC, ReactNode } from "react";
-import Text from "../Typography/Text";
 import { merge } from "@/libs/tailwind";
+import SubHeadline from "../Typography/SubHeadline";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
@@ -13,7 +13,7 @@ const Button: FC<ButtonProps> = ({ children, className, ...props }) => {
     <button
       type="button"
       className={merge(
-        "h-12 w-24 rounded-md",
+        "w-full gap-2 rounded-lg p-3",
         "flex items-center justify-center",
         "text-primary dark:text-white",
         "bg-soda-80",
@@ -21,7 +21,11 @@ const Button: FC<ButtonProps> = ({ children, className, ...props }) => {
       )}
       {...props}
     >
-      {typeof children === "string" ? <Text>{children}</Text> : children}
+      {typeof children === "string" ? (
+        <SubHeadline>{children}</SubHeadline>
+      ) : (
+        children
+      )}
     </button>
   );
 };
