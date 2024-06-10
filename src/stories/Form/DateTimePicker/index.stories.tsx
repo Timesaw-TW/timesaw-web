@@ -26,7 +26,7 @@ const render = (time?: string) => (args: DateTimePickerProps) => {
     },
   });
   return (
-    <div className="h-[46px] w-[328px] p-10">
+    <div className="h-[2.875rem] w-[20.5rem] p-10">
       <form onSubmit={handleSubmit}>
         <DateTimePicker {...args} value={values.time} onChange={handleChange} />
         <button

@@ -22,7 +22,7 @@ const DateTimePickerYearView: FC<Props> = ({
   const years = Array.from({ length: 12 }, (_, index) => startYear + index);
 
   return (
-    <ul className={merge("grid grid-cols-4 gap-[10px]")}>
+    <ul className={merge("grid grid-cols-4 gap-[0.625rem]")}>
       {years.map((year, index) => {
         const isOutOfMax = max && year > max.year();
         const isOutOfMin = min && year < min.year();

@@ -23,7 +23,7 @@ const TimeButton = <T,>({
   return (
     <div
       className={merge(
-        "h-[40px] w-[320px]",
+        "h-10 w-80",
         "overflow-hidden",
         "flex items-center justify-center",
         "rounded-md bg-soda-20",

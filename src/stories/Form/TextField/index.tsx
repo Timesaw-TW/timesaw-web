@@ -111,7 +111,7 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Container(
   return (
     <div
       ref={ref || containerRef}
-      className={merge("relative h-[70px] w-[300px]", className)}
+      className={merge("relative h-[4.375rem] w-[18.75rem]", className)}
     >
       <div
         className={merge(

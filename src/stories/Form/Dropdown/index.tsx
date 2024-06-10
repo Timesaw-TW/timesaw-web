@@ -60,7 +60,7 @@ const Dropdown = <T,>({
   return (
     <ul
       className={merge(
-        "absolute z-10 w-[300px] p-1",
+        "absolute z-10 w-[18.75rem] p-1",
         "flex flex-col",
         "rounded border shadow-md",
         "text-pretty bg-white",

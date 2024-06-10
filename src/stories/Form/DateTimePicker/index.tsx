@@ -103,7 +103,7 @@ const DateTimePicker = forwardRef<HTMLDivElement, DateTimePickerProps>(
               onChange={handleChange}
               max={max}
               min={min}
-              className="mt-1 w-[328px]"
+              className="mt-1 w-[20.5rem]"
             />
           </div>
         )}

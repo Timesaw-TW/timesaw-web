@@ -31,10 +31,10 @@ describe("#Splash", () => {
   });
 
   it("should accept and apply custom width and height", () => {
-    const { getByTestId } = render(<Splash width={100} height={100} />);
+    const { getByTestId } = render(<Splash width="100rem" height="100rem" />);
     const lottieElement = getByTestId("lottie");
-    expect(lottieElement).toHaveStyle("width: 100px");
-    expect(lottieElement).toHaveStyle("height: 100px");
+    expect(lottieElement).toHaveStyle("width: 100rem");
+    expect(lottieElement).toHaveStyle("height: 100rem");
   });
 
   it("should apply correct classes to the container div", () => {

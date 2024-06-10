@@ -34,7 +34,7 @@ export const Example_3: Story = {
   args: {
     showLabel: true,
     label: "任務",
-    className: "w-[128px] rounded-[100px] bg-soda-20",
+    className: "w-32 rounded-[6.25rem] bg-soda-20",
     onClick: () => alert("click"),
     icon: IconCheckCircleOutline,
   },
@@ -44,7 +44,7 @@ export const Example_4: Story = {
   name: "Default Label",
   args: {
     showLabel: true,
-    className: "w-[128px] rounded-[100px] bg-soda-20",
+    className: "w-32 rounded-[6.25rem] bg-soda-20",
     onClick: () => alert("click"),
   },
 };
@@ -52,7 +52,7 @@ export const Example_4: Story = {
 export const Example_5: Story = {
   name: "Custom Label",
   args: {
-    className: "w-[128px] rounded-[100px] bg-soda-20",
+    className: "w-32 rounded-[6.25rem] bg-soda-20",
     icon: IconChevronDown,
     showLabel: true,
     label: "Open",
