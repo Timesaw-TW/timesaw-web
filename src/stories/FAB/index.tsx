@@ -28,16 +28,15 @@ const FAB: FC<FABProps> = ({
   showLabel = false,
   label = "Continue",
   children,
-  type,
   ...props
 }) => {
   const Icon = icon;
 
   return (
     <button
-      type={type ?? "button"}
+      type="button"
       className={merge(
-        "h-12 w-12",
+        "w-12 p-3",
         "rounded-[50%] bg-soda-100",
         "border-[0.5px] border-[#0900000A] shadow-fab",
         "flex items-center",

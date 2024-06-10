@@ -8,7 +8,7 @@ describe("#FAB", () => {
     const button = getByRole("button");
     expect(button).toBeInTheDocument();
     expect(button).toHaveClass(
-      "h-12 w-12 rounded-[50%] bg-soda-100 shadow-fab border-[0.5px] border-[#0900000A] flex items-center justify-center"
+      "w-12 rounded-[50%] bg-soda-100 shadow-fab border-[0.5px] border-[#0900000A] flex items-center justify-center"
     );
 
     const icon = container.getElementsByTagName("svg");
