@@ -50,7 +50,7 @@ const FAB: FC<FABProps> = ({
 
       {!children && (
         <div className="flex gap-2">
-          {showIcon && <Icon className="h-6 w-6" />}
+          {showIcon && <Icon />}
           {showLabel && <SubHeadline>{label}</SubHeadline>}
         </div>
       )}

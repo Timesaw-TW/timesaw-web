@@ -13,7 +13,7 @@ const HomeButton = () => {
       label="Home"
       onClick={() => router.push("/")}
     >
-      <IconHomeSolid className={"h-6 w-6"} />
+      <IconHomeSolid />
     </ButtonIcon>
   );
 };

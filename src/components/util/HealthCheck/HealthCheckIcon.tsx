@@ -10,7 +10,7 @@ export type HealthCheckState = "success" | "failed" | "pending";
 
 const HealthCheckIcon: FC<{ status: HealthCheckState }> = ({ status }) => {
   const className = merge(
-    "ml-3 h-6 w-6",
+    "ml-3",
     status === "success" ? "text-green-600" : "text-red-600"
   );
   if (status === "pending") {

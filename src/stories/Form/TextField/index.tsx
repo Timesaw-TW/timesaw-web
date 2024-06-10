@@ -142,9 +142,9 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Container(
           >
             {element ??
               (isClearIcon ? (
-                <IconXMark className="h-6 w-6" />
+                <IconXMark />
               ) : (
-                isDropdownIcon && <IconChevronDown className="h-6 w-6" />
+                isDropdownIcon && <IconChevronDown />
               ))}
           </button>
         )}

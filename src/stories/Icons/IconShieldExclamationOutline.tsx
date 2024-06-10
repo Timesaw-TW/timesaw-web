@@ -1,6 +1,8 @@
+import { merge } from "@/libs/tailwind";
 import { SVGProps } from "react";
 
 export const IconShieldExclamationOutline = ({
+  className,
   ...props
 }: SVGProps<SVGSVGElement>) => {
   return (
@@ -9,6 +11,7 @@ export const IconShieldExclamationOutline = ({
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
+      className={merge("h-6 w-6", className)}
       {...props}
     >
       <path

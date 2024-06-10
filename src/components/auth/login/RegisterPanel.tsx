@@ -10,7 +10,7 @@ import * as yup from "yup";
 
 const getEyeIcon = (show: boolean) => {
   const Icon = show ? IconEyeSlashOutline : IconEyeOutline;
-  return <Icon className="h-6 w-6" />;
+  return <Icon />;
 };
 
 const RegisterPanel = () => {
