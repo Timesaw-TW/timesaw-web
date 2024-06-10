@@ -27,7 +27,6 @@ const LoginBox: FC<Props> = ({ className }) => {
   return (
     <div className={merge("h-full w-full", "flex flex-col gap-6", className)}>
       <SegmentedPicker
-        className="w-full bg-soda-20"
         value={tab}
         segments={segments}
         onSelect={() => setTab(tab === "login" ? "register" : "login")}
