@@ -1,6 +1,6 @@
 import { FC, ReactNode, ButtonHTMLAttributes } from "react";
-import Text from "../Typography/Text";
 import { merge } from "@/libs/tailwind";
+import SubHeadline from "../Typography/SubHeadline";
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
@@ -11,16 +11,21 @@ const ButtonIcon: FC<Props> = ({ children, className, label, ...props }) => {
   return (
     <button
       className={merge(
-        "px-6 py-3",
-        "flex flex-col items-center justify-center gap-1",
-        "rounded-md",
+        "w-full p-3",
+        "flex flex-col items-center justify-center",
+        "gap-2 rounded-lg",
         "bg-soda-20",
         className
       )}
       {...props}
     >
       {children}
-      {label && (typeof label === "string" ? <Text>{label}</Text> : label)}
+      {label &&
+        (typeof label === "string" ? (
+          <SubHeadline>{label}</SubHeadline>
+        ) : (
+          label
+        ))}
     </button>
   );
 };
