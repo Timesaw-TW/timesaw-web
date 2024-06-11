@@ -81,10 +81,10 @@ const TimeSelect: FC<Props> = ({ value, type, onChange, max, min }) => {
         <ul
           ref={listRef}
           className={merge(
-            "h-[240px] w-[72px] overflow-y-scroll p-1",
+            "h-60 w-[4.5rem] overflow-y-scroll p-1",
             "absolute bottom-9 left-0",
             "rounded border border-caption bg-white",
-            "flex flex-col gap-[10px]"
+            "flex flex-col gap-[0.625rem]"
           )}
         >
           {options.map(({ value: option, isDisable }) => {

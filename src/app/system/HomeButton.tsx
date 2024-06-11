@@ -9,11 +9,11 @@ const HomeButton = () => {
 
   return (
     <ButtonIcon
-      className="fixed right-5 top-5 shadow"
+      className="fixed right-5 top-5 w-24 shadow"
       label="Home"
       onClick={() => router.push("/")}
     >
-      <IconHomeSolid className={"h-6 w-6"} />
+      <IconHomeSolid />
     </ButtonIcon>
   );
 };

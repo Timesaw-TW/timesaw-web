@@ -94,7 +94,7 @@ const DateTimePicker = forwardRef<HTMLDivElement, DateTimePickerProps>(
           ) : (
             <Text>{datetime.format("MMM DD, YYYY HH:mm")}</Text>
           )}
-          <IconCalendarOutline className={merge("absolute right-3 h-6 w-6")} />
+          <IconCalendarOutline className="absolute right-3" />
         </button>
         {opened && (
           <div className="absolute">
@@ -103,7 +103,7 @@ const DateTimePicker = forwardRef<HTMLDivElement, DateTimePickerProps>(
               onChange={handleChange}
               max={max}
               min={min}
-              className="mt-1 w-[328px]"
+              className="mt-1 w-[20.5rem]"
             />
           </div>
         )}

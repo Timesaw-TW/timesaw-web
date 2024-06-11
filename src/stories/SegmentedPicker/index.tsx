@@ -30,7 +30,7 @@ export const SegmentedPicker = <T,>({
   return (
     <div
       className={merge(
-        "h-8 w-[20.5rem]",
+        "h-8",
         "flex items-center justify-between",
         "rounded-lg bg-soda-20 p-[0.125rem]",
         "overflow-hidden",

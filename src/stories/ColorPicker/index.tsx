@@ -67,7 +67,7 @@ const ColorItem = ({
       ref={ref}
       className={merge(
         "flex items-center justify-center",
-        "h-[32px] w-[32px] rounded-[50%]",
+        "h-8 w-8 rounded-[50%]",
         "transition-all duration-300"
       )}
       style={{
@@ -78,7 +78,7 @@ const ColorItem = ({
       <div
         className={merge(
           "flex items-center justify-center",
-          "h-[28px] w-[28px] rounded-[50%]",
+          "h-7 w-7 rounded-[50%]",
           "transition-all duration-300",
           (isSelected || isHovering) &&
             (backgroundColorClass || "bg-white dark:bg-black")
@@ -86,7 +86,7 @@ const ColorItem = ({
       >
         <div
           className={merge(
-            "h-[24px] w-[24px] rounded-[50%]",
+            "h-6 w-6 rounded-[50%]",
             "transition-all duration-300"
           )}
           style={{ backgroundColor: color.code }}
@@ -110,7 +110,7 @@ const ColorPicker: FC<Props> = ({
   return (
     <ul
       className={merge(
-        "grid w-[280px] p-3",
+        "grid w-[17.5rem] p-3",
         "rounded-md border border-solid border-caption",
         "justify-items-center",
         className,

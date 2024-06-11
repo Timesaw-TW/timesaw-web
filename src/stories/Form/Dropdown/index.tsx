@@ -60,9 +60,9 @@ const Dropdown = <T,>({
   return (
     <ul
       className={merge(
-        "absolute z-10 w-[300px] p-1",
-        "flex flex-col",
-        "rounded border shadow-md",
+        "absolute z-10 w-full p-1",
+        "flex flex-col gap-1",
+        "rounded shadow-dropdown",
         "text-pretty bg-white",
         className
       )}
@@ -99,7 +99,10 @@ const Dropdown = <T,>({
         <li className={merge(liBaseClass)}>
           <button
             onClick={() => onCreateClick?.(searchValue)}
-            className={merge("flex w-full items-center gap-2", itemPadding)}
+            className={merge(
+              "flex w-full items-center gap-[0.625rem]",
+              itemPadding
+            )}
           >
             <SubHeadline className="text-[#747478]">Create</SubHeadline>
             <SubHeadline className="text-[#090000]">{searchValue}</SubHeadline>

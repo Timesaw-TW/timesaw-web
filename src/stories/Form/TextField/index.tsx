@@ -33,7 +33,6 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Container(
     value: inputValue,
     onChange,
     errorMessage,
-    type = "text",
     ...inputProps
   } = props;
   const {
@@ -41,7 +40,6 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Container(
     className: btnClassName,
     onClick: btnOnClick,
     allowClear,
-    type: btnType = "button",
     ...btnProps
   } = button || {};
   const {
@@ -111,7 +109,7 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Container(
   return (
     <div
       ref={ref || containerRef}
-      className={merge("relative h-[70px] w-[300px]", className)}
+      className={merge("relative h-[4.375rem]", className)}
     >
       <div
         className={merge(
@@ -121,7 +119,7 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Container(
       >
         <input
           ref={inputRef}
-          type={type}
+          type="text"
           className={merge(
             "flex-1 pb-2 pl-2 pt-3",
             showButton ? "pr-9" : "pr-2",
@@ -135,16 +133,16 @@ const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Container(
         />
         {showButton && (
           <button
-            type={btnType}
+            type="button"
             className={merge("absolute right-3 h-full", btnClassName)}
             onClick={handleIconClick}
             {...btnProps}
           >
             {element ??
               (isClearIcon ? (
-                <IconXMark className="h-6 w-6" />
+                <IconXMark />
               ) : (
-                isDropdownIcon && <IconChevronDown className="h-6 w-6" />
+                isDropdownIcon && <IconChevronDown />
               ))}
           </button>
         )}

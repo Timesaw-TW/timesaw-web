@@ -23,8 +23,7 @@ const TimeButton = <T,>({
   return (
     <div
       className={merge(
-        "h-[40px] w-[320px]",
-        "overflow-hidden",
+        "w-full overflow-hidden",
         "flex items-center justify-center",
         "rounded-md bg-soda-20",
         className
@@ -43,7 +42,7 @@ const TimeButton = <T,>({
           )}
           <div
             className={merge(
-              "relative z-[2] h-full w-full",
+              "relative z-[2] w-full py-3",
               "flex items-center justify-center",
               index === selectedTimeIndex && "rounded-lg bg-soda-80",
               index < selectedTimeIndex && "bg-soda-40"

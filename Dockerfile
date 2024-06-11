@@ -10,7 +10,7 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 
 ENV NEXT_PUBLIC_BASE_URI=https://timesaw.zeabur.app
-ENV NEXT_PUBLIC_BACKEND_URI=https://timesaw-backend.zeabur.app
+ENV NEXT_PUBLIC_BACKEND_URI=https://api.timesawpuzzle.com
 
 RUN pnpm build
 

@@ -29,6 +29,37 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <link rel="icon" href="/favicons/favicon.ico" sizes="any" />
+        <link
+          rel="apple-touch-icon"
+          href="/favicons/apple-icon.png"
+          type="image/png"
+          sizes="180x180"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicons/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicons/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/favicons/manifest.webmanifest" />
+        <link
+          rel="mask-icon"
+          href="/favicons/safari-pinned-tab.svg"
+          color="#5bbad5"
+        />
+        <meta
+          name="msapplication-config"
+          content="/favicons/browserconfig.xml"
+        />
+        <meta name="msapplication-TileColor" content="#2b5797" />
+        <meta name="theme-color" content="#ffffff" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className="h-full font-main">

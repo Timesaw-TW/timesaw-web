@@ -16,6 +16,7 @@ type Story = StoryObj<typeof TimeButton>;
 export const DefaultState: Story = {
   render: () => (
     <TimeButton
+      className="w-80"
       options={[
         {
           label: "1 分鐘",
@@ -45,6 +46,7 @@ export const DefaultState: Story = {
 export const DifferentTimePeriodQuantities: Story = {
   render: () => (
     <TimeButton
+      className="w-80"
       options={[
         {
           label: "1 分鐘",
@@ -66,6 +68,7 @@ export const DifferentTimePeriodQuantities: Story = {
 export const CustomStyles: Story = {
   render: () => (
     <TimeButton
+      className="w-80"
       options={[
         {
           label: <span style={{ color: "red" }}>1 分鐘</span>,

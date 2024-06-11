@@ -17,13 +17,15 @@ type Story = StoryObj<typeof meta>;
 export const Trash_Outline: Story = {
   args: {
     label: "Delete",
-    children: <IconTrashOutline className="h-6 w-6" />,
+    className: "w-24",
+    children: <IconTrashOutline />,
   },
 };
 
 export const Trash_Solid: Story = {
   args: {
     label: "Delete",
-    children: <IconTrashSolid className="h-6 w-6" />,
+    className: "w-24",
+    children: <IconTrashSolid />,
   },
 };

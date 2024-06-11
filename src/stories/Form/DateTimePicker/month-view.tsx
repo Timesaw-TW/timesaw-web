@@ -19,7 +19,7 @@ const DateTimePickerMonthView: FC<Props> = ({
   min,
 }) => {
   return (
-    <ul className={merge("grid grid-cols-4 gap-[10px]")}>
+    <ul className={merge("grid grid-cols-4 gap-[0.625rem]")}>
       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((month) => {
         const isOutOfMax =
           max &&

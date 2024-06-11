@@ -8,13 +8,28 @@ import LoginPanel from "./LoginPanel";
 import Caption from "@/stories/Typography/Caption";
 import Button from "@/stories/Button";
 import { SegmentedPicker } from "@/stories/SegmentedPicker";
+import { useSearchParams } from "next/navigation";
+
+type PageType = "register" | "login";
+
+function getPageType(type?: string | null): PageType {
+  if (type) {
+    return ["register", "login"].includes(type)
+      ? (type as PageType)
+      : "register";
+  }
+  return "register";
+}
 
 interface Props {
   className?: string;
 }
 
 const LoginBox: FC<Props> = ({ className }) => {
-  const [tab, setTab] = useState<"register" | "login">("register");
+  const searchParams = useSearchParams();
+  const [tab, setTab] = useState<PageType>(
+    getPageType(searchParams?.get("type"))
+  );
 
   const segments = useMemo(
     () => [
@@ -27,7 +42,6 @@ const LoginBox: FC<Props> = ({ className }) => {
   return (
     <div className={merge("h-full w-full", "flex flex-col gap-6", className)}>
       <SegmentedPicker
-        className="w-full bg-soda-20"
         value={tab}
         segments={segments}
         onSelect={() => setTab(tab === "login" ? "register" : "login")}

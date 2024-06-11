@@ -39,6 +39,7 @@ const config: Config = {
         error: "#D7402A",
       },
       boxShadow: {
+        dropdown: "0px 3px 7px 0px #00000033",
         fab: "0px 3px 1px 0px #0000000A, 0px 3px 8px 0px #0000001F",
         segmentedPickerSelected:
           "0px 3px 1px 0px #0000000A, 0px 3px 8px 0px #0000001F",

@@ -10,7 +10,7 @@ import * as yup from "yup";
 
 const getEyeIcon = (show: boolean) => {
   const Icon = show ? IconEyeSlashOutline : IconEyeOutline;
-  return <Icon className="h-6 w-6" />;
+  return <Icon />;
 };
 
 const LoginPanel = () => {
@@ -28,7 +28,6 @@ const LoginPanel = () => {
   return (
     <form onSubmit={handleSubmit}>
       <TextField
-        className="w-full"
         id="email"
         name="email"
         placeholder="信箱"
@@ -41,7 +40,6 @@ const LoginPanel = () => {
         }}
       />
       <TextField
-        className="w-full"
         id="password"
         name="password"
         placeholder="密碼"
@@ -56,7 +54,7 @@ const LoginPanel = () => {
         errorMessage={{ message: errors.password }}
       />
       <div className="py-2">
-        <Button className="h-11 w-full" type="submit">
+        <Button type="submit">
           <Text bold>登入</Text>
         </Button>
       </div>

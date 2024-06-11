@@ -24,6 +24,7 @@ const SEGMENT_ARRAY: Segment<string>[] = [
 export const DefaultState: Story = {
   render: () => (
     <SegmentedPicker
+      className="w-[20.5rem]"
       segments={SEGMENT_ARRAY}
       onSelect={(value) => {
         console.log(value);
@@ -40,6 +41,7 @@ const LOGIN_SEGMENT_ARRAY: Segment<string>[] = [
 export const LoginSegmentPicker: Story = {
   render: () => (
     <SegmentedPicker
+      className="w-[20.5rem]"
       segments={LOGIN_SEGMENT_ARRAY}
       onSelect={(value) => {
         console.log(value);
