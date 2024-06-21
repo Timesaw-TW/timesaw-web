@@ -9,6 +9,7 @@ import Caption from "@/stories/Typography/Caption";
 import Button from "@/stories/Button";
 import { SegmentedPicker } from "@/stories/SegmentedPicker";
 import { useSearchParams } from "next/navigation";
+import ContentFooter from "./ContentFooter";
 
 type PageType = "register" | "login";
 
@@ -79,6 +80,7 @@ const LoginBox: FC<Props> = ({ className }) => {
         </div>
       </div>
       <ThirdPartyPanel />
+      <ContentFooter className="flex justify-center" />
     </div>
   );
 };
