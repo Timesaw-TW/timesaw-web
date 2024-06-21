@@ -36,10 +36,10 @@ const LoginLayout: FC<Props> = ({ children }) => {
             "border-l-2 border-r-2 border-t-2 border-soda-100 sm:border-2"
           )}
         >
-          <div className="relative z-[1]">
+          <div className="relative z-[1] flex w-full justify-center">
             <div
               className={merge(
-                "sm:w-[30rem] lg:w-[22.5rem]",
+                "w-full sm:w-[30rem] lg:w-[22.5rem]",
                 "px-4 lg:px-0",
                 "sx:py-10 py-6"
               )}
