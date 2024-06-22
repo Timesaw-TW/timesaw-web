@@ -27,4 +27,10 @@ describe("#Button", () => {
     const button = getByRole("button");
     expect(button).toHaveClass("custom-class");
   });
+
+  it("should disable with correct style", () => {
+    const { getByRole } = render(<Button disabled>Custom Button</Button>);
+    const button = getByRole("button");
+    expect(button).toHaveClass("text-secondary opacity-[38%]");
+  });
 });

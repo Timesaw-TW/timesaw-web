@@ -11,7 +11,7 @@ import { SegmentedPicker } from "@/stories/SegmentedPicker";
 import { useSearchParams } from "next/navigation";
 import ContentFooter from "./ContentFooter";
 
-type PageType = "register" | "login";
+export type PageType = "register" | "login";
 
 function getPageType(type?: string | null): PageType {
   if (type) {

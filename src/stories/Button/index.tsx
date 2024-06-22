@@ -8,7 +8,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
 }
 
-const Button: FC<ButtonProps> = ({ children, className, ...props }) => {
+const Button: FC<ButtonProps> = ({
+  children,
+  className,
+  disabled,
+  ...props
+}) => {
   return (
     <button
       type="button"
@@ -17,6 +22,7 @@ const Button: FC<ButtonProps> = ({ children, className, ...props }) => {
         "flex items-center justify-center",
         "text-primary dark:text-white",
         "bg-soda-80",
+        disabled && "text-secondary opacity-[38%]",
         className
       )}
       {...props}
