@@ -1,5 +1,5 @@
-import { create } from "zustand";
 import { CookieKey, getCookie, setCookie, removeCookie } from "@/libs/cookie";
+import { create } from "zustand";
 
 interface JwtState {
   token: string | undefined;

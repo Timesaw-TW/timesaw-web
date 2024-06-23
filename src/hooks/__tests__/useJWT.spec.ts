@@ -1,8 +1,6 @@
-/** @jest-environment jsdom */
-
 import { act, renderHook } from "@testing-library/react";
-import useJWT from "@/hooks/useJWT";
-import { CookieKey, getCookie, setCookie, removeCookie } from "@/libs/cookie";
+import useJWT from "../useJWT";
+import { CookieKey, setCookie, removeCookie } from "@/libs/cookie";
 
 jest.mock("@/libs/cookie", () => ({
   __esModule: true,
