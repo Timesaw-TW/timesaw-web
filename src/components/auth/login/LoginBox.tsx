@@ -9,8 +9,9 @@ import Caption from "@/stories/Typography/Caption";
 import Button from "@/stories/Button";
 import { SegmentedPicker } from "@/stories/SegmentedPicker";
 import { useSearchParams } from "next/navigation";
+import ContentFooter from "./ContentFooter";
 
-type PageType = "register" | "login";
+export type PageType = "register" | "login";
 
 function getPageType(type?: string | null): PageType {
   if (type) {
@@ -79,6 +80,7 @@ const LoginBox: FC<Props> = ({ className }) => {
         </div>
       </div>
       <ThirdPartyPanel />
+      <ContentFooter className="flex justify-center" />
     </div>
   );
 };
