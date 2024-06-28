@@ -7,6 +7,7 @@ import {
   ServerSideHealthCheck,
 } from "@/components/util/HealthCheck";
 import HomeButton from "./HomeButton";
+import UserInfo from "./UserInfo";
 
 export const dynamic = "force-dynamic";
 
@@ -27,6 +28,11 @@ export default function System() {
       >
         <ServerSideHealthCheck />
         <ClientSideHealthCheck />
+      </div>
+      <div
+        className={merge("m-5 rounded-md p-5", "border-[2px] border-soda-100")}
+      >
+        <UserInfo />
       </div>
       <div
         className={merge("m-5 rounded-md p-5", "border-[2px] border-soda-100")}

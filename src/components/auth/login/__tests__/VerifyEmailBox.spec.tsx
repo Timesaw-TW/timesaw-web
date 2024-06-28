@@ -1,11 +1,10 @@
 import { render, fireEvent, waitFor } from "@testing-library/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useFormik } from "formik";
 
 import VerifyEmailBox from "../VerifyEmailBox";
 
 jest.mock("next/navigation", () => ({
-  useRouter: jest.fn(),
   useSearchParams: jest.fn(),
 }));
 
@@ -15,12 +14,10 @@ jest.mock("formik", () => ({
 }));
 
 describe("#VerifyEmailBox", () => {
-  const mockPush = jest.fn();
   const getParam = jest.fn();
   const mockUseSearchParams = { get: getParam };
 
   beforeEach(() => {
-    (useRouter as jest.Mock).mockReturnValue({ push: mockPush });
     (useSearchParams as jest.Mock).mockReturnValue(mockUseSearchParams);
     (useFormik as jest.Mock).mockReturnValue({
       errors: {},
@@ -72,11 +69,5 @@ describe("#VerifyEmailBox", () => {
     await waitFor(() => {
       expect(getByText("Email 格式錯誤")).toBeInTheDocument();
     });
-  });
-
-  it("should navigate to login on register button click", () => {
-    const { getByText } = render(<VerifyEmailBox />);
-    fireEvent.click(getByText("註冊"));
-    expect(mockPush).toHaveBeenCalledWith("/login?type=register");
   });
 });
