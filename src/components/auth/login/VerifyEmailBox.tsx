@@ -49,7 +49,7 @@ const VerifyEmailBox: FC<Props> = ({ className }) => {
     <div className={merge("h-full w-full", "flex flex-col gap-6", className)}>
       <Headline bold>重新驗證信箱</Headline>
       <form onSubmit={handleSubmit}>
-        <div className="px-4">
+        <div>
           <TextField
             id="email"
             name="email"
