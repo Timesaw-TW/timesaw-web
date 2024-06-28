@@ -1,5 +1,7 @@
-import { LoginPayload } from "@/gql-requests/user/auth";
-import { useLogin as useLoginGQL } from "@/gql-requests/user/auth";
+import {
+  useLogin as useLoginGQL,
+  LoginPayload,
+} from "@/gql-requests/user/auth";
 import { User, useMe as useMeGQL } from "@/gql-requests/user/user";
 import useUser from "./useUser";
 import useJWT from "../useJWT";
@@ -21,13 +23,13 @@ const useLogin = () => {
       },
     });
 
-    if (tokenRes.data && tokenRes.data.login) {
+    if (tokenRes.data?.login) {
       const token = tokenRes.data.login;
       const userRes = await me({
         context: { headers: { authorization: `Bearer ${token}` } },
       });
 
-      if (userRes.data && userRes.data.me) {
+      if (userRes.data?.me) {
         const user = userRes.data.me;
         setToken(token);
         setUser(user);

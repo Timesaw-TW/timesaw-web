@@ -25,13 +25,15 @@ const Modal: FC<ModalProps> = ({
   allowClosed,
   onClosed,
   footer,
+  className,
 }) => {
   return (
     <div
       className={merge(
         "fixed left-0 top-0 z-[100]",
         "h-full w-full bg-[#010B1F61]",
-        "flex items-center justify-center"
+        "flex items-center justify-center",
+        className
       )}
     >
       <div

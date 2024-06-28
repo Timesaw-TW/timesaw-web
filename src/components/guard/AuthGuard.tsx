@@ -41,7 +41,7 @@ const AuthGuard: FC<Props> = ({ children }) => {
       context: { headers: { authorization: `Bearer ${token}` } },
     })
       .then((res) => {
-        if (res.data && res.data.me) {
+        if (res.data?.me) {
           setUser(res.data.me);
           if (isLoginRoute) {
             replace("/");

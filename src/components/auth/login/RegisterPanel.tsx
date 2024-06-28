@@ -123,7 +123,6 @@ const RegisterPanel: FC<Props> = ({ onSuccess }) => {
           </Button>
         </div>
       </form>
-      {/* {modalProps && <Modal {...modalProps} />} */}
       {modalProps && <Modal {...modalProps} />}
     </>
   );
