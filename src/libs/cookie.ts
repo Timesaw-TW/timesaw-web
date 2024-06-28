@@ -1,4 +1,4 @@
-import Cookies, { CookieAttributes } from "js-cookie";
+import Cookies from "js-cookie";
 
 export enum CookieKey {
   TOKEN = "__t",
@@ -7,7 +7,7 @@ export enum CookieKey {
 export const setCookie = (
   key: CookieKey,
   value: unknown,
-  options?: CookieAttributes
+  options?: Cookies.CookieAttributes
 ) => {
   return Cookies.set(key, JSON.stringify(value), options);
 };
@@ -19,6 +19,9 @@ export const getCookie = <T>(key: CookieKey): T | undefined => {
   }
 };
 
-export const removeCookie = (key: CookieKey, options?: CookieAttributes) => {
+export const removeCookie = (
+  key: CookieKey,
+  options?: Cookies.CookieAttributes
+) => {
   Cookies.remove(key, options);
 };
