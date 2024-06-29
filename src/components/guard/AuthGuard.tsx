@@ -10,7 +10,7 @@ interface Props {
   children: ReactNode;
 }
 
-const WHITELIST: string[] = ["/system"];
+const WHITELIST: string[] = ["/system", "/"];
 
 const AuthGuard: FC<Props> = ({ children }) => {
   const { replace } = useRouter();
@@ -22,6 +22,8 @@ const AuthGuard: FC<Props> = ({ children }) => {
   const [me] = useMe();
 
   const isLoginRoute = pathname.split("/").includes("login");
+  const isVerifyPage = pathname === "/login/verify";
+  const isSystemPage = pathname === "/system";
   const isWhiteListRoute = WHITELIST.includes(pathname);
 
   useEffect(() => {
@@ -30,34 +32,45 @@ const AuthGuard: FC<Props> = ({ children }) => {
     }
 
     if (!token) {
-      if (!isLoginRoute && !isWhiteListRoute) {
+      if (isVerifyPage || (!isLoginRoute && !isWhiteListRoute)) {
         replace("/login");
       }
       setRender(true);
       return;
     }
 
+    function loginFailed() {
+      removeToken();
+      if (isSystemPage || isWhiteListRoute) return;
+      if (isVerifyPage || !isLoginRoute) {
+        replace("/login");
+      }
+    }
+
     me({
       context: { headers: { authorization: `Bearer ${token}` } },
     })
-      .then((res) => {
-        if (res.data?.me) {
-          setUser(res.data.me);
-          if (isLoginRoute) {
+      .then(({ data }) => {
+        if (data?.me) {
+          setUser(data.me);
+
+          if (isSystemPage || isWhiteListRoute) return;
+
+          if (!data.me.emailVerified && !isVerifyPage) {
+            replace("/login/verify");
+            return;
+          }
+
+          if (data.me.emailVerified && isLoginRoute) {
             replace("/");
+            return;
           }
         } else {
-          removeToken();
-          if (!isLoginRoute && !isWhiteListRoute) {
-            replace("/login");
-          }
+          loginFailed();
         }
       })
       .catch(() => {
-        removeToken();
-        if (!isLoginRoute && !isWhiteListRoute) {
-          replace("/login");
-        }
+        loginFailed();
       })
       .finally(() => {
         setRender(true);
@@ -65,6 +78,8 @@ const AuthGuard: FC<Props> = ({ children }) => {
   }, [
     render,
     token,
+    isSystemPage,
+    isVerifyPage,
     isLoginRoute,
     isWhiteListRoute,
     replace,

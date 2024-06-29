@@ -38,7 +38,7 @@ const UserInfo = () => {
         {Object.keys(user).map((key) => {
           return (
             <Text key={key}>
-              {key}: {user[key as keyof User]}
+              {key}: {String(user[key as keyof User])}
             </Text>
           );
         })}

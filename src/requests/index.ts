@@ -10,9 +10,6 @@ export interface RequestWrapper<T> {
   ) => Promise<AxiosResponse<T>>;
   url: string;
   method: string;
-  //   additional?: {
-  //     isPublic?: boolean;
-  //   };
 }
 
 export const requestWrapper = <T>(
@@ -20,9 +17,6 @@ export const requestWrapper = <T>(
     url: string;
     method: HttpMethod;
   }
-  //   additional?: {
-  //     isPublic?: boolean;
-  //   }
 ): RequestWrapper<T> => {
   const url = `${getEnv().baseUri}${config.url}`;
   return {
@@ -34,6 +28,5 @@ export const requestWrapper = <T>(
     },
     url,
     method: config.method,
-    // additional,
   };
 };

@@ -6,7 +6,8 @@ const GQL_ME = gql(`
             id,
             email,
             name,
-            createdAt,
+            emailVerified,
+            createdAt
         }
     }
 `);
@@ -15,6 +16,7 @@ export type User = {
   id: string;
   email: string;
   name?: string;
+  emailVerified: boolean;
   createdAt?: string;
 };
 

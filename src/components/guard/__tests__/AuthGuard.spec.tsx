@@ -18,7 +18,7 @@ describe("#AuthGuard", () => {
 
   beforeEach(() => {
     (useRouter as jest.Mock).mockReturnValue({ replace: replaceMock });
-    (usePathname as jest.Mock).mockReturnValue("");
+    (usePathname as jest.Mock).mockReturnValue("/");
     (useJWT as unknown as jest.Mock).mockReturnValue({
       token: null,
       removeToken: jest.fn(),
@@ -32,6 +32,7 @@ describe("#AuthGuard", () => {
   });
 
   it("should redirect to login if no token and not on a whitelist route", () => {
+    (usePathname as jest.Mock).mockReturnValue("/need-redirect");
     render(
       <AuthGuard>
         <div>Protected Content</div>
@@ -84,7 +85,7 @@ describe("#AuthGuard", () => {
 
   it("should not redirect if on a whitelist route", () => {
     (useRouter as jest.Mock).mockReturnValue({ replace: replaceMock });
-    (usePathname as jest.Mock).mockReturnValue("/system");
+    (usePathname as jest.Mock).mockReturnValue("/");
     render(
       <AuthGuard>
         <div>Protected Content</div>
@@ -94,14 +95,14 @@ describe("#AuthGuard", () => {
     expect(replaceMock).not.toHaveBeenCalled();
   });
 
-  it("should redirect to home if logged in and on login route", async () => {
+  it("should redirect to home if logged in and verify email before", async () => {
     (useRouter as jest.Mock).mockReturnValue({ replace: replaceMock });
     (usePathname as jest.Mock).mockReturnValue("/login");
     (useJWT as unknown as jest.Mock).mockReturnValue({ token: "valid-token" });
     (useMe as jest.Mock).mockReturnValue([
       jest.fn(() =>
         Promise.resolve({
-          data: { me: { id: 1, name: "Test User" } },
+          data: { me: { id: 1, name: "Test User", emailVerified: true } },
         })
       ),
     ]);
@@ -114,6 +115,29 @@ describe("#AuthGuard", () => {
 
     await waitFor(() => {
       expect(replaceMock).toHaveBeenCalledWith("/");
+    });
+  });
+
+  it("should redirect to email verify page if logged in and not verify email", async () => {
+    (useRouter as jest.Mock).mockReturnValue({ replace: replaceMock });
+    (usePathname as jest.Mock).mockReturnValue("/login");
+    (useJWT as unknown as jest.Mock).mockReturnValue({ token: "valid-token" });
+    (useMe as jest.Mock).mockReturnValue([
+      jest.fn(() =>
+        Promise.resolve({
+          data: { me: { id: 1, name: "Test User", emailVerified: false } },
+        })
+      ),
+    ]);
+
+    render(
+      <AuthGuard>
+        <div>Protected Content</div>
+      </AuthGuard>
+    );
+
+    await waitFor(() => {
+      expect(replaceMock).toHaveBeenCalledWith("/login/verify");
     });
   });
 });

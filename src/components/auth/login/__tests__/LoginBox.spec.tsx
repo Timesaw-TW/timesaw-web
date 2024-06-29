@@ -57,11 +57,4 @@ describe("#LoginBox", () => {
 
     expect(getByText("RegisterPanel")).toBeInTheDocument();
   });
-
-  it("should call replace with type login query string", () => {
-    const { getByRole } = render(<LoginBox />);
-    fireEvent.click(getByRole("switch"));
-    expect(mockReplace).toHaveBeenCalledTimes(1);
-    expect(mockReplace).toHaveBeenCalledWith(`/login?type=login`);
-  });
 });

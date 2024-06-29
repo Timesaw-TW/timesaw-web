@@ -1,7 +1,7 @@
 "use client";
 
 import { merge } from "@/libs/tailwind";
-import { FC, useEffect, useMemo, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import RegisterPanel from "./RegisterPanel";
 import ThirdPartyPanel from "./ThirdPartyPanel";
 import LoginPanel from "./LoginPanel";
@@ -10,6 +10,7 @@ import Button from "@/stories/Button";
 import { SegmentedPicker } from "@/stories/SegmentedPicker";
 import { useRouter, useSearchParams } from "next/navigation";
 import ContentFooter from "./ContentFooter";
+import { User } from "@/gql-requests/user/user";
 
 export type PageType = "register" | "login";
 
@@ -33,14 +34,6 @@ const LoginBox: FC<Props> = ({ className }) => {
     getPageType(searchParams.get("type"))
   );
 
-  useEffect(() => {
-    setTab(getPageType(searchParams.get("type")));
-  }, [searchParams]);
-
-  const changeTab = (tab: PageType) => {
-    replace(`/login?type=${tab}`);
-  };
-
   const segments = useMemo<{ label: string; value: PageType }[]>(
     () => [
       { label: "註冊", value: "register" },
@@ -49,27 +42,32 @@ const LoginBox: FC<Props> = ({ className }) => {
     []
   );
 
+  const onRegisterSuccess = () => {
+    replace("/login/verify");
+  };
+
+  const onLoginSuccess = (user: User) => {
+    if (!user.emailVerified) {
+      replace("/login/verify");
+      return;
+    }
+
+    push("/splash");
+    setTimeout(() => {
+      replace("/");
+    }, 3000);
+  };
+
   return (
     <div className={merge("h-full w-full", "flex flex-col gap-6", className)}>
       <SegmentedPicker
         value={tab}
         segments={segments}
-        onSelect={(value) => changeTab(value)}
+        onSelect={(value) => setTab(value)}
       />
       <div>
-        {tab === "register" && (
-          <RegisterPanel onSuccess={() => changeTab("login")} />
-        )}
-        {tab === "login" && (
-          <LoginPanel
-            onSuccess={() => {
-              push("/splash");
-              setTimeout(() => {
-                replace("/");
-              }, 3000);
-            }}
-          />
-        )}
+        {tab === "register" && <RegisterPanel onSuccess={onRegisterSuccess} />}
+        {tab === "login" && <LoginPanel onSuccess={onLoginSuccess} />}
         <div
           className={merge(
             "flex items-center",
@@ -90,7 +88,7 @@ const LoginBox: FC<Props> = ({ className }) => {
             <Button
               role="switch"
               className="h-8 w-12 bg-transparent px-3 py-2"
-              onClick={() => changeTab(tab === "login" ? "register" : "login")}
+              onClick={() => setTab(tab === "login" ? "register" : "login")}
             >
               <Caption className="text-soda-100" bold>
                 {tab === "register" ? "登入" : "註冊"}

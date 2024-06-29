@@ -59,6 +59,26 @@ describe("#LoginPanel", () => {
     });
   });
 
+  it("should show login error error message", async () => {
+    const loginMock = jest.fn(() => Promise.reject());
+    mockUseLogin.mockReturnValue({ login: loginMock });
+
+    const { getByPlaceholderText, getByText } = render(<LoginPanel />);
+
+    fireEvent.change(getByPlaceholderText("信箱"), {
+      target: { value: "test@example.com" },
+    });
+    fireEvent.change(getByPlaceholderText("密碼"), {
+      target: { value: "password" },
+    });
+
+    fireEvent.click(getByText("登入"));
+
+    await waitFor(() => {
+      expect(getByText("信箱不存在或密碼輸入錯誤")).toBeInTheDocument();
+    });
+  });
+
   it("should toggle password visibility", () => {
     const { getByPlaceholderText } = render(<LoginPanel />);
 
