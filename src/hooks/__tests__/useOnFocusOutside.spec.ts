@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react";
 import { useRef } from "react";
-import useOnFocusOutside from ".";
+import useOnFocusOutside from "../useOnFocusOutside";
 
 describe("#useOnFocusOutside", () => {
   beforeAll(() => {

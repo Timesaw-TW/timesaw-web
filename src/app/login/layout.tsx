@@ -14,7 +14,7 @@ const LoginLayout: FC<Props> = ({ children }) => {
         <IconLogoText
           className={merge(
             "absolute fill-soda-40",
-            "-right-2 bottom-[calc(70%+8rem)] z-20 h-[3.25rem] w-[17.5rem]",
+            "-right-2 bottom-[calc(70%+8rem)] h-[3.25rem] w-[17.5rem]",
             "sm:bottom-[calc(75%+5.5rem)] sm:h-[5.25rem] sm:w-[27rem]",
             "lg:-right-0 lg:bottom-[calc(75%+5rem)] lg:w-[27.5rem]"
           )}

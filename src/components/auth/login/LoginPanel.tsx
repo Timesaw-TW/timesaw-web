@@ -1,28 +1,56 @@
 "use client";
 
-import { useState } from "react";
+import { FC, useState } from "react";
+import { useFormik } from "formik";
+import * as yup from "yup";
 import Button from "@/stories/Button";
 import TextField from "@/stories/Form/TextField";
 import { IconEyeOutline, IconEyeSlashOutline } from "@/stories/Icons";
 import Text from "@/stories/Typography/Text";
-import { useFormik } from "formik";
-import * as yup from "yup";
+import useLogin from "@/hooks/user/useLogin";
+import { User } from "@/gql-requests/user/user";
 
 const getEyeIcon = (show: boolean) => {
   const Icon = show ? IconEyeSlashOutline : IconEyeOutline;
   return <Icon />;
 };
 
-const LoginPanel = () => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+interface LoginField {
+  email: string;
+  password: string;
+}
 
-  const { errors, values, handleChange, handleSubmit } = useFormik({
+interface Props {
+  onSuccess?: (user: User) => unknown;
+}
+
+const LoginPanel: FC<Props> = ({ onSuccess }) => {
+  const { login } = useLogin();
+
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [formError, setFormError] = useState<{
+    [T in keyof LoginField]?: string;
+  }>({});
+
+  const { errors, values, handleChange, handleSubmit } = useFormik<LoginField>({
     initialValues: { email: "", password: "" },
     validationSchema: yup.object({
       email: yup.string().required("請填寫信箱").email("Email 格式錯誤"),
       password: yup.string().required("請填寫密碼"),
     }),
-    onSubmit(value) {},
+    validateOnBlur: false,
+    validateOnChange: false,
+    onSubmit({ email, password }) {
+      login({ email, password })
+        .then((user) => {
+          if (user) {
+            onSuccess?.(user);
+          }
+        })
+        .catch(() => {
+          setFormError({ email: "信箱不存在或密碼輸入錯誤" });
+        });
+    },
   });
 
   return (
@@ -33,7 +61,7 @@ const LoginPanel = () => {
         placeholder="信箱"
         value={values.email}
         onChange={handleChange}
-        errorMessage={{ message: errors.email }}
+        errorMessage={{ message: errors.email ?? formError.email }}
         showButton
         button={{
           allowClear: true,

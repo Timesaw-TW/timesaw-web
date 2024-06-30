@@ -1,6 +1,7 @@
 /* eslint-disable react/display-name */
 import { render, fireEvent } from "@testing-library/react";
 import LoginBox from "../LoginBox";
+import { useRouter, useSearchParams } from "next/navigation";
 
 jest.mock("../RegisterPanel", () => () => <div>RegisterPanel</div>);
 jest.mock("../LoginPanel", () => () => <div>LoginPanel</div>);
@@ -17,25 +18,43 @@ jest.mock("@/stories/SegmentedPicker", () => ({
     </div>
   ),
 }));
+jest.mock("next/navigation", () => ({
+  useRouter: jest.fn(),
+  useSearchParams: jest.fn(),
+}));
 
 describe("#LoginBox", () => {
+  const mockReplace = jest.fn();
+  beforeEach(() => {
+    (useRouter as jest.Mock).mockReturnValue({
+      replace: mockReplace,
+    });
+    (useSearchParams as jest.Mock).mockReturnValue({
+      get: jest.fn,
+    });
+  });
+
   it("should render correctly", () => {
     const { getByText } = render(<LoginBox />);
     expect(getByText("RegisterPanel")).toBeInTheDocument();
     expect(getByText("ThirdPartyPanel")).toBeInTheDocument();
   });
 
-  it("should switch to LoginPanel when login button is clicked", () => {
-    const { getByRole, getByText } = render(<LoginBox />);
-    fireEvent.click(getByRole("switch"));
+  it("should render component with login tab active", () => {
+    (useSearchParams as jest.Mock).mockReturnValue({
+      get: jest.fn(() => "login"),
+    });
+    const { getByText } = render(<LoginBox />);
+
     expect(getByText("LoginPanel")).toBeInTheDocument();
   });
 
-  it("should switch back to RegisterPanel when register button is clicked", () => {
-    const { getByRole, getByText } = render(<LoginBox />);
-    const switchText = getByRole("switch");
-    fireEvent.click(switchText);
-    fireEvent.click(switchText);
+  it("should render component with register tab active", () => {
+    (useSearchParams as jest.Mock).mockReturnValue({
+      get: jest.fn(() => "register"),
+    });
+    const { getByText } = render(<LoginBox />);
+
     expect(getByText("RegisterPanel")).toBeInTheDocument();
   });
 });

@@ -5,6 +5,7 @@ import "./globals.css";
 import SystemProvider from "@/components/provider/SystemProvider";
 import AxiosProvider from "@/components/provider/AxiosProvider";
 import ApolloProvider from "@/components/provider/ApolloProvider";
+import AuthGuard from "@/components/guard/AuthGuard";
 
 const notoSans = localFont({
   src: "../../public/fonts/Noto_Sans/regular.ttf",
@@ -65,7 +66,9 @@ export default function RootLayout({
       <body className="h-full font-main">
         <ApolloProvider>
           <SystemProvider>
-            <AxiosProvider>{children}</AxiosProvider>
+            <AxiosProvider>
+              <AuthGuard>{children}</AuthGuard>
+            </AxiosProvider>
           </SystemProvider>
         </ApolloProvider>
       </body>

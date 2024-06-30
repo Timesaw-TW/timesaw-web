@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { merge } from "@/libs/tailwind";
@@ -13,13 +13,13 @@ import TextField from "@/stories/Form/TextField";
 import Button from "@/stories/Button";
 import Caption from "@/stories/Typography/Caption";
 import { PageType } from "./LoginBox";
+import Link from "next/link";
 
 interface Props {
   className?: string;
 }
 
 const VerifyEmailBox: FC<Props> = ({ className }) => {
-  const { push } = useRouter();
   const searchParams = useSearchParams();
   const [disableSubmitSeconds, setDisableSubmitSeconds] = useState<number>(0);
 
@@ -45,15 +45,11 @@ const VerifyEmailBox: FC<Props> = ({ className }) => {
     },
   });
 
-  const navigateToLogin = (type: PageType) => {
-    push(`/login?type=${type}`);
-  };
-
   return (
     <div className={merge("h-full w-full", "flex flex-col gap-6", className)}>
       <Headline bold>重新驗證信箱</Headline>
       <form onSubmit={handleSubmit}>
-        <div className="px-4">
+        <div>
           <TextField
             id="email"
             name="email"
@@ -77,14 +73,18 @@ const VerifyEmailBox: FC<Props> = ({ className }) => {
         </div>
         <div className="flex items-center justify-end px-4">
           <Caption>還沒有帳號?</Caption>
-          <Button
-            className="h-8 w-12 bg-transparent px-3 py-2"
-            onClick={() => navigateToLogin("register")}
+          <Link
+            href={{
+              pathname: "/login",
+              query: { type: "register" as PageType },
+            }}
           >
-            <Caption className="text-soda-100" bold>
-              註冊
-            </Caption>
-          </Button>
+            <Button className="h-8 w-12 bg-transparent px-3 py-2">
+              <Caption className="text-soda-100" bold>
+                註冊
+              </Caption>
+            </Button>
+          </Link>
         </div>
       </form>
       <ThirdPartyPanel />
