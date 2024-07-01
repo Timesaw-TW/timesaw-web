@@ -30,7 +30,7 @@ const Modal: FC<ModalProps> = ({
   return (
     <div
       className={merge(
-        "fixed left-0 top-0 z-[100]",
+        "fixed left-0 top-0",
         "h-full w-full bg-[#010B1F61]",
         "flex items-center justify-center",
         className
