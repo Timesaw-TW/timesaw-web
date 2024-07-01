@@ -5,6 +5,10 @@ import { useRouter, usePathname } from "next/navigation";
 import useJWT from "@/hooks/useJWT";
 import { useMe } from "@/gql-requests/user/user";
 import useUser from "@/hooks/user/useUser";
+import useModal from "@/hooks/useModal";
+import Headline from "@/stories/Typography/Headline";
+import SubHeadline from "@/stories/Typography/SubHeadline";
+import Button from "@/stories/Button";
 
 interface Props {
   children: ReactNode;
@@ -17,6 +21,7 @@ const AuthGuard: FC<Props> = ({ children }) => {
   const pathname = usePathname();
   const { token, removeToken } = useJWT();
   const { setUser } = useUser();
+  const { setModal, closeModal } = useModal();
 
   const [render, setRender] = useState<boolean>(false);
   const [me] = useMe();
@@ -57,7 +62,29 @@ const AuthGuard: FC<Props> = ({ children }) => {
           if (isSystemPage || isWhiteListRoute) return;
 
           if (!data.me.emailVerified && !isVerifyPage) {
-            replace("/login/verify");
+            setModal({
+              content: (
+                <div className="flex flex-col gap-1">
+                  <Headline bold>尚未驗證信箱</Headline>
+                  <SubHeadline>
+                    請於填寫的信箱點選信件中的鏈接完成註冊
+                  </SubHeadline>
+                </div>
+              ),
+              footer: (
+                <div className="flex justify-end gap-4">
+                  <Button
+                    className="w-[5.5rem]"
+                    onClick={() => {
+                      replace("/login/verify");
+                      closeModal();
+                    }}
+                  >
+                    <SubHeadline>確認</SubHeadline>
+                  </Button>
+                </div>
+              ),
+            });
             return;
           }
 
@@ -78,6 +105,8 @@ const AuthGuard: FC<Props> = ({ children }) => {
   }, [
     render,
     token,
+    setModal,
+    closeModal,
     isSystemPage,
     isVerifyPage,
     isLoginRoute,

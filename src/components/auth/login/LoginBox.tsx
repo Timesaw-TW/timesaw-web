@@ -11,6 +11,9 @@ import { SegmentedPicker } from "@/stories/SegmentedPicker";
 import { useRouter, useSearchParams } from "next/navigation";
 import ContentFooter from "./ContentFooter";
 import { User } from "@/gql-requests/user/user";
+import useModal from "@/hooks/useModal";
+import Headline from "@/stories/Typography/Headline";
+import SubHeadline from "@/stories/Typography/SubHeadline";
 
 export type PageType = "register" | "login";
 
@@ -33,6 +36,7 @@ const LoginBox: FC<Props> = ({ className }) => {
   const [tab, setTab] = useState<PageType>(
     getPageType(searchParams.get("type"))
   );
+  const { setModal, closeModal } = useModal();
 
   const segments = useMemo<{ label: string; value: PageType }[]>(
     () => [
@@ -48,7 +52,27 @@ const LoginBox: FC<Props> = ({ className }) => {
 
   const onLoginSuccess = (user: User) => {
     if (!user.emailVerified) {
-      replace("/login/verify");
+      setModal({
+        content: (
+          <div className="flex flex-col gap-1">
+            <Headline bold>尚未驗證信箱</Headline>
+            <SubHeadline>請於填寫的信箱點選信件中的鏈接完成註冊</SubHeadline>
+          </div>
+        ),
+        footer: (
+          <div className="flex justify-end gap-4">
+            <Button
+              className="w-[5.5rem]"
+              onClick={() => {
+                replace("/login/verify");
+                closeModal();
+              }}
+            >
+              <SubHeadline>確認</SubHeadline>
+            </Button>
+          </div>
+        ),
+      });
       return;
     }
 

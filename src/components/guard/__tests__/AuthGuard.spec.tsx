@@ -1,9 +1,10 @@
-import { render, waitFor } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import { usePathname, useRouter } from "next/navigation";
 import useJWT from "@/hooks/useJWT";
 import { useMe } from "@/gql-requests/user/user";
 import useUser from "@/hooks/user/useUser";
 import AuthGuard from "../AuthGuard";
+import useModal from "@/hooks/useModal";
 
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
@@ -12,9 +13,11 @@ jest.mock("next/navigation", () => ({
 jest.mock("@/hooks/useJWT");
 jest.mock("@/gql-requests/user/user");
 jest.mock("@/hooks/user/useUser");
+jest.mock("@/hooks/useModal");
 
 describe("#AuthGuard", () => {
   const replaceMock = jest.fn();
+  const mockSetModal = jest.fn();
 
   beforeEach(() => {
     (useRouter as jest.Mock).mockReturnValue({ replace: replaceMock });
@@ -25,6 +28,7 @@ describe("#AuthGuard", () => {
     });
     (useMe as jest.Mock).mockReturnValue([jest.fn(() => Promise.resolve({}))]);
     (useUser as unknown as jest.Mock).mockReturnValue({ setUser: jest.fn() });
+    (useModal as unknown as jest.Mock).mockReturnValue({ setModal: jest.fn() });
   });
 
   afterEach(() => {
@@ -118,7 +122,7 @@ describe("#AuthGuard", () => {
     });
   });
 
-  it("should redirect to email verify page if logged in and not verify email", async () => {
+  it("should call setModal to open alert modal if not verify email", async () => {
     (useRouter as jest.Mock).mockReturnValue({ replace: replaceMock });
     (usePathname as jest.Mock).mockReturnValue("/login");
     (useJWT as unknown as jest.Mock).mockReturnValue({ token: "valid-token" });
@@ -129,6 +133,9 @@ describe("#AuthGuard", () => {
         })
       ),
     ]);
+    (useModal as unknown as jest.Mock).mockReturnValue({
+      setModal: mockSetModal,
+    });
 
     render(
       <AuthGuard>
@@ -137,7 +144,7 @@ describe("#AuthGuard", () => {
     );
 
     await waitFor(() => {
-      expect(replaceMock).toHaveBeenCalledWith("/login/verify");
+      expect(mockSetModal).toHaveBeenCalled();
     });
   });
 });
