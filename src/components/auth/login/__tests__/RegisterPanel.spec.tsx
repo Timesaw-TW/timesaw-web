@@ -3,11 +3,20 @@ import { useRegister } from "@/gql-requests/user/auth";
 import RegisterPanel from "../RegisterPanel";
 import { ErrorCodeGQL } from "@/gql-requests/error-code";
 import useJWT from "@/hooks/useJWT";
+import useModal from "@/hooks/useModal";
 
 jest.mock("@/gql-requests/user/auth");
 jest.mock("@/hooks/useJWT", () => ({
   __esModule: true,
   default: jest.fn(),
+}));
+
+jest.mock("@/hooks/useModal", () => ({
+  __esModule: true,
+  default: jest.fn(() => ({
+    setModal: jest.fn(),
+    closeModal: jest.fn(),
+  })),
 }));
 
 const mockUseRegister = useRegister as jest.Mock;
@@ -60,11 +69,15 @@ describe("#RegisterPanel", () => {
     });
   });
 
-  it("should call setToken and onSuccess after successful registration", async () => {
+  it("should call setToken and setModal when register successfully", async () => {
     const onSuccess = jest.fn();
     mockUseRegister.mockReturnValue([
       jest.fn(() => Promise.resolve({ data: { register: "mock-token" } })),
     ]);
+    const mockSetModal = jest.fn();
+    (useModal as unknown as jest.Mock).mockReturnValue({
+      setModal: mockSetModal,
+    });
 
     const { getByPlaceholderText, getByText } = render(
       <RegisterPanel onSuccess={onSuccess} />
@@ -83,13 +96,9 @@ describe("#RegisterPanel", () => {
     fireEvent.click(getByText("註冊"));
 
     await waitFor(() => {
-      expect(mockSetToken).toHaveBeenCalled();
-      expect(getByText("驗證電子郵件以完成註冊")).toBeInTheDocument();
+      expect(mockSetToken).toHaveBeenLastCalledWith("mock-token");
+      expect(mockSetModal).toHaveBeenCalled();
     });
-
-    fireEvent.click(getByText("確認"));
-
-    expect(onSuccess).toHaveBeenCalled();
   });
 
   it("should toggle password visibility", () => {

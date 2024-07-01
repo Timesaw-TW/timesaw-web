@@ -30,7 +30,7 @@ const Modal: FC<ModalProps> = ({
   return (
     <div
       className={merge(
-        "fixed left-0 top-0 z-[100]",
+        "fixed left-0 top-0",
         "h-full w-full bg-[#010B1F61]",
         "flex items-center justify-center",
         className
@@ -38,8 +38,8 @@ const Modal: FC<ModalProps> = ({
     >
       <div
         className={merge(
-          "relative h-[204px] w-[328px] bg-white",
-          "flex flex-col justify-between gap-2",
+          "relative w-[328px] bg-white",
+          "flex flex-col justify-between gap-6",
           "rounded-lg px-4 py-6"
         )}
       >
@@ -48,7 +48,7 @@ const Modal: FC<ModalProps> = ({
           ((successLabel || cancelLabel) && (
             <div className="flex justify-end gap-4">
               {successLabel && (
-                <Button className="w-fit" onClick={onSuccess}>
+                <Button className="w-fit bg-soda-80" onClick={onSuccess}>
                   <SubHeadline>{successLabel}</SubHeadline>
                 </Button>
               )}

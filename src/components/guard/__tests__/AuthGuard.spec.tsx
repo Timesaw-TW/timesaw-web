@@ -1,20 +1,22 @@
 import { render, waitFor } from "@testing-library/react";
 import { usePathname, useRouter } from "next/navigation";
 import useJWT from "@/hooks/useJWT";
-import { useMe } from "@/gql-requests/user/user";
-import useUser from "@/hooks/user/useUser";
 import AuthGuard from "../AuthGuard";
+import useModal from "@/hooks/useModal";
+import useLogin from "@/hooks/user/useLogin";
 
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
   usePathname: jest.fn(),
 }));
 jest.mock("@/hooks/useJWT");
-jest.mock("@/gql-requests/user/user");
-jest.mock("@/hooks/user/useUser");
+jest.mock("@/hooks/useModal");
+jest.mock("@/hooks/user/useLogin");
 
 describe("#AuthGuard", () => {
   const replaceMock = jest.fn();
+  const mockSetModal = jest.fn();
+  const mockFetchUser = jest.fn();
 
   beforeEach(() => {
     (useRouter as jest.Mock).mockReturnValue({ replace: replaceMock });
@@ -23,8 +25,8 @@ describe("#AuthGuard", () => {
       token: null,
       removeToken: jest.fn(),
     });
-    (useMe as jest.Mock).mockReturnValue([jest.fn(() => Promise.resolve({}))]);
-    (useUser as unknown as jest.Mock).mockReturnValue({ setUser: jest.fn() });
+    (useModal as unknown as jest.Mock).mockReturnValue({ setModal: jest.fn() });
+    (useLogin as jest.Mock).mockReturnValue({ fetchUser: mockFetchUser });
   });
 
   afterEach(() => {
@@ -44,13 +46,9 @@ describe("#AuthGuard", () => {
 
   it("should render children if token is valid", () => {
     (useJWT as unknown as jest.Mock).mockReturnValue({ token: "valid-token" });
-    (useMe as jest.Mock).mockReturnValue([
-      jest.fn(() =>
-        Promise.resolve({
-          data: { me: { id: 1, name: "Test User" } },
-        })
-      ),
-    ]);
+    mockFetchUser.mockResolvedValueOnce({
+      data: { me: { id: 1, name: "Test User" } },
+    });
 
     const { getByText } = render(
       <AuthGuard>
@@ -68,9 +66,9 @@ describe("#AuthGuard", () => {
       token: "invalid-token",
       removeToken: jest.fn(),
     });
-    (useMe as jest.Mock).mockReturnValue([
-      jest.fn(() => Promise.resolve({ data: null })),
-    ]);
+    mockFetchUser.mockResolvedValueOnce({
+      data: null,
+    });
 
     render(
       <AuthGuard>
@@ -99,13 +97,9 @@ describe("#AuthGuard", () => {
     (useRouter as jest.Mock).mockReturnValue({ replace: replaceMock });
     (usePathname as jest.Mock).mockReturnValue("/login");
     (useJWT as unknown as jest.Mock).mockReturnValue({ token: "valid-token" });
-    (useMe as jest.Mock).mockReturnValue([
-      jest.fn(() =>
-        Promise.resolve({
-          data: { me: { id: 1, name: "Test User", emailVerified: true } },
-        })
-      ),
-    ]);
+    mockFetchUser.mockResolvedValueOnce({
+      data: { me: { id: 1, name: "Test User", emailVerified: true } },
+    });
 
     render(
       <AuthGuard>
@@ -118,17 +112,17 @@ describe("#AuthGuard", () => {
     });
   });
 
-  it("should redirect to email verify page if logged in and not verify email", async () => {
+  it("should call setModal to open alert modal if not verify email", async () => {
     (useRouter as jest.Mock).mockReturnValue({ replace: replaceMock });
     (usePathname as jest.Mock).mockReturnValue("/login");
     (useJWT as unknown as jest.Mock).mockReturnValue({ token: "valid-token" });
-    (useMe as jest.Mock).mockReturnValue([
-      jest.fn(() =>
-        Promise.resolve({
-          data: { me: { id: 1, name: "Test User", emailVerified: false } },
-        })
-      ),
-    ]);
+    mockFetchUser.mockResolvedValueOnce({
+      data: { me: { id: 1, name: "Test User", emailVerified: false } },
+    });
+
+    (useModal as unknown as jest.Mock).mockReturnValue({
+      setModal: mockSetModal,
+    });
 
     render(
       <AuthGuard>
@@ -137,7 +131,7 @@ describe("#AuthGuard", () => {
     );
 
     await waitFor(() => {
-      expect(replaceMock).toHaveBeenCalledWith("/login/verify");
+      expect(mockSetModal).toHaveBeenCalled();
     });
   });
 });

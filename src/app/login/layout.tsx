@@ -9,7 +9,12 @@ interface Props {
 
 const LoginLayout: FC<Props> = ({ children }) => {
   return (
-    <div className="flex h-full items-end justify-center overflow-x-hidden bg-soda-20">
+    <div
+      className={merge(
+        "flex h-full items-end overflow-x-hidden bg-soda-20",
+        "lg:justify-center"
+      )}
+    >
       <div className={merge("relative h-full", "w-full lg:w-[42.5rem]")}>
         <IconLogoText
           className={merge(

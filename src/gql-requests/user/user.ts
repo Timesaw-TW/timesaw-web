@@ -1,3 +1,4 @@
+import useJWT from "@/hooks/useJWT";
 import { gql, useLazyQuery } from "@apollo/client";
 
 const GQL_ME = gql(`
@@ -21,5 +22,8 @@ export type User = {
 };
 
 export const useMe = () => {
-  return useLazyQuery<{ me: User }>(GQL_ME);
+  const { token } = useJWT();
+  return useLazyQuery<{ me: User }>(GQL_ME, {
+    context: { headers: { authorization: `Bearer ${token}` } },
+  });
 };
