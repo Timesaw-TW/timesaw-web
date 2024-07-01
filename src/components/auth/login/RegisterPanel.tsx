@@ -72,7 +72,8 @@ const RegisterPanel: FC<Props> = ({ onSuccess }) => {
                 <div className="flex flex-col gap-1">
                   <Headline bold>驗證電子郵件以完成註冊</Headline>
                   <SubHeadline>
-                    已寄送驗證信至您的信箱，請點選信件中的鏈接以完成註冊。
+                    已寄送驗證碼至您註冊 Timesaw 的信箱，請輸入信件中的 6
+                    碼驗證碼以完成註冊
                   </SubHeadline>
                 </div>
               ),
