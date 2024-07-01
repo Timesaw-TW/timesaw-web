@@ -83,8 +83,6 @@ const RegisterPanel: FC<Props> = ({ onSuccess }) => {
                   </Button>
                 </div>
               ),
-              allowClosed: true,
-              onClosed: () => onSuccess?.(),
             });
           })
           .catch(({ graphQLErrors }: ApolloError) => {
