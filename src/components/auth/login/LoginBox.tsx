@@ -56,13 +56,16 @@ const LoginBox: FC<Props> = ({ className }) => {
         content: (
           <div className="flex flex-col gap-1">
             <Headline bold>尚未驗證信箱</Headline>
-            <SubHeadline>請於填寫的信箱點選信件中的鏈接完成註冊</SubHeadline>
+            <SubHeadline>
+              信箱尚未驗證。請於註冊信箱中查看驗證碼，並輸入信件中的 6
+              碼驗證碼以完成註冊。
+            </SubHeadline>
           </div>
         ),
         footer: (
           <div className="flex justify-end gap-4">
             <Button
-              className="w-[5.5rem]"
+              className="w-[5.5rem] bg-soda-80"
               onClick={() => {
                 replace("/login/verify");
                 closeModal();

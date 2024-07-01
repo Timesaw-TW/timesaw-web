@@ -80,7 +80,7 @@ const RegisterPanel: FC<Props> = ({ onSuccess }) => {
               footer: (
                 <div className="flex justify-end gap-4">
                   <Button
-                    className="w-[5.5rem]"
+                    className="w-[5.5rem] bg-soda-80"
                     onClick={() => {
                       onSuccess?.();
                       closeModal();

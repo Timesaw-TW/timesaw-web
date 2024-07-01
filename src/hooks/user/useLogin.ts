@@ -43,7 +43,25 @@ const useLogin = () => {
     removeUser();
   };
 
-  return { login, logout };
+  const fetchUser = async () => {
+    return me()
+      .then((res) => {
+        if (res.data?.me) {
+          setUser(res.data.me);
+        } else {
+          removeToken();
+          removeUser();
+        }
+        return res;
+      })
+      .catch((e) => {
+        removeToken();
+        removeUser();
+        throw e;
+      });
+  };
+
+  return { login, logout, fetchUser };
 };
 
 export default useLogin;
