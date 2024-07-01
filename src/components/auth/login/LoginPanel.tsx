@@ -48,7 +48,10 @@ const LoginPanel: FC<Props> = ({ onSuccess }) => {
           }
         })
         .catch(() => {
-          setFormError({ email: "信箱不存在或密碼輸入錯誤" });
+          setFormError({
+            email: "信箱不存在或密碼輸入錯誤",
+            password: "信箱不存在或密碼輸入錯誤",
+          });
         });
     },
   });
@@ -79,7 +82,7 @@ const LoginPanel: FC<Props> = ({ onSuccess }) => {
         }}
         value={values.password}
         onChange={handleChange}
-        errorMessage={{ message: errors.password }}
+        errorMessage={{ message: errors.password ?? formError.password }}
       />
       <div className="py-2">
         <Button type="submit">
