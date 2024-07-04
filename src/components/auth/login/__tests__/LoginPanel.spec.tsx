@@ -1,4 +1,10 @@
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import {
+  render,
+  fireEvent,
+  waitFor,
+  queryAllByText,
+  getAllByText,
+} from "@testing-library/react";
 import useLogin from "@/hooks/user/useLogin";
 import LoginPanel from "../LoginPanel";
 
@@ -63,7 +69,9 @@ describe("#LoginPanel", () => {
     const loginMock = jest.fn(() => Promise.reject());
     mockUseLogin.mockReturnValue({ login: loginMock });
 
-    const { getByPlaceholderText, getByText } = render(<LoginPanel />);
+    const { getByPlaceholderText, getByText, getAllByText } = render(
+      <LoginPanel />
+    );
 
     fireEvent.change(getByPlaceholderText("信箱"), {
       target: { value: "test@example.com" },
@@ -75,7 +83,7 @@ describe("#LoginPanel", () => {
     fireEvent.click(getByText("登入"));
 
     await waitFor(() => {
-      expect(getByText("信箱不存在或密碼輸入錯誤")).toBeInTheDocument();
+      expect(getAllByText("信箱不存在或密碼輸入錯誤")).toHaveLength(2);
     });
   });
 

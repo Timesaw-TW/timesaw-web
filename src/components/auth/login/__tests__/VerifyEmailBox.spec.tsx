@@ -1,29 +1,40 @@
-import { render, fireEvent, waitFor } from "@testing-library/react";
-import { useSearchParams } from "next/navigation";
-import { useFormik } from "formik";
-
+import { fireEvent, render, waitFor, within } from "@testing-library/react";
+import {
+  useEmailVerify,
+  useResendVerificationEmail,
+} from "@/gql-requests/user/auth";
+import useLogin from "@/hooks/user/useLogin";
+import useModal from "@/hooks/useModal";
+import { useRouter } from "next/navigation";
 import VerifyEmailBox from "../VerifyEmailBox";
 
 jest.mock("next/navigation", () => ({
-  useSearchParams: jest.fn(),
+  useRouter: jest.fn(),
 }));
+jest.mock("@/hooks/user/useLogin");
+jest.mock("@/hooks/useModal");
+jest.mock("@/gql-requests/user/auth");
 
-jest.mock("formik", () => ({
-  __esModule: true,
-  useFormik: jest.fn(),
-}));
-
-describe("#VerifyEmailBox", () => {
-  const getParam = jest.fn();
-  const mockUseSearchParams = { get: getParam };
+describe("VerifyEmailBox", () => {
+  const mockFetchUser = jest.fn();
+  const mockVerifyEmail = jest.fn();
+  const mockResendVerificationEmail = jest.fn();
+  const mockSetModal = jest.fn();
+  const mockCloseModal = jest.fn();
+  const mockReplace = jest.fn();
 
   beforeEach(() => {
-    (useSearchParams as jest.Mock).mockReturnValue(mockUseSearchParams);
-    (useFormik as jest.Mock).mockReturnValue({
-      errors: {},
-      values: { email: "test@example.com" },
-      handleChange: jest.fn(),
-      handleSubmit: jest.fn(),
+    (useLogin as jest.Mock).mockReturnValue({ fetchUser: mockFetchUser });
+    (useEmailVerify as jest.Mock).mockReturnValue([mockVerifyEmail]);
+    (useResendVerificationEmail as jest.Mock).mockReturnValue([
+      mockResendVerificationEmail,
+    ]);
+    (useModal as unknown as jest.Mock).mockReturnValue({
+      setModal: mockSetModal,
+      closeModal: mockCloseModal,
+    });
+    (useRouter as jest.Mock).mockReturnValue({
+      replace: mockReplace,
     });
   });
 
@@ -31,43 +42,86 @@ describe("#VerifyEmailBox", () => {
     jest.clearAllMocks();
   });
 
-  it("should render correctly", () => {
-    const { getByText, getByPlaceholderText } = render(<VerifyEmailBox />);
-
-    expect(getByText("重新驗證信箱")).toBeInTheDocument();
-    expect(getByPlaceholderText("信箱")).toBeInTheDocument();
-  });
-
-  it("should attach email with query parameter", () => {
-    const testEmail = "test@example.com";
-    getParam.mockReturnValue(testEmail);
-    const { getByPlaceholderText } = render(<VerifyEmailBox />);
-    expect(getByPlaceholderText("信箱")).toHaveValue(testEmail);
-    expect(getParam).toHaveBeenCalledWith("email");
-    expect(getParam).toHaveBeenCalledTimes(1);
-  });
-
-  it("should show error message when email format invalid", async () => {
-    const mockHandleSubmit = jest.fn();
-    const mockHandleChange = jest.fn();
-
-    (useFormik as jest.Mock).mockReturnValue({
-      errors: { email: "Email 格式錯誤" },
-      values: { email: "invalid-email" },
-      handleChange: mockHandleChange,
-      handleSubmit: mockHandleSubmit,
-    });
-
-    const { getByPlaceholderText, getByRole, getByText } = render(
+  it("should render component correctly", () => {
+    const { getByPlaceholderText, getByText, container } = render(
       <VerifyEmailBox />
     );
-    fireEvent.change(getByPlaceholderText("信箱"), {
-      target: { value: "invalid-email" },
+
+    expect(getByPlaceholderText("請輸入驗證碼")).toBeInTheDocument();
+    expect(
+      within(container.getElementsByTagName("form")[0]).getByText("驗證信箱")
+    ).toBeInTheDocument();
+    expect(getByText("重新寄送驗證碼")).toBeInTheDocument();
+  });
+
+  it("should call verify email and fetch user on form submit", async () => {
+    mockVerifyEmail.mockResolvedValueOnce({ data: { verifyEmail: true } });
+    mockFetchUser.mockResolvedValueOnce({ data: { me: true } });
+
+    const { getByPlaceholderText, container } = render(<VerifyEmailBox />);
+
+    fireEvent.change(getByPlaceholderText("請輸入驗證碼"), {
+      target: { value: "123456" },
     });
-    fireEvent.submit(getByRole("button", { name: /寄送驗證信/i }));
+    const submitBtn = within(
+      container.getElementsByTagName("form")[0]
+    ).getByText("驗證信箱");
+    fireEvent.click(submitBtn);
 
     await waitFor(() => {
-      expect(getByText("Email 格式錯誤")).toBeInTheDocument();
+      expect(mockVerifyEmail).toHaveBeenCalledWith({
+        variables: { token: "123456" },
+      });
+      expect(mockFetchUser).toHaveBeenCalled();
+    });
+
+    await waitFor(() => {
+      expect(mockReplace).toHaveBeenCalledWith("/");
+      expect(mockSetModal).toHaveBeenCalledWith({
+        content: expect.anything(),
+        successLabel: "開始使用",
+        onSuccess: expect.any(Function),
+      });
+    });
+  });
+
+  it("should display error message on invalid code", async () => {
+    mockVerifyEmail.mockRejectedValueOnce({
+      graphQLErrors: [{ extensions: { code: "INVALID_CODE" } }],
+    });
+
+    const { getByPlaceholderText, container, getByText } = render(
+      <VerifyEmailBox />
+    );
+
+    fireEvent.change(getByPlaceholderText("請輸入驗證碼"), {
+      target: { value: "invalid" },
+    });
+    const submitBtn = within(
+      container.getElementsByTagName("form")[0]
+    ).getByText("驗證信箱");
+    fireEvent.click(submitBtn);
+
+    await waitFor(() => {
+      expect(getByText("驗證碼錯誤")).toBeInTheDocument();
+    });
+  });
+
+  it("should resend verification email and start countdown", async () => {
+    mockResendVerificationEmail.mockResolvedValueOnce({
+      data: { resendVerificationEmail: true },
+    });
+
+    const { getByText } = render(<VerifyEmailBox />);
+
+    fireEvent.click(getByText("重新寄送驗證碼"));
+
+    await waitFor(() => {
+      expect(mockResendVerificationEmail).toHaveBeenCalled();
+    });
+
+    await waitFor(() => {
+      expect(getByText("重新寄送驗證碼 (60s)")).toBeInTheDocument();
     });
   });
 });
