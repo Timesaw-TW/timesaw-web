@@ -12,6 +12,13 @@ import { IconHomeSolid } from "./IconHomeSolid";
 import { IconCheckCircleOutline } from "./IconCheckCircleOutline";
 import { IconEyeOutline } from "./IconEyeOutline";
 import { IconEyeSlashOutline } from "./IconEyeSlashOutline";
+import { IconBarsThreeOutline } from "./IconBarsThreeOutline";
+import { IconPuzzlePieceOutline } from "./IconPuzzlePieceOutline";
+import { IconHomeOutline } from "./IconHomeOutline";
+import { IconTagOutline } from "./IconTagOutline";
+import { IconArchiveBoxOutline } from "./IconArchiveBoxOutline";
+import { IconRocketLaunchOutline } from "./IconRocketLaunchOutline";
+import { IconCogEightOutline } from "./IconCogEightOutline";
 
 export {
   IconTrashOutline,
@@ -28,5 +35,12 @@ export {
   IconCheckCircleOutline,
   IconEyeOutline,
   IconEyeSlashOutline,
+  IconBarsThreeOutline,
+  IconPuzzlePieceOutline,
+  IconHomeOutline,
+  IconTagOutline,
+  IconArchiveBoxOutline,
+  IconRocketLaunchOutline,
+  IconCogEightOutline,
 };
 export * from "./Svgs";
