@@ -7,6 +7,7 @@ import AxiosProvider from "@/components/provider/AxiosProvider";
 import ApolloProvider from "@/components/provider/ApolloProvider";
 import AuthGuard from "@/components/guard/AuthGuard";
 import ModalProvider from "@/components/provider/ModalProvider";
+import SlideMenu from "@/components/util/Menu/SlideMenu";
 
 const notoSans = localFont({
   src: "../../public/fonts/Noto_Sans/regular.ttf",
@@ -70,6 +71,7 @@ export default function RootLayout({
             <AxiosProvider>
               <AuthGuard>
                 <>
+                  <SlideMenu />
                   {children}
                   <ModalProvider />
                 </>
