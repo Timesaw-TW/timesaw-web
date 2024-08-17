@@ -30,6 +30,7 @@
     "react-dom": "^18",
     "react-lottie": "^1.2.4",
     "react-use": "^17.5.0",
+    "swiper": "^11.1.4",
     "tailwind-merge": "^2.3.0",
     "yup": "^1.4.0",
     "zustand": "^4.5.2"

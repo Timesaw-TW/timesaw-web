@@ -1,17 +1,18 @@
+import { FC } from "react";
+import { Dayjs } from "dayjs";
 import Headline from "@/stories/Typography/Headline";
 import Text from "@/stories/Typography/Text";
 import Header from "../util/Header";
 import HeaderRight from "./HeaderRight";
-import { CalendarType } from "../calendar/type";
-import { FC } from "react";
-import { getCalendarText } from "../calendar";
+import { CalendarType, getCalendarText, MONTH_CHINESE } from "@/libs/calendar";
 
 interface Props {
   order: CalendarType[];
+  date: Dayjs;
   onChange: () => unknown;
 }
 
-const HomeHeader: FC<Props> = ({ order, onChange }) => {
+const HomeHeader: FC<Props> = ({ date, order, onChange }) => {
   return (
     <Header
       right={
@@ -28,9 +29,9 @@ const HomeHeader: FC<Props> = ({ order, onChange }) => {
       }
     >
       <div className="flex gap-1">
-        <Headline bold>三月</Headline>
+        <Headline bold>{MONTH_CHINESE[date.month()]}月</Headline>
         <Headline bold className="text-soda-100">
-          2023
+          {date.year()}
         </Headline>
       </div>
     </Header>
