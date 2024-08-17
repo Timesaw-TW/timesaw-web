@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useMemo } from "react";
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 import SubHeadline from "@/stories/Typography/SubHeadline";
 import { merge } from "@/libs/tailwind";
 
@@ -53,13 +53,13 @@ const CalendarPickerMonth: FC<Props> = ({
     <>
       {dateList.map((week, weekIndex) => (
         <tr
-          key={`picker-week-${weekIndex}`}
+          key={`picker-${week[0].date.toString()}`}
           className={merge("flex justify-between py-2", className)}
         >
           {week.map((dateItem, dateIndex) => {
             return (
               <td
-                key={`picker-week-${weekIndex}-${dateIndex}`}
+                key={`picker-${week[0].date.toString()}-${dateItem.date.toString()}`}
                 className={merge(
                   "flex h-8 w-8 cursor-pointer items-center justify-center",
                   dateItem.isOutOfMon

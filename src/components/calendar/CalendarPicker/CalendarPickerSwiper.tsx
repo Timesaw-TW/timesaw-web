@@ -1,4 +1,4 @@
-import { FC, MutableRefObject, Ref } from "react";
+import { FC, MutableRefObject } from "react";
 import SwiperInstance from "swiper";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import { Dayjs } from "dayjs";
@@ -26,7 +26,7 @@ const CalendarPickerSwiper: FC<Props> = ({
   return (
     <Swiper ref={swiperRef} {...props}>
       {slides.map((slide, index) => (
-        <SwiperSlide key={index}>
+        <SwiperSlide key={slide.toString()}>
           <CalendarPickerPanel
             key={slide.toString()}
             type={type}
