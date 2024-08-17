@@ -5,6 +5,7 @@ import Text from "@/stories/Typography/Text";
 import Header from "../util/Header";
 import HeaderRight from "./HeaderRight";
 import { CalendarType, getCalendarText, MONTH_CHINESE } from "@/libs/calendar";
+import { merge } from "@/libs/tailwind";
 
 interface Props {
   order: CalendarType[];
@@ -19,7 +20,11 @@ const HomeHeader: FC<Props> = ({ date, order, onChange }) => {
         <HeaderRight>
           {order.length && (
             <button
-              className="w-12 rounded-[2.125rem] bg-soda-40 px-2"
+              className={merge(
+                "w-12 rounded-[2.125rem] bg-soda-40",
+                "px-2 lg:px-4",
+                "py-1 lg:py-2"
+              )}
               onClick={onChange}
             >
               <Text>{getCalendarText(order[0])}</Text>
