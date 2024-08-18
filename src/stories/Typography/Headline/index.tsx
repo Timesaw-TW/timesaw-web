@@ -15,8 +15,8 @@ const Headline: FC<Props> = ({
   return (
     <Element
       className={merge(
-        `font-main text-lg`,
-        bold ? "font-bold" : "font-semibold",
+        `font-main text-lg lg:text-2xl`,
+        bold ? "font-bold" : "font-semibold lg:font-normal",
         className
       )}
     >

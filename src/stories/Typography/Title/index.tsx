@@ -10,7 +10,7 @@ const Title: FC<Props> = ({ children, className, bold, element = "h1" }) => {
   return (
     <Element
       className={merge(
-        `font-main text-xl`,
+        `font-main text-xl lg:text-3xl`,
         bold ? "font-semibold" : "font-normal",
         className
       )}

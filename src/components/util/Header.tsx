@@ -17,9 +17,9 @@ const Header: FC<Props> = ({ showNav = true, children, right, className }) => {
   return (
     <div
       className={merge(
-        "flex items-center justify-between px-1",
-        "sm:px-9 sm:pt-2",
-        "lg:pt:6 lg:px-[4.5rem]",
+        "flex items-center justify-between",
+        "px-1 sm:px-9 lg:px-[4.5rem]",
+        "sm:pt-2 lg:pt-4",
         className
       )}
     >

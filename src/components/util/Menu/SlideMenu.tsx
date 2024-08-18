@@ -23,8 +23,8 @@ const SlideMenu = () => {
           "transition-transform duration-500",
           !opened && "-translate-x-full transform",
           opened && "translate-x-0 transform",
-          "w-full p-4",
-          "sm:w-[20.25rem] sm:rounded-tr-[1.75rem] sm:px-12 sm:py-4 sm:shadow-menu"
+          "w-full px-4 py-1",
+          "sm:w-[20.25rem] sm:rounded-tr-[1.75rem] sm:px-9 sm:pb-6 sm:pt-2 sm:shadow-menu"
         )}
       >
         <Menu onClosed={() => setOpened(false)} />
