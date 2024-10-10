@@ -14,6 +14,7 @@ export interface ModalProps {
   allowClosed?: boolean;
   onClosed?: () => void;
   className?: string;
+  modalClassName?: string;
 }
 
 const Modal: FC<ModalProps> = ({
@@ -26,6 +27,7 @@ const Modal: FC<ModalProps> = ({
   onClosed,
   footer,
   className,
+  modalClassName,
 }) => {
   return (
     <div
@@ -40,7 +42,8 @@ const Modal: FC<ModalProps> = ({
         className={merge(
           "relative w-[328px] bg-white",
           "flex flex-col justify-between gap-6",
-          "rounded-lg px-4 py-6"
+          "rounded-lg px-4 py-6",
+          modalClassName
         )}
       >
         {content}
