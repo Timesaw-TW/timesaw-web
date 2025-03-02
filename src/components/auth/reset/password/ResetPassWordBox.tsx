@@ -4,7 +4,7 @@ import { merge } from "@/libs/tailwind";
 import { FC, useState } from "react";
 import ResetPassWordPanel from "./ResetPassWordPanel";
 import Caption from "@/stories/Typography/Caption";
-import { useResetPassword } from "@/gql-requests/ password-reset/password-reset";
+import passwordResetModule from "@/gql-requests/password-reset/password-reset";
 import useUrlQueryParam from "@/hooks/route/useUrlQueryParam";
 import { useRouter } from "next/navigation";
 
@@ -13,6 +13,7 @@ interface Props {
 }
 
 const ResetPassWordBox: FC<Props> = ({ className }) => {
+  const { useResetPassword } = passwordResetModule;
   const [resetPassword] = useResetPassword();
   const token = useUrlQueryParam("token");
   const [message, setMessage] = useState<string>("");
@@ -57,14 +58,7 @@ const ResetPassWordBox: FC<Props> = ({ className }) => {
           onSuccess={handleResetPassword}
           isLoading={isLoading}
         />
-        {message && (
-          <Caption
-            className="text-center"
-            // color={message.includes("成功") ? "text-green-500" : "text-red-500"}
-          >
-            {message}
-          </Caption>
-        )}
+        {message && <Caption className="text-center">{message}</Caption>}
       </div>
     </div>
   );

@@ -9,11 +9,12 @@ import ContentFooter from "../login/ContentFooter";
 import ThirdPartyPanel from "../login/ThirdPartyPanel";
 import useModal from "@/hooks/useModal";
 import useUrlQueryParam from "@/hooks/route/useUrlQueryParam";
-import { useSendResetPasswordEmail } from "@/gql-requests/ password-reset/password-reset";
+import passwordResetModule from "@/gql-requests/password-reset/password-reset";
 interface Props {
   className?: string;
 }
 const ForgetPasswordBox: FC<Props> = ({ className }) => {
+  const { useSendResetPasswordEmail } = passwordResetModule;
   const { setModal, closeModal } = useModal();
   const [error, setError] = useState("");
   const email = useUrlQueryParam("email");
