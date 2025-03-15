@@ -33,6 +33,7 @@ interface Props {
 const LoginBox: FC<Props> = ({ className }) => {
   const { replace, push } = useRouter();
   const searchParams = useSearchParams();
+  const [email, setEmail] = useState("");
   const [tab, setTab] = useState<PageType>(
     getPageType(searchParams.get("type"))
   );
@@ -94,7 +95,13 @@ const LoginBox: FC<Props> = ({ className }) => {
       />
       <div>
         {tab === "register" && <RegisterPanel onSuccess={onRegisterSuccess} />}
-        {tab === "login" && <LoginPanel onSuccess={onLoginSuccess} />}
+        {tab === "login" && (
+          <LoginPanel
+            onSuccess={onLoginSuccess}
+            email={email}
+            onEmailChange={setEmail}
+          />
+        )}
         <div
           className={merge(
             "flex items-center",
@@ -102,7 +109,12 @@ const LoginBox: FC<Props> = ({ className }) => {
           )}
         >
           {tab === "login" && (
-            <Button className="h-8 w-[4.875rem] bg-transparent px-3 py-2">
+            <Button
+              className="h-8 w-[4.875rem] bg-transparent px-3 py-2"
+              onClick={() => {
+                push(`/login/forget?email=${encodeURIComponent(email)}`);
+              }}
+            >
               <Caption className="text-soda-100" bold>
                 忘記密碼?
               </Caption>

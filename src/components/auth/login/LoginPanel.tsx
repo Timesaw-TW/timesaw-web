@@ -22,9 +22,11 @@ interface LoginField {
 
 interface Props {
   onSuccess?: (user: User) => unknown;
+  email?: string;
+  onEmailChange?: (email: string) => void;
 }
 
-const LoginPanel: FC<Props> = ({ onSuccess }) => {
+const LoginPanel: FC<Props> = ({ onSuccess, onEmailChange }) => {
   const { login } = useLogin();
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -56,6 +58,12 @@ const LoginPanel: FC<Props> = ({ onSuccess }) => {
     },
   });
 
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleChange(e);
+    if (onEmailChange) {
+      onEmailChange(e.target.value);
+    }
+  };
   return (
     <form onSubmit={handleSubmit}>
       <TextField
@@ -63,7 +71,7 @@ const LoginPanel: FC<Props> = ({ onSuccess }) => {
         name="email"
         placeholder="信箱"
         value={values.email}
-        onChange={handleChange}
+        onChange={handleEmailChange}
         errorMessage={{ message: errors.email ?? formError.email }}
         showButton
         button={{
